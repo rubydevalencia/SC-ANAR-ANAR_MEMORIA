@@ -2,16 +2,20 @@
 
 // Listens for the app launching then creates the window
 chrome.app.runtime.onLaunched.addListener(function() {
-  var width = 500;
-  var height = 300;
+
+  var screenWidth = window.screen.availWidth;
+  var screenHeight = window.screen.availHeight;
+
+  var width = screenWidth*0.8;
+  var height = screenHeight*0.8
 
   chrome.app.window.create('index.html', {
-    id: 'main',
-    bounds: {
-      width: width,
-      height: height,
-      left: Math.round((screen.availWidth - width) / 2),
-      top: Math.round((screen.availHeight - height)/2)
-    }
+    "id" : "index",
+    "bounds" : {
+      "width" : Math.round(width),
+      "height": Math.round(height),
+      "left" : Math.round((screenWidth - width)/2),
+      "top" : Math.round((screenHeight - height)/2)
+    } 
   });
 });
