@@ -1,7 +1,7 @@
 {
     "name": "ANAR Memoria",
     "description": "ANAR Memoria",
-    "version": "2",
+    "version": "3",
     "manifest_version": 2,
     "default_locale": "en",
     "permissions": [
