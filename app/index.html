@@ -2,24 +2,55 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <title>ANAR Memoria</title>
-
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="../bower_components/bootstrap-material-design/dist/css/material.css" />
         <link rel="stylesheet" href="../bower_components/bootstrap-material-design/dist/css/ripples.css" />
         <!-- endbower -->
         <!-- endbuild -->
-
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/bootstrap.min.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
     </head>
     <body>
-        <h1>'Allo</h1>
-	   <button class="btn btn-primary">Colored<div class="ripple-wrapper"></div></button>
-
+        <div id="main" class="row">
+            <div class="col-xs-2 col-md-4"></div>
+            <div class="col-xs-8 col-md-4 well page active container" id="dialog">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <legend>Iniciar Sesión</legend>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Nombre</label>
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Nombre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                            </div>
+                        </div>
+                        <div style="text-align: right">
+                            <button id="button_register" class="btn">Registrarse<div class="ripple-wrapper"></div></button>
+                            <button id="button_login" class="btn">Ingresar<div class="ripple-wrapper"></div></button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-xs-2 col-md-4"></div>
+        </div>
+        <div id="credit" class="row">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-8" style="text-align: center; height: 100%">
+                <h4 class="container">Archivo Nacional de Arte Rupestre</h4>
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+        
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -27,7 +58,6 @@
         <script src="../bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
-
         <!-- build:js scripts/index.js -->
         <script src="scripts/index.js"></script>
         <!-- endbuild -->
