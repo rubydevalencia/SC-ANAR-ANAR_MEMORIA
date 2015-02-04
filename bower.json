@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "dependencies": {
     "jquery": "latest",
-    "bootstrap-material-design": "latest"
+    "bootstrap-material-design": "latest",
+    "angular": "latest",
+    "requirejs": "latest",
+    "requirejs-domready": "latest"
     },
   "devDependencies": {
   }

@@ -5,7 +5,15 @@
     "manifest_version": 2,
     "default_locale": "en",
     "permissions": [
-        "storage"
+        "storage",
+        "unlimitedStorage",
+        "https://docs.google.com/feeds/",
+        "https://docs.googleusercontent.com/",
+        "https://spreadsheets.google.com/feeds/",
+        "https://ssl.gstatic.com/",
+        "https://www.googleapis.com/",
+        "http://api.wunderground.com/api/",
+        "http://autocomplete.wunderground.com/api"
     ],
     "icons": {
         "16": "images/icon-16.png",
@@ -15,8 +23,10 @@
         "background": {
             "scripts": [
                 "scripts/main.js",
-                "scripts/chromereload.js"
+                "scripts/chromereload.js",
+                "scripts/vendor/angular.min.js"
             ]
         }
-    }
+    },
+    "content_security_policy": "script-src 'self'; object-src 'self'"
 }
