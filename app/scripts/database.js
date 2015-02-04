@@ -4,17 +4,18 @@ var db = new PouchDB('ANAR');
  * User module
  */
 
-function registerUser(id, password) {
+function DBregisterUser(id, password, callback) {
   
   var user = {
     _id: id,
     password: password
+    // TTODO add rest
   };
 
-  db.put(user, function callback(err, result) {
-    if (!err) {
-      console.log('Successfully added a user');
-    }
+  db.put(user).then(function (result) {
+    callback(200);
+  }).catch(function (err) {
+    callback(err.status);
   });
 }
 

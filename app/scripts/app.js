@@ -15,4 +15,18 @@ angular.module('AnarApp', ['ngRoute'])
                 console.log(status);
         });
     }
+
+    // This function is used to register the user
+    $scope.registerUser = function loginUser(id, password) {
+        DBregisterUser(id, password, function(status){
+            
+            //TODO check possible errors
+            if (status == 200)
+                console.log("success");
+            else if(status == 409)
+                console.log("already exists");
+            else 
+                console.log(status);
+        });
+    }
 });
