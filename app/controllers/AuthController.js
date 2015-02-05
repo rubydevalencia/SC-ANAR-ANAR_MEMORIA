@@ -3,16 +3,18 @@
 app.controller('AuthController', function($scope) {
     // This function is used to login the user
     $scope.loginUser = function (id, password) {
-        DBloginUser(id, password, function(status){
-            
-            if (status == 200)
+        var resultCode = DBloginUser(id, password, function(status){
+            if (status == 200) {
                 $scope.page.page = 'home';
+                $scope.$apply;
+            }
             else if(status == 401)
                 console.log("unathorized");
             else if(status == 404)
                 console.log("not found");
             else 
                 console.log(status);
+            console.log($scope.page.page);
         });
     }
 
