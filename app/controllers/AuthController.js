@@ -6,6 +6,7 @@ app.controller('AuthController', function($scope) {
         var resultCode = DBloginUser(id, password, function(status){
             if (status == 200) {
                 $scope.page.page = 'home';
+                $scope.user.name = id;
                 $scope.$apply;
             }
             else if(status == 401)
