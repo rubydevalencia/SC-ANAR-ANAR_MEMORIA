@@ -7,7 +7,7 @@ app.controller('AuthController', function($scope) {
             if (status == 200) {
                 $scope.page.page = 'home';
                 $scope.user.name = id;
-                $scope.$apply;
+                $scope.$apply();
             }
             else if(status == 401)
                 console.log("unathorized");
@@ -15,7 +15,6 @@ app.controller('AuthController', function($scope) {
                 console.log("not found");
             else 
                 console.log(status);
-            console.log($scope.page.page);
         });
     }
 
