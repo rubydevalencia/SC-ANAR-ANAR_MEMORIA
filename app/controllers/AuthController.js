@@ -5,9 +5,8 @@ app.controller('AuthController', function($scope) {
     $scope.loginUser = function (id, password) {
         var resultCode = DBloginUser(id, password, function(status){
             if (status == 200) {
-                $scope.page.page = 'home';
                 $scope.user.name = id;
-                $scope.$apply();
+                $scope.changePage('home');
             }
             else if(status == 401)
                 console.log("unathorized");

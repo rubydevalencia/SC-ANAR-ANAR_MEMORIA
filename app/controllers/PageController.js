@@ -6,6 +6,11 @@ app.controller('PageController', function($scope) {
 
     $scope.user = {};
 
+    $scope.changePage = function (page) {
+        $scope.page.page = page;
+        $scope.$apply();
+    }
+
     $scope.$watch('page.page', function(newVal, oldVal) {
         console.log("Page changed to " + newVal);
         $scope.page.page = newVal;
