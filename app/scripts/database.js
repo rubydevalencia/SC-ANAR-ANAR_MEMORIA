@@ -90,6 +90,26 @@ function DBgetUserLevelsIds(id, callback) {
   });
 }
 
+function DBaddUserCard(id, card_id){
+  db_user.get(id).then(function (doc) {
+    doc.levels.push(card_id);
+    doc.levels.sort();
+    return db_user.put(doc);
+  
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
+function DBgetUserCardsIds(id, callback) {
+  db_user.get(id).then(function (doc) {
+    callback(doc.cards);
+  
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
 /*
  * End User module
  */
