@@ -45,7 +45,7 @@ function DBgetUserHighscore(id, callback) {
     callback(doc.highscore);
   
   }).catch(function (err) {
-    consol.log(err);
+    callback(err.status);
   });
 }
 
@@ -62,7 +62,7 @@ function DBsetUserHighscore(id, new_highschore) {
 function DBaddScoreToUserHighscore(id, score) {
   db_user.get(id).then(function (doc) {
     doc.highscore += score;
-    return db_user.put(doc);
+    callback(db_user.put(doc));
   
   }).catch(function (err) {
     console.log(err);
@@ -74,10 +74,10 @@ function DBaddUserLevel(id, lvl_id){
     doc.levels.push(lvl_id);
     doc.levels.sort(function(a, b){return a-b});
 
-    return db_user.put(doc);
+    callback(db_user.put(doc));
   
   }).catch(function (err) {
-    console.log(err);
+    callback(err.status);
   });
 }
 
@@ -86,18 +86,18 @@ function DBgetUserLevelsIds(id, callback) {
     callback(doc.levels);
   
   }).catch(function (err) {
-    console.log(err);
+    callback(err.status);
   });
 }
 
-function DBaddUserCard(id, card_id){
+function DBaddUserCard(id, card_id, callback){
   db_user.get(id).then(function (doc) {
     doc.levels.push(card_id);
     doc.levels.sort();
-    return db_user.put(doc);
+    callback(db_user.put(doc));
   
   }).catch(function (err) {
-    console.log(err);
+    callback(err.status);
   });
 }
 
@@ -106,7 +106,7 @@ function DBgetUserCardsIds(id, callback) {
     callback(doc.cards);
   
   }).catch(function (err) {
-    console.log(err);
+    callback(err.status);
   });
 }
 
@@ -117,6 +117,28 @@ function DBgetUserCardsIds(id, callback) {
 /*
  * Level module
  */
+
+function DGgetLevel(id) {
+  db_level.get(id).then(function (doc) {
+    callback(doc);
+  
+  }).catch(function (err) {
+    callback(err.status);
+  });
+}
+
+// Have to assign the proper start and end keys, depends on the lvl in the DB
+function DBgetLevelsByDifficulty(difficulty) {
+  if (difficulty == 'easy') {
+    result = db_level.allDocs({startkey : 'easy1', endkey : 'easy10', include_docs: true});
+  } else if (difficulty == 'medium') {
+    result = db_level.allDocs({startkey : 'medium1', endkey : 'medium10', include_docs: true});
+  } else if (difficulty == 'hard') {
+    result = db_level.allDocs({startkey : 'hard1', endkey : 'hard10', include_docs: true});
+  };
+
+  return result;
+}
 
 /*
  * End Level module
