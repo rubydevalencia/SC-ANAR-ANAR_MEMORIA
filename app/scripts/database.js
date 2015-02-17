@@ -40,9 +40,9 @@ function DBloginUser(id, password, callback) {
   });
 }
 
-function DBgetUserHighscore(id) {
+function DBgetUserHighscore(id, callback) {
   db_user.get(id).then(function (doc) {
-    return doc.highscore;
+    callback(doc.highscore);
   
   }).catch(function (err) {
     consol.log(err);
