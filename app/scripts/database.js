@@ -69,6 +69,27 @@ function DBaddScoreToUserHighscore(id, score) {
   });
 }
 
+function DBaddUserLevel(id, lvl_id){
+  db_user.get(id).then(function (doc) {
+    doc.levels.push(lvl_id);
+    doc.levels.sort(function(a, b){return a-b});
+
+    return db_user.put(doc);
+  
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
+function DBgetUserLevelsIds(id, callback) {
+  db_user.get(id).then(function (doc) {
+    callback(doc.levels);
+  
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
 /*
  * End User module
  */
