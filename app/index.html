@@ -16,7 +16,7 @@
         <!-- endbower -->
         <!-- endbuild -->
     </head>
-    <body ng-switch="page.page" ng-controller="PageController">
+    <body ng-switch="page" ng-controller="PageController">
 
         <!--                -->
         <!-- Authentication -->
@@ -30,7 +30,7 @@
         <!--      Home      -->
         <!--                -->
 
-        <div style="height: 100%" ng-switch-when="home">
+        <div style="height: 100%" ng-switch-when="home" ng-controller="HomeController">
             <div style="height: 100%" ng-include=" ' partials/home.html ' "></div>
         </div>
 
@@ -61,5 +61,6 @@
         <!-- Controllers -->
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
+        <script src="controllers/HomeController.js"></script>
     </body>
 </html>
