@@ -1,8 +1,8 @@
 // Atts: id, password, levels [1..*], cards [1..*], highscore
 var db_user = new PouchDB('ANAR_USER');
-// Atts: id, name, numPieces, time, difficulty
+// Atts: id, name, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
-var db_level = new PouchDB('ANAR_LEVEL2');
+var db_level = new PouchDB('ANAR_LEVEL');
 // Atts: id, name, image, description
 var db_card = new PouchDB('ANAR_CARD');
 
@@ -16,7 +16,7 @@ function DBregisterUser(id, password, callback) {
         _id: id,
         password: password,
         highscore: 0,
-        levels: ["1"],
+        levels: ["0"],
         cards: []
     };
 
@@ -62,7 +62,7 @@ function DBGetHighscores(callback) {
  * Level module
  */
 
-function DBCreateCards() {
+function DBCreateLevels() {
     var level = {};
 
     for (var i = 0; i < 30; i++) {
@@ -72,7 +72,8 @@ function DBCreateCards() {
                 name: 'Nivel ' + i,
                 numPieces: 10,
                 time: '120',
-                difficulty: 'easy'
+                difficulty: 'easy',
+                imageName: 'icon-128.png'
             };
         else if (i < 20)
             level = {
@@ -80,7 +81,8 @@ function DBCreateCards() {
                 name: 'Nivel ' + i,
                 numPieces: 20,
                 time: '60',
-                difficulty: 'medium'
+                difficulty: 'medium',
+                imageName: 'icon-128.png'
             };
         else
             level = {
@@ -88,7 +90,8 @@ function DBCreateCards() {
                 name: 'Nivel ' + i,
                 numPieces: 30,
                 time: '30',
-                difficulty: 'hard'
+                difficulty: 'hard',
+                imageName: 'icon-128.png'
             };
 
         db_level.put(level);

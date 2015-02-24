@@ -2,13 +2,23 @@
 
 app.controller('HomeController', function ($scope) {
     $scope.levels = {};
+    $scope.unlockedLevels = [];
     $scope.levelsByCategory = {};
 
-    function pushLevel(levels, level) {
+    DBGetUserLevels($scope.user, function (err, result) {
+        var levels = [];
+        for (var i = 0; i < result.rows.length; i++) {
+            levels.push(result.rows[i].doc);
+        }
 
-    };
+        $scope.unlockedLevels = levels;
+        $scope.$apply();
+    });
 
-    // First we count how many levels per difficulty are
+    /* 
+     * The first thing the controller will do is get the levels and place them on
+     * the view as unlocked levels
+     */
     DBGetLevels(function (err, result) {
         if (err)
             return;
@@ -38,38 +48,41 @@ app.controller('HomeController', function ($scope) {
             var level = result.rows[i].doc;
 
             for (var j = 0; j < levels.length; j++) {
-                if (levels[j].name == level.difficulty)
+                if (levels[j].name == level.difficulty) {
+                    if (!$scope.unlockedLevels.contains(level))
+                        level.imageName = 'lock.png';
+
                     levels[j].levels.push(level);
+                }
             }
         }
 
         // Then we fill the levels array with actual levels
-
         $scope.levels = levels;
         $scope.$apply();
     });
 
-    // Then we get the user levels
-    /*DBGetUserLevels($scope.user, function (err, result) {
-        var levels = [];
-        for (var i = 0; i < result.rows.length; i++) {
-            levels.push(result.rows[i].doc);
-        }
+    /* 
+     * After the levesl are set we go through them updating the ones that are unlocked
+     */
+    
 
-        $scope.levels = levels;
-        $scope.$apply();
-    });*/
-
-    $scope.getlevels = function(n, levels) {
-        var result = [];
-        for (var i = 0; i < 5; i++) {
-            result.push(levels[n*2 + i]);
-        }
-        return result;
-    };
-
+    /*
+     * This function will recieve the amount of levels per category and
+     * return an array with the amount of rows of levels per category.
+     */
     $scope.divideRows = function(length) {
         return new Array(length / 5);
     };
+
+    Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i]._id === obj._id) {
+            return true;
+        }
+    }
+    return false;
+}
 });
 

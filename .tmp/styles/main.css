@@ -72,3 +72,7 @@ body {
 .navbar {
     padding: 0 8.33333333%;
 }
+
+.panel-body {
+    padding: 0;
+}
