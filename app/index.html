@@ -43,6 +43,14 @@
             <div style="height: 100%" ng-include=" ' partials/collection.html ' "></div>
         </div>
 
+        <!--                -->
+        <!--   Collection   -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="game" ng-controller="GameController" ng-init="GameController.init(level)">
+            <div style="height: 100%" ng-include=" ' partials/game.html ' "></div>
+        </div>
+
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="scripts/vendor/angular.min.js"></script>
@@ -63,5 +71,6 @@
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/HomeController.js"></script>
+        <script src="controllers/GameController.js"></script>
     </body>
 </html>

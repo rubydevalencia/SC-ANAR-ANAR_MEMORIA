@@ -4,7 +4,11 @@ app.controller('HomeController', function ($scope) {
     $scope.levels = {};
     $scope.unlockedLevels = [];
     $scope.levelsByCategory = {};
+    $scope.array = [0, 1, 2, 3, 4];
 
+    /* 
+     * The first thing the controller will do is get the user levels
+     */
     DBGetUserLevels($scope.user, function (err, result) {
         var levels = [];
         for (var i = 0; i < result.rows.length; i++) {
@@ -16,8 +20,8 @@ app.controller('HomeController', function ($scope) {
     });
 
     /* 
-     * The first thing the controller will do is get the levels and place them on
-     * the view as unlocked levels
+     * Then we get all the levels and place them on the view.
+     * This will take into consideration if the level has been unlocked or not.
      */
     DBGetLevels(function (err, result) {
         if (err)
@@ -57,15 +61,25 @@ app.controller('HomeController', function ($scope) {
             }
         }
 
+        // Dear programmer, I know this is a nasty amount of loops. If i have time I will refactor.
+
         // Then we fill the levels array with actual levels
         $scope.levels = levels;
         $scope.$apply();
     });
 
-    /* 
-     * After the levesl are set we go through them updating the ones that are unlocked
+    /*
+     * This is the definition for the contains function for arrays.
      */
-    
+    Array.prototype.contains = function(obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i]._id === obj._id) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     /*
      * This function will recieve the amount of levels per category and
@@ -74,15 +88,5 @@ app.controller('HomeController', function ($scope) {
     $scope.divideRows = function(length) {
         return new Array(length / 5);
     };
-
-    Array.prototype.contains = function(obj) {
-    var i = this.length;
-    while (i--) {
-        if (this[i]._id === obj._id) {
-            return true;
-        }
-    }
-    return false;
-}
 });
 

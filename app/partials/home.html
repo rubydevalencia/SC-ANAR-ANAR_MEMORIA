@@ -19,6 +19,11 @@
                     <i class="mdi-editor-insert-chart navbar-icon"></i>
                 </a>
             </li>
+            <li>
+                <a href="#" ng-click="logOut()">
+                    <i class="mdi-action-exit-to-app navbar-icon"></i>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
@@ -32,49 +37,13 @@
     </div>
     <div class="row" ng-repeat="i in [] | range: category.levels.length / 5">
         <div class="col-md-1"></div>
-        <div class="col-xs-6 col-md-2">
+        <div class="col-xs-6 col-md-2" ng-click="startGame(category.levels[i*5 + j])" ng-repeat="j in array">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <img height="100%" width="100%" 
-                    ng-src="images/{{category.levels[i*5].imageName}}">
+                    ng-src="images/{{category.levels[i*5 + j].imageName}}">
                 </div>
-                <div class="panel-footer">{{category.levels[i*5].name}}</div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img height="100%" width="100%" 
-                    ng-src="images/{{category.levels[i*5 + 1].imageName}}">
-                </div>
-                <div class="panel-footer">{{category.levels[i*5 + 1].name}}</div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img height="100%" width="100%" 
-                    ng-src="images/{{category.levels[i*5 + 2].imageName}}">
-                </div>
-                <div class="panel-footer">{{category.levels[i*5 + 2].name}}</div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img height="100%" width="100%" 
-                    ng-src="images/{{category.levels[i*5 + 3].imageName}}">
-                </div>
-                <div class="panel-footer">{{category.levels[i*5 + 3].name}}</div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <img height="100%" width="100%" 
-                    ng-src="images/{{category.levels[i*5 + 3].imageName}}">
-                </div>
-                <div class="panel-footer">{{category.levels[i*5 + 4].name}}</div>
+                <div class="panel-footer">{{category.levels[i*5 + j].name}}</div>
             </div>
         </div>
         <div class="col-md-1"></div>
