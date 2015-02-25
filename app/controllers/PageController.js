@@ -5,6 +5,7 @@ app.controller('PageController', function($scope) {
     $scope.user = {};
 
     $scope.changePage = function (page) {
+        // console.log(page);
         $scope.page = page;
         $scope.$apply();
     }
