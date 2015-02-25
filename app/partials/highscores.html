@@ -24,6 +24,11 @@
                     <i class="mdi-editor-insert-chart navbar-icon"></i>
                 </a>
             </li>
+            <li>
+                <a href="#" ng-click="logOut()">
+                    <i class="mdi-action-exit-to-app navbar-icon"></i>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
@@ -39,7 +44,7 @@
     <tbody>
         <tr style="border-bottom: 1px solid #E0E0E0; height:50px;" ng-repeat='u in users'>
             <td style="width:15%"> </td>
-            <td style="text-align: left !important; font-weight: bold;" ng-if="{{user._id == '1'}}">{{u.doc._id}}</td>
+            <td style="text-align: left !important; font-weight: bold;">{{u.doc._id}}</td>
             <td style="">{{u.doc.highscore}}</td>
         </tr>    
     </tbody>

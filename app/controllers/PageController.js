@@ -14,4 +14,15 @@ app.controller('PageController', function($scope) {
         $scope.user = user;
         $scope.$apply();
     }
+
+    $scope.startGame = function (level) {
+        $scope.level = level;
+        $scope.changePage('game');
+    }
+
+    $scope.logOut = function() {
+        $scope.page = 'auth';
+        $scope.user = {};
+        $scope.$apply();
+    }
 });

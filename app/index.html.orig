@@ -44,18 +44,19 @@
         </div>
 
         <!--                -->
+<<<<<<< HEAD
         <!--   Highscore    -->
         <!--                -->
 
         <div style="height: 100%" ng-switch-when="highscores" ng-controller="HighscoresController">
             <div style="height: 100%" ng-include=" ' partials/highscores.html ' "></div>
-        
-        <!--                -->
-        <!--   Game         -->
+=======
+        <!--   Collection   -->
         <!--                -->
 
         <div style="height: 100%" ng-switch-when="game" ng-controller="GameController" ng-init="GameController.init(level)">
             <div style="height: 100%" ng-include=" ' partials/game.html ' "></div>
+>>>>>>> 2f6d2ab2ec30291da18bf181907053a8dc0ec57c
         </div>
 
         <!-- build:js scripts/vendor.js -->
@@ -78,8 +79,11 @@
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/HomeController.js"></script>
+<<<<<<< HEAD
         <script src="controllers/CollectionController.js"></script>
         <script src="controllers/HighscoresController.js"></script>
+=======
         <script src="controllers/GameController.js"></script>
+>>>>>>> 2f6d2ab2ec30291da18bf181907053a8dc0ec57c
     </body>
 </html>

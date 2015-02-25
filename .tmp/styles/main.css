@@ -76,3 +76,17 @@ body {
 .panel-body {
     padding: 0;
 }
+
+/*
+ *  Table
+ */
+table {
+    width:100%;
+}
+ table > thead > tr > th {
+     border-bottom: 2px solid #E0E0E0;
+     color: #A0A0A0;
+     text-align: left;
+     padding-bottom: 25px;
+     padding-top: 10px;
+ }
