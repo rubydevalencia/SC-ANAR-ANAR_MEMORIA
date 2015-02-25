@@ -39,8 +39,16 @@
         <!--   Collection   -->
         <!--                -->
 
-        <div style="height: 100%" ng-switch-when="collection">
+        <div style="height: 100%" ng-switch-when="collection" ng-controller="CollectionController">
             <div style="height: 100%" ng-include=" ' partials/collection.html ' "></div>
+        </div>
+
+        <!--                -->
+        <!--   Highscore    -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="highscores" ng-controller="HighscoresController">
+            <div style="height: 100%" ng-include=" ' partials/highscores.html ' "></div>
         </div>
 
         <!-- build:js scripts/vendor.js -->
@@ -63,5 +71,7 @@
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/HomeController.js"></script>
+        <script src="controllers/CollectionController.js"></script>
+        <script src="controllers/HighscoresController.js"></script>
     </body>
 </html>

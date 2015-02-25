@@ -3,7 +3,7 @@ var db_user = new PouchDB('ANAR_USER');
 // Atts: id, name, numPieces, time, difficulty
 // Functions: getPieces(), getCardsOnWin(), getPoints()
 var db_level = new PouchDB('ANAR_LEVEL2');
-// Atts: id, name, image, description
+// Atts: id, name, image, description, number
 var db_card = new PouchDB('ANAR_CARD2');
 
 /*
@@ -130,9 +130,9 @@ function DBCreateCards() {
         card = {
             _id: i.toString(),
             name: 'Carta ' + i,
-            number: i,
             image: "images/icon-128.png",
-            description: 'Lorem ipsum donor amet.'
+            description: 'Lorem ipsum donor amet.',
+            number: i
         };
 
         db_card.put(card);

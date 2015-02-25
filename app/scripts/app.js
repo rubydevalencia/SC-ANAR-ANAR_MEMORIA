@@ -12,12 +12,4 @@ app.filter('range', function() {
 });
 
 // DBCreateLevels();
-DBCreateCards();
-
-// DBGetHighscores(function (err, response) {
-//   console.log(JSON.stringify(response.rows) + "\n");
-  
-//   for (var i = response.rows.length - 1; i >= 0; i--) {
-//     console.log(JSON.stringify(response.rows[i]) + "\n\n");
-//   };
-// });
+// DBCreateCards();
