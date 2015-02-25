@@ -4,7 +4,7 @@ var db_user = new PouchDB('ANAR_USER');
 // Functions: getPieces(), getCardsOnWin(), getPoints()
 var db_level = new PouchDB('ANAR_LEVEL2');
 // Atts: id, name, image, description
-var db_card = new PouchDB('ANAR_CARD');
+var db_card = new PouchDB('ANAR_CARD2');
 
 /*
  * User module
@@ -62,7 +62,7 @@ function DBGetHighscores(callback) {
  * Level module
  */
 
-function DBCreateCards() {
+function DBCreateLevels() {
     var level = {};
 
     for (var i = 0; i < 30; i++) {
@@ -72,7 +72,7 @@ function DBCreateCards() {
                 name: 'Nivel ' + i,
                 numPieces: 10,
                 time: '120',
-                difficulty: 'easy'
+                difficulty: 'Fácil'
             };
         else if (i < 20)
             level = {
@@ -80,7 +80,7 @@ function DBCreateCards() {
                 name: 'Nivel ' + i,
                 numPieces: 20,
                 time: '60',
-                difficulty: 'medium'
+                difficulty: 'Normal'
             };
         else
             level = {
@@ -88,12 +88,13 @@ function DBCreateCards() {
                 name: 'Nivel ' + i,
                 numPieces: 30,
                 time: '30',
-                difficulty: 'hard'
+                difficulty: 'Difícil'
             };
 
         db_level.put(level);
     }
 }
+
 
 /* Gets the user levels. */
 function DBGetUserLevels(user, callback) {
@@ -129,6 +130,7 @@ function DBCreateCards() {
         card = {
             _id: i.toString(),
             name: 'Carta ' + i,
+            number: i,
             image: "images/icon-128.png",
             description: 'Lorem ipsum donor amet.'
         };
@@ -141,6 +143,14 @@ function DBGetUserCards(user, callback) {
     db_card.allDocs({
         include_docs: true,
         keys: user.cards
+    }, function(err, response) {
+        callback(err, response);
+    });
+};
+
+function DBGetCards(callback) {
+    db_card.allDocs({
+        include_docs: true,
     }, function(err, response) {
         callback(err, response);
     });
