@@ -4,7 +4,7 @@ var db_user = new PouchDB('ANAR_USER');
 // Functions: getPieces(), getCardsOnWin(), getPoints()
 var db_level = new PouchDB('ANAR_LEVEL');
 // Atts: id, name, image, description, number
-var db_card = new PouchDB('ANAR_CARD');
+var db_card = new PouchDB('ANAR_CARD2');
 
 /*
  * User module
@@ -155,6 +155,14 @@ function DBGetCards(callback) {
     db_card.allDocs({
         include_docs: true,
     }, function(err, response) {
+        // Sorts the response according to the number attribute
+        if (response) {
+            response.rows.sort(function(a, b) {
+                    if (a.doc.number > b.doc.number) return 1;
+                    else if (a.doc.number < b.doc.number) return -1;
+                    else return 0;
+                });
+        }
         callback(err, response);
     });
 };
