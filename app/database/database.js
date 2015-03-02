@@ -1,6 +1,6 @@
 // Atts: id, password, levels [1..*], cards [1..*], highscore
 var db_user = new PouchDB('ANAR_USER');
-// Atts: id, name, numPieces, time, difficulty, imageName
+// Atts: id, name, cards, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
 var db_level = new PouchDB('ANAR_LEVEL');
 // Atts: id, name, image, description, number
@@ -62,23 +62,35 @@ function DBGetHighscores(callback) {
  * Level module
  */
 
+function getArray(low, high) {
+    var arr = [];
+    for (var i = low; i < high; ++i)
+        arr.push(i);
+
+    return arr;   
+}
+
 function DBCreateLevels() {
     var level = {};
+
 
     for (var i = 0; i < 30; i++) {
         if (i < 10)
             level = {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
+                cards: getArray(0, 10),
                 numPieces: 10,
                 time: '120',
                 difficulty: 'Fácil',
                 imageName: 'icon-128.png'
             };
+
         else if (i < 20)
             level = {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
+                cards: getArray(0, 20),
                 numPieces: 20,
                 time: '60',
                 difficulty: 'Normal',
@@ -88,6 +100,7 @@ function DBCreateLevels() {
             level = {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
+                cards: getArray(0, 30),
                 numPieces: 30,
                 time: '30',
                 difficulty: 'Difícil',
@@ -165,6 +178,10 @@ function DBGetCards(callback) {
         }
         callback(err, response);
     });
+};
+
+function BDGetLevelCards(level, callback) {
+
 };
 
 /*

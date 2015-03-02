@@ -88,5 +88,11 @@ app.controller('HomeController', function ($scope) {
     $scope.divideRows = function(length) {
         return new Array(length / 5);
     };
+
+    $scope.startGame = function(level) {
+        $scope.changeLevel(level);
+        $scope.changePage('game');
+        console.log($scope.page);
+    };
 });
 
