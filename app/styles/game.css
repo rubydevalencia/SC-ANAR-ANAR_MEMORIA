@@ -1,0 +1,17 @@
+.modal-dialog {
+    width: 90%;
+    padding: 2.5%;
+}
+
+.game_card {
+    position: relative;
+    border-radius: 50%;
+    width: 100%;
+    padding-bottom: 100%;
+    background-color: #4DAF4E;
+    background-image: url("../images/lock.png");
+}
+
+.row {
+    padding-bottom: 50px;
+}

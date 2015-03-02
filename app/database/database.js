@@ -58,9 +58,19 @@ function DBGetHighscores(callback) {
      * End User module
      */
 
+
+
 /*
  * Level module
  */
+
+ function getArray(min, max) {
+    var result = [];
+    for (var i = min; i < max; i++) {
+        result.push(i.toString());
+    }
+    return result;
+ }
 
 function DBCreateLevels() {
     var level = {};
@@ -71,6 +81,7 @@ function DBCreateLevels() {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
                 numPieces: 10,
+                cards: getArray(0, 10),
                 time: '120',
                 difficulty: 'easy',
                 imageName: 'icon-128.png'
@@ -80,6 +91,7 @@ function DBCreateLevels() {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
                 numPieces: 20,
+                cards: getArray(0, 20),
                 time: '60',
                 difficulty: 'medium',
                 imageName: 'icon-128.png'
@@ -89,6 +101,7 @@ function DBCreateLevels() {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
                 numPieces: 30,
+                cards: getArray(0, 30),
                 time: '30',
                 difficulty: 'hard',
                 imageName: 'icon-128.png'
@@ -144,6 +157,15 @@ function DBGetUserCards(user, callback) {
     db_card.allDocs({
         include_docs: true,
         keys: user.cards
+    }, function(err, response) {
+        callback(err, response);
+    });
+};
+
+function DBGetLevelCards(level, callback) {
+    db_card.allDocs({
+        include_docs: true,
+        keys: level.cards
     }, function(err, response) {
         callback(err, response);
     });

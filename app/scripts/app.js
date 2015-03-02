@@ -10,3 +10,6 @@ app.filter('range', function() {
     return input;
   };
 });
+
+//DBCreateLevels();
+//DBCreateCards(); 
