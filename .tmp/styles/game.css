@@ -10,10 +10,6 @@
     padding-bottom: 100%;
     background-color: #4DAF4E;
     background-image: url("../images/card.png");
-
-    background-size: 70% 70%;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .row {
