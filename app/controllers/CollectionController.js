@@ -39,6 +39,7 @@ app.controller('CollectionController', function ($scope) {
             // the user has the card
             if (!$scope.unlockedCards.contains(level)) {
                 level.image = 'images/lock.png';
+                level.description = "No has conseguido esta carta."
                 level.obtained = false;
             } else
               level.obtained = true;
@@ -63,4 +64,16 @@ app.controller('CollectionController', function ($scope) {
         }
         return false;
     };
+
+    $scope.showCard = function(card) {
+        $scope.card = card;
+        document.getElementById("modal").style.display="block";
+        
+    }
+
+    $scope.hideCard = function() {
+        $scope.card = {};
+        document.getElementById("modal").style.display="none";
+        
+    }
 });
