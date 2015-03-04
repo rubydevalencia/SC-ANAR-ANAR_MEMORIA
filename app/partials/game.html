@@ -22,19 +22,35 @@
         </ul>
     </div>
 </div>
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-body">
-            <div ng-repeat="i in [] | range: cards.length / 5">
-                <div class="row"  ng-class="{'last':$last}">
-                    <div class="col-md-1"></div>
-                    <div class="col-xs-6 col-md-2"  ng-repeat="j in array">
-                        <div class="game_card circle"></div>
-                    </div>
-                    <div class="col-md-1"></div>
+<div id="board">
+    <div class="well page">
+        <div ng-repeat="i in [] | range: cards.length / 5">
+            <div class="row"  ng-class="{'last':$last}">
+                <div class="col-md-1"></div>
+                <div class="col-xs-6 col-md-2" ng-repeat="j in array" ng-click="showCard(cards[i*5 + j])">
+                    <div class="game_card circle"></div>
                 </div>
+                <div class="col-md-1"></div>
             </div>
         </div>
     </div>
 </div>
-<div id="timer" class="circle">{{time}}</div>
+
+<div id="modal" class="modal" style="display: none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">{{card.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image" ng-src="{{card.image}}">
+                <p>{{card.description}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="hideCard()">Close<div class="ripple-wrapper"></div></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="timer" class="circle">{{counter}}</div>
