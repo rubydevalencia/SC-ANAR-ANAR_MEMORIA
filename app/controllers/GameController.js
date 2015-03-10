@@ -1,23 +1,24 @@
 
 
 app.controller('GameController', function($scope, $timeout) {
-    $scope.card = undefined;
-    var cards = {};
+    var selectedCards = {};
+    var totalCards;
+    var mytimeout = $timeout($scope.onTimeout,1000);
 
     $scope.cards = [];
     $scope.array = [0, 1, 2, 3, 4];
     $scope.counter = $scope.level.time;
 
     // The first thing we do is set up the timer countdown
-    $scope.onTimeout = function(){
+    $scope.onTimeout = function() {
         $scope.counter--;
         if ($scope.counter == 0) {
-            //finish game
+            document.getElementById("game_screen").style.display='none';
+            document.getElementById("loser_screen").style.display='block';
         } else {
             mytimeout = $timeout($scope.onTimeout,1000);
         }
     }
-    var mytimeout = $timeout($scope.onTimeout,1000);
 
     $scope.stop = function(){
         $timeout.cancel(mytimeout);
@@ -26,11 +27,11 @@ app.controller('GameController', function($scope, $timeout) {
     // Then we get the cards
     DBGetLevelCards($scope.level, function (err, result) {
         var cards = [];
+        totalCards = result.rows.length;
         for (var i = 0; i < result.rows.length; i++) {
             var card = result.rows[i].doc;
             card.imageShown = 'images/card.png';
             card.position = i;
-            card.showing = true;
             cards.push(card);
         }
 
@@ -39,21 +40,22 @@ app.controller('GameController', function($scope, $timeout) {
         });
     });
 
+    // This functions are used to handle the game cards
     $scope.showCard = function(card) {
-        if (!cards.card1) 
-            cards.card1 = card;
-        else if (!cards.card2)
-            cards.card2 = card;
+        if (!selectedCards.card1) 
+            selectedCards.card1 = card;
+        else if (!selectedCards.card2)
+            selectedCards.card2 = card;
         else {
-            if (cards.card1._id == cards.card2._id && cards.card1.position != cards.card2.position) {
-                removeCard(cards.card1);
+            if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+                removeCard(selectedCards.card1);
             } else {
-                cards.card1.imageShown = 'images/card.png';
-                cards.card2.imageShown = 'images/card.png';
+                selectedCards.card1.imageShown = 'images/card.png';
+                selectedCards.card2.imageShown = 'images/card.png';
             }
 
-            delete cards.card1;
-            delete cards.card2;
+            delete selectedCards.card1;
+            delete selectedCards.card2;
             return;
         }
         
@@ -63,5 +65,40 @@ app.controller('GameController', function($scope, $timeout) {
     var removeCard = function(card) {
         document.getElementsByClassName(card._id)[0].style.display='none';
         document.getElementsByClassName(card._id)[1].style.display='none';
+
+        totalCards -= 2;
+
+        if (totalCards == 0) {
+            $scope.stop();
+            // todo has una funcion para la victoria. updatea la base.
+            document.getElementById("game_screen").style.display='none';
+            document.getElementById("win_screen").style.display='block';
+        }
+    }
+
+    $scope.restartGame = function() {
+        // Tecnicamente se puede usar route pero nunca configure el provider asi que
+        // queda hacer esta fealdad
+
+        // Reinicio el estado de las cartas
+        var card;
+        for (var i = 0; i < $scope.cards.length; ++i) {
+            card = $scope.cards[i];
+            card.imageShown = 'images/card.png';
+            document.getElementsByClassName(card._id)[0].style.display='block';
+            document.getElementsByClassName(card._id)[1].style.display='block';
+        }
+
+        // Reinicio las variables internas del controlador
+        totalCards = $scope.cards.length;
+        selectedCards = {};
+
+        // Reinicio el contador
+        $scope.counter = $scope.level.time;
+
+        // Me aseguro que las pantallas correctas se esten mostrando
+        document.getElementById("game_screen").style.display='block';
+        document.getElementById("loser_screen").style.display='none';  
+        document.getElementById("win_screen").style.display='none';  
     }
 });

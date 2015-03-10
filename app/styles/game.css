@@ -50,3 +50,16 @@
     width: 100%;
     padding: 5%;
 }
+
+#loser_screen {
+    text-align: center;
+}
+
+#loser_screen h1 {
+    color: #F44336;
+}
+
+#loser_screen i {
+    color: #4DAF4E;
+    font-size: 4em;
+}
