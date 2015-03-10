@@ -53,8 +53,11 @@ app.controller('HomeController', function ($scope) {
 
             for (var j = 0; j < levels.length; j++) {
                 if (levels[j].name == level.difficulty) {
-                    if (!$scope.unlockedLevels.contains(level))
+                    if (!$scope.unlockedLevels.contains(level)) {
                         level.imageName = 'lock.png';
+                        level.isUnlocked = false;
+                    } else 
+                        level.isUnlocked = true;
 
                     levels[j].levels.push(level);
                 }

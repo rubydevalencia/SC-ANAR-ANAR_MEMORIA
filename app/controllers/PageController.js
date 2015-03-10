@@ -15,8 +15,10 @@ app.controller('PageController', function($scope) {
     }
 
     $scope.startGame = function (level) {
-        $scope.level = level;
-        $scope.changePage('game');
+        if (level.isUnlocked) {
+            $scope.level = level;
+            $scope.changePage('game');
+        }
     }
 
     $scope.logOut = function() {
