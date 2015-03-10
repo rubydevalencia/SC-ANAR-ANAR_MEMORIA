@@ -11,5 +11,4 @@ app.filter('range', function() {
   };
 });
 
-//DBCreateLevels();
-//DBCreateCards(); 
+DBCreateDB();

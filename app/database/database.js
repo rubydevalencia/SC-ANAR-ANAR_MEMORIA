@@ -6,6 +6,26 @@ var db_level = new PouchDB('ANAR_LEVEL');
 // Atts: id, name, image, description
 var db_card = new PouchDB('ANAR_CARD');
 
+function DBCreateDB() {
+    // Buscamos todos los docs en la base de niveles. Si no hay los creamos.
+    db_level.allDocs({}, function(err, response) {
+        if (err)
+            console.log(err);
+
+        if (response.total_rows == 0)
+            DBCreateLevels();
+    });
+
+    // Igual con las cartas
+    db_card.allDocs({}, function(err, response) {
+        if (err)
+            console.log(err);
+
+        if (response.total_rows == 0)
+            DBCreateCards();
+    });
+}
+
 /*
  * User module
  */
@@ -66,10 +86,13 @@ function DBGetHighscores(callback) {
 
  function getArray(min, max) {
     var result = [];
-    for (var i = min; i < max; i++) {
+    for (var i = min; i < max / 2; i++) {
         result.push(i.toString());
     }
-    return result;
+
+    var reverse = result.reverse();
+
+    return result.concat(reverse);
  }
 
 function DBCreateLevels() {

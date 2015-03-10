@@ -1,5 +1,4 @@
-.modal-dialog {
-    width: 80%;
+#board {
     padding: 2.5%;
 }
 
@@ -38,4 +37,9 @@
 
 .last {
     padding-bottom: 0;
+}
+
+.modal-image {
+    width: 100%;
+    padding: 5%;
 }
