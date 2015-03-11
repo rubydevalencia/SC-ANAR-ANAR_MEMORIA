@@ -39,12 +39,12 @@
         <!--   Game         -->
         <!--                -->
 
-        <div style="height: 100%" ng-switch-when="game" ng-controller="GameController" ng-init="GameController.init(level)">
+        <div style="height: 100%" ng-switch-when="game" ng-controller="GameController">
             <div style="height: 100%" ng-include=" ' partials/game.html ' "></div>
         </div>
 
         <!--                -->
-        <!--   Collection   -->
+        <!--   Game         -->
         <!--                -->
 
         <div style="height: 100%" ng-switch-when="collection" ng-controller="CollectionController">
@@ -57,6 +57,7 @@
 
         <div style="height: 100%" ng-switch-when="highscores" ng-controller="HighscoresController">
             <div style="height: 100%" ng-include=" ' partials/highscores.html ' "></div>
+        </div>  
         
 
         <!-- build:js scripts/vendor.js -->
@@ -79,8 +80,8 @@
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/HomeController.js"></script>
+        <script src="controllers/GameController.js"></script>
         <script src="controllers/CollectionController.js"></script>
         <script src="controllers/HighscoresController.js"></script>
-        <script src="controllers/GameController.js"></script>
     </body>
 </html>

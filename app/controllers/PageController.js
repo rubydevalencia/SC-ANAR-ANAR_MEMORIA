@@ -12,12 +12,16 @@ app.controller('PageController', function($scope) {
     }
 
     $scope.changeUser = function (user) {
+        console.log(user);
         $scope.user = user;
         $scope.$apply();
     }
 
-    $scope.changeLevel = function (level) {
-        $scope.level = level;
+    $scope.startGame = function (level) {
+        if (level.isUnlocked) {
+            $scope.level = level;
+            $scope.changePage('game');
+        }
     }
 
     $scope.logOut = function() {

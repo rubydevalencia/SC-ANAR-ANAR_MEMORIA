@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('AnarApp', ['ui.router']);
+var app = angular.module('AnarApp', []);
 
 app.filter('range', function() {
   return function(input, total) {
@@ -11,5 +11,4 @@ app.filter('range', function() {
   };
 });
 
-// DBCreateLevels();
-// DBCreateCards();
+DBCreateDB();

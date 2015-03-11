@@ -4,7 +4,27 @@ var db_user = new PouchDB('ANAR_USER');
 // Functions: getPieces(), getCardsOnWin(), getPoints()
 var db_level = new PouchDB('ANAR_LEVEL');
 // Atts: id, name, image, description, number
-var db_card = new PouchDB('ANAR_CARD2');
+var db_card = new PouchDB('ANAR_CARD');
+
+function DBCreateDB() {
+    // Buscamos todos los docs en la base de niveles. Si no hay los creamos.
+    db_level.allDocs({}, function(err, response) {
+        if (err)
+            console.log(err);
+
+        if (response.total_rows == 0)
+            DBCreateLevels();
+    });
+
+    // Igual con las cartas
+    db_card.allDocs({}, function(err, response) {
+        if (err)
+            console.log(err);
+
+        if (response.total_rows == 0)
+            DBCreateCards();
+    });
+}
 
 /*
  * User module
@@ -21,6 +41,7 @@ function DBregisterUser(id, password, callback) {
     };
 
     db_user.put(user).then(function(result) {
+        user._rev = result.rev;
         callback(null, user);
 
     }).catch(function(err) {
@@ -41,34 +62,48 @@ function DBloginUser(id, password, callback) {
 }
 
 function DBGetHighscores(callback) {
-        db_user.allDocs({
-            include_docs: true
-        }, function(err, response) {
-            if (response) {
-                response.rows.sort(function(a, b) {
-                    if (a.doc.highscore < b.doc.highscore) return 1;
-                    else if (a.doc.highscore > b.doc.highscore) return -1;
-                    else return 0;
-                });
-            }
-            callback(err, response);
-        });
-    }
+    db_user.allDocs({
+        include_docs: true
+    }, function(err, response) {
+        if (response) {
+            response.rows.sort(function(a, b) {
+                if (a.doc.highscore < b.doc.highscore) return 1;
+                else if (a.doc.highscore > b.doc.highscore) return -1;
+                else return 0;
+            });
+        }
+        callback(err, response);
+    });
+}
+
+
+function DBUpdateUser(user, callback) {
+    db_user.put(user).then(function(result) {
+        callback(null, user);
+    }).catch(function(err) {
+        callback(err.status, null);
+    });
+}
     /*
      * End User module
      */
+
+
 
 /*
  * Level module
  */
 
-function getArray(low, high) {
-    var arr = [];
-    for (var i = low; i < high; ++i)
-        arr.push(i);
+ function getArray(min, max) {
+    var result = [];
+    for (var i = min; i < max / 2; i++) {
+        result.push(i.toString());
+    }
 
-    return arr;   
-}
+    var reverse = result.reverse();
+
+    return result.concat(reverse);
+ }
 
 function DBCreateLevels() {
     var level = {};
@@ -83,7 +118,8 @@ function DBCreateLevels() {
                 numPieces: 10,
                 time: '120',
                 difficulty: 'Fácil',
-                imageName: 'icon-128.png'
+                imageName: 'icon-128.png',
+                nextLevel: (i+1).toString()
             };
 
         else if (i < 20)
@@ -94,7 +130,8 @@ function DBCreateLevels() {
                 numPieces: 20,
                 time: '60',
                 difficulty: 'Normal',
-                imageName: 'icon-128.png'
+                imageName: 'icon-128.png',
+                nextLevel: (i+1).toString()
             };
         else
             level = {
@@ -102,9 +139,11 @@ function DBCreateLevels() {
                 name: 'Nivel ' + i,
                 cards: getArray(0, 30),
                 numPieces: 30,
+                cards: getArray(0, 30),
                 time: '30',
                 difficulty: 'Difícil',
-                imageName: 'icon-128.png'
+                imageName: 'icon-128.png',
+                nextLevel: (i+1).toString()
             };
 
         db_level.put(level);
@@ -128,6 +167,16 @@ function DBGetLevels(callback) {
         include_docs: true
     }, function(err, response) {
         callback(err, response);
+    });
+}
+
+function DBUnlocklevel(user, level, callback) {
+    user.levels.push(level.nextLevel);
+
+    db_user.put(user).then(function(result) {
+        callback(null, user);
+    }).catch(function(err) {
+        callback(err.status, null);
     });
 }
 
@@ -180,9 +229,31 @@ function DBGetCards(callback) {
     });
 };
 
-function BDGetLevelCards(level, callback) {
-
+function DBGetLevelCards(level, callback) {
+    db_card.allDocs({
+        include_docs: true,
+        keys: level.cards
+    }, function(err, response) {
+        callback(err, response);
+    });
 };
+
+function DBUnlockCard(user, card, callback) {
+    for (var i = 0; i < user.cards.length; ++i) {
+        if (user.cards[i] == card._id) {
+            callback(0, null);
+            return;
+        }
+    }
+
+    user.cards.push(card._id);
+
+    db_user.put(user).then(function(result) {
+        callback(null, user);
+    }).catch(function(err) {
+        callback(err.status, null);
+    });
+}
 
 /*
  * End Card module
