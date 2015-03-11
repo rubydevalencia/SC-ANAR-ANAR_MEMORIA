@@ -41,6 +41,7 @@ function DBregisterUser(id, password, callback) {
     };
 
     db_user.put(user).then(function(result) {
+        user._rev = result.rev;
         callback(null, user);
 
     }).catch(function(err) {
@@ -74,6 +75,15 @@ function DBGetHighscores(callback) {
             callback(err, response);
         });
     }
+
+
+function DBUpdateUser(user, callback) {
+    db_user.put(user).then(function(result) {
+        callback(null, user);
+    }).catch(function(err) {
+        callback(err.status, null);
+    });
+}
     /*
      * End User module
      */
@@ -106,8 +116,9 @@ function DBCreateLevels() {
                 numPieces: 10,
                 cards: getArray(0, 10),
                 time: '120',
-                difficulty: 'easy',
-                imageName: 'icon-128.png'
+                difficulty: 'Fácil',
+                imageName: 'icon-128.png',
+                nextLevel: (i+1).toString()
             };
         else if (i < 20)
             level = {
@@ -116,8 +127,9 @@ function DBCreateLevels() {
                 numPieces: 20,
                 cards: getArray(0, 20),
                 time: '60',
-                difficulty: 'medium',
-                imageName: 'icon-128.png'
+                difficulty: 'Intermedio',
+                imageName: 'icon-128.png',
+                nextLevel: (i+1).toString()
             };
         else
             level = {
@@ -126,8 +138,9 @@ function DBCreateLevels() {
                 numPieces: 30,
                 cards: getArray(0, 30),
                 time: '30',
-                difficulty: 'hard',
-                imageName: 'icon-128.png'
+                difficulty: 'Difícil',
+                imageName: 'icon-128.png',
+                nextLevel: (i+1).toString()
             };
 
         db_level.put(level);
@@ -150,6 +163,16 @@ function DBGetLevels(callback) {
         include_docs: true
     }, function(err, response) {
         callback(err, response);
+    });
+}
+
+function DBUnlocklevel(user, level, callback) {
+    user.levels.push(level.nextLevel);
+
+    db_user.put(user).then(function(result) {
+        callback(null, user);
+    }).catch(function(err) {
+        callback(err.status, null);
     });
 }
 
@@ -193,6 +216,23 @@ function DBGetLevelCards(level, callback) {
         callback(err, response);
     });
 };
+
+function DBUnlockCard(user, card, callback) {
+    for (var i = 0; i < user.cards.length; ++i) {
+        if (user.cards[i] == card._id) {
+            callback(0, null);
+            return;
+        }
+    }
+
+    user.cards.push(card._id);
+
+    db_user.put(user).then(function(result) {
+        callback(null, user);
+    }).catch(function(err) {
+        callback(err.status, null);
+    });
+}
 
 /*
  * End Card module

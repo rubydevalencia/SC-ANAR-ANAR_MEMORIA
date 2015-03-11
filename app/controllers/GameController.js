@@ -3,7 +3,6 @@
 app.controller('GameController', function($scope, $timeout) {
     var selectedCards = {};
     var totalCards;
-    var mytimeout = $timeout($scope.onTimeout,1000);
 
     $scope.cards = [];
     $scope.array = [0, 1, 2, 3, 4];
@@ -19,6 +18,7 @@ app.controller('GameController', function($scope, $timeout) {
             mytimeout = $timeout($scope.onTimeout,1000);
         }
     }
+    var mytimeout = $timeout($scope.onTimeout,1000);
 
     $scope.stop = function(){
         $timeout.cancel(mytimeout);
@@ -69,8 +69,40 @@ app.controller('GameController', function($scope, $timeout) {
         totalCards -= 2;
 
         if (totalCards == 0) {
+            // El timer se detiene y esconde
             $scope.stop();
-            // todo has una funcion para la victoria. updatea la base.
+            document.getElementById("timer").style.display='none';
+
+            // Se actualiza el puntaje del nivel
+            $scope.score = $scope.counter;
+
+            // Se busca una carta aleatoria entre las cartas del nivel para entregar al usuario
+            var random = Math.floor(Math.random() * $scope.cards.length);
+            $scope.obtainedCard = $scope.cards[random];
+
+            // Se instancia el usuario activo, se le actualiza el highscore, los niveles
+            // y se le desbloquea la nueva carta para luego actualizar la base
+            var newUser = $scope.user;
+            var addCard = true;
+            newUser.highscore += $scope.score;
+            newUser.levels.push($scope.level.nextLevel);
+
+            for (var i = 0; i < newUser.cards.length; ++i) {
+                if (newUser.cards[i] == $scope.obtainedCard._id) {
+                    addCard = false;
+                }
+            }
+
+            if (addCard)
+                newUser.cards.push($scope.obtainedCard._id);
+
+            DBUpdateUser(newUser, function(err, response) {
+                if (err)
+                    console.log(err);
+                else
+                    $scope.changeUser(response);
+            });
+
             document.getElementById("game_screen").style.display='none';
             document.getElementById("win_screen").style.display='block';
         }

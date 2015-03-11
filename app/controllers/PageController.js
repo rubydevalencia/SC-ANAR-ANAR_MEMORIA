@@ -10,6 +10,7 @@ app.controller('PageController', function($scope) {
     }
 
     $scope.changeUser = function (user) {
+        console.log(user);
         $scope.user = user;
         $scope.$apply();
     }
