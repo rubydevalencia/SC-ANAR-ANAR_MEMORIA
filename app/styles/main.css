@@ -44,3 +44,62 @@ body {
 #button_register {
     color: #4DAF4E;
 }
+
+#button_close_modal {
+    background-color: white;
+    color: #4DAF4E;
+}
+
+#modal-card-image{
+    margin-bottom:30px;    
+}
+
+.row {
+    margin: 0;
+}
+
+.title {
+    border-bottom: 1px solid lightgrey;
+}
+
+.primary {
+    color: #4DAF4E !important;
+}
+
+.primary_background {
+    background-color: #4DAF4E !important;
+}
+
+.navbar-brand {
+    font-size: 1.7em;
+}
+
+.navbar-icon {
+    font-size: 1.5em;
+}
+
+.navbar {
+    padding: 0 8.33333333%;
+}
+
+.panel-body {
+    padding: 0;
+}
+
+/*
+ *  Table
+ */
+table {
+    width:100%;
+}
+ table > thead > tr > th {
+     border-bottom: 2px solid #E0E0E0;
+     color: #A0A0A0;
+     text-align: left;
+     padding-bottom: 25px;
+     padding-top: 10px;
+ }
+
+ .current_user {
+     background-color:#D0D0D0;
+ }

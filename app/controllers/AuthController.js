@@ -1,34 +1,61 @@
 'use strict';
 
 app.controller('AuthController', function($scope) {
+    $scope.errorMessage = "";
+
     // This function is used to login the user
     $scope.loginUser = function (id, password) {
-        var resultCode = DBloginUser(id, password, function(status){
-            if (status == 200) {
-                $scope.page.page = 'home';
-                $scope.$apply;
+        if(!id || !password)
+            return;
+
+        DBloginUser(id, password, function(err, response){
+            if (err) {
+                console.log(err); 
+                if (err == 401)
+                    $scope.errorMessage = "Contraseña incorrecta";
+                else if (err == 404)
+                    $scope.errorMessage = "Usuario no encontrado";
+                else
+                    $scope.errorMessage = err;
+                $scope.showErrorMessage();
+                $scope.$apply();
+                return;
             }
-            else if(status == 401)
-                console.log("unathorized");
-            else if(status == 404)
-                console.log("not found");
-            else 
-                console.log(status);
-            console.log($scope.page.page);
+
+            $scope.changeUser(response);
+            $scope.changePage('home');  
         });
     }
 
     // This function is used to register the user
     $scope.registerUser = function (id, password) {
-        DBregisterUser(id, password, function(status){
-            
-            //TODO check possible errors
-            if (status == 200)
-                console.log("success");
-            else if(status == 409)
-                console.log("already exists");
-            else 
-                console.log(status);
+        if(!id || !password)
+            return;
+
+        DBregisterUser(id, password, function(err, response){
+            if (err) {
+                console.log(err); 
+                if (err == 409)
+                    $scope.errorMessage = "El usuario ya existe";
+                else if (err == 404)
+                    $scope.errorMessage = "Usuario no encontrado";
+                else
+                    $scope.errorMessage = err;
+                $scope.showErrorMessage();
+                $scope.$apply();    
+                return;
+            }
+
+            $scope.changeUser(response);
+            $scope.changePage('home');
         });
+    }
+
+    $scope.hideErrorMessage = function () {
+        document.getElementById("error").style.display='none';
+    }
+
+    $scope.showErrorMessage = function () {
+        document.getElementById("error").style.display='block';
     }
 });

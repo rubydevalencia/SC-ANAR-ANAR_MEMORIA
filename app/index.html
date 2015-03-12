@@ -2,83 +2,86 @@
 <html ng-app="AnarApp" ng-csp="">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <title>ANAR Memoria</title>
+        
+        <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="../bower_components/bootstrap-material-design/dist/css/material.css" />
         <link rel="stylesheet" href="../bower_components/bootstrap-material-design/dist/css/ripples.css" />
         <!-- endbower -->
         <!-- endbuild -->
-        <!-- build:css styles/main.css -->
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
     </head>
-    <body ng-switch="page.page" ng-controller="PageController">
+    <body ng-switch="page" ng-controller="PageController">
+
+        <!--                -->
         <!-- Authentication -->
+        <!--                -->
+
         <div style="height: 100%" ng-switch-default ng-controller="AuthController">
-            <div id="main" class="row">
-                <div class="col-xs-2 col-md-4"></div>
-                <div class="col-xs-8 col-md-4 well page active container" id="dialog">
-                    <form class="form-horizontal" ng-submit="loginUser(user.id, user.password)">
-                        <fieldset>
-                            <legend>Iniciar Sesión</legend>
-                            <div class="form-group">
-                                <label for="inputNAME" class="col-lg-2 control-label">Nombre</label>
-                                <div class="col-lg-10">
-                                    <input required type="text" class="form-control" id="inputName" placeholder="Nombre" ng-model="user.id">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
-                                <div class="col-lg-10">
-                                    <input required type="password" class="form-control" id="inputPassword" placeholder="Contraseña" ng-model="user.password">
-                                </div>
-                            </div>
-                            <div style="text-align: right">
-                                <button id="button_register" type="button" ng-click="registerUser(user.id, user.password)" class="btn">Registrarse<div class="ripple-wrapper"></div></button>
-                                <button id="button_login" type="submit" class="btn">Ingresar<div class="ripple-wrapper"></div></button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="col-xs-2 col-md-4"></div>
-            </div>
-            <div id="credit" class="row">
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8" style="text-align: center; height: 100%">
-                    <h4 class="container">Archivo Nacional de Arte Rupestre</h4>
-                </div>
-                <div class="col-xs-2"></div>
-            </div>
+            <div style="height: 100%" ng-include=" ' partials/auth.html ' "></div>
         </div>
 
-        <div style="height: 100%" ng-switch-when="home">
-            dasdsadas
+        <!--                -->
+        <!--      Home      -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="home" ng-controller="HomeController">
+            <div style="height: 100%" ng-include=" ' partials/home.html ' "></div>
         </div>
 
+        <!--                -->
+        <!--   Game         -->
+        <!--                -->
 
+        <div style="height: 100%" ng-switch-when="game" ng-controller="GameController">
+            <div style="height: 100%" ng-include=" ' partials/game.html ' "></div>
+        </div>
 
+        <!--                -->
+        <!--   Game         -->
+        <!--                -->
 
+        <div style="height: 100%" ng-switch-when="collection" ng-controller="CollectionController">
+            <div style="height: 100%" ng-include=" ' partials/collection.html ' "></div>
+        </div>
+
+        <!--                -->
+        <!--   Highscore    -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="highscores" ng-controller="HighscoresController">
+            <div style="height: 100%" ng-include=" ' partials/highscores.html ' "></div>
+        </div>  
+        
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="scripts/vendor/angular.min.js"></script>
         <script src="scripts/vendor/angular-ui-router.min.js"></script>
         <script src="scripts/vendor/pouchdb.min.js"></script>
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="scripts/vendor/pouchdb.quick-search.min.js"></script>
+        <script src="scripts/vendor/jquery.min.js"></script>
         <script src="../bower_components/bootstrap-material-design/dist/js/material.js"></script>
         <script src="../bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js scripts/index.js -->
         <script src="scripts/index.js"></script>
-        <script src="scripts/database.js"></script>
+        <script src="database/database.js"></script>
         <script src="scripts/app.js"></script>
         <!-- endbuild -->
         <!-- Controllers -->
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
+        <script src="controllers/HomeController.js"></script>
+        <script src="controllers/GameController.js"></script>
+        <script src="controllers/CollectionController.js"></script>
+        <script src="controllers/HighscoresController.js"></script>
     </body>
 </html>

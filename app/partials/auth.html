@@ -1,0 +1,39 @@
+<div id="main" class="row">
+    <div class="col-xs-2 col-md-2"></div>
+    <div class="col-xs-6 col-md-6 well page active container" id="dialog">
+        <form class="form-horizontal" >
+            <fieldset>
+                <legend>Iniciar Sesión</legend>
+                <div class="form-group">
+                    <label for="inputNAME" class="col-lg-2 control-label">Nombre</label>
+                    <div class="col-lg-10">
+                        <input required type="text" class="form-control" id="inputName" placeholder="Nombre" ng-model="user.id">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
+                    <div class="col-lg-10">
+                        <input required type="password" class="form-control" id="inputPassword" placeholder="Contraseña" ng-model="user.password">
+                    </div>
+                </div>
+                <div style="text-align: right">
+                    <button id="button_register" type="button" ng-click="registerUser(user.id, user.password)" class="btn">Registrarse<div class="ripple-wrapper"></div></button>
+                    <button id="button_login" type="submit" ng-click="loginUser(user.id, user.password)" class="btn">Ingresar<div class="ripple-wrapper"></div></button>
+                </div>
+            </fieldset>
+        </form>
+        <div id="error" class="alert alert-dismissable alert-danger" style="display:none">
+            <button type="button" class="close" ng-click="hideErrorMessage()">×</button>
+            {{errorMessage}}
+        </div>
+    </div>
+    <div class="col-xs-2 col-md-2"></div>
+</div>
+
+<div id="credit" class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8" style="text-align: center; height: 100%">
+        <h4 class="container">Archivo Nacional de Arte Rupestre</h4>
+    </div>
+    <div class="col-xs-2"></div>
+</div>

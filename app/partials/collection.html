@@ -1,0 +1,86 @@
+<div class="primary_background navbar navbar-default ">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a href="#" class="navbar-brand" ng-click="changePage('home')">
+            <i class="mdi-navigation-arrow-back navbar-icon"></i>
+        </a>
+        <a class="navbar-brand">Tu Colección de Cartas</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" ng-click="changePage('collection')">
+                    <i class="mdi-content-content-copy navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" ng-click="changePage('highscores')">
+                    <i class="mdi-editor-insert-chart navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" ng-click="logOut()">
+                    <i class="mdi-action-exit-to-app navbar-icon"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div style="text-align: center;" class="row" ng-repeat="i in [] | range: cards.length / 4">
+    <div class="col-md-2"></div>
+    <div class="col-xs-6 col-md-2" style="margin-top: 40px;">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-click="showCard(cards[i*4])">
+                <img height="100%" width="100%" src="{{cards[i*4].image}}">
+            </div>
+            <div class="panel-footer">{{cards[i*4].name}}</div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-2" style="margin-top: 40px;">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-click="showCard(cards[i*4+1])">
+                <img height="100%" width="100%" src="{{cards[i*4+1].image}}">
+            </div>
+            <div class="panel-footer">{{cards[i*4 + 1].name}}</div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-2" style="margin-top: 40px;">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-click="showCard(cards[i*4+2])">
+                <img height="100%" width="100%" src="{{cards[i*4+2].image}}">
+            </div>
+            <div class="panel-footer">{{cards[i*4 + 2].name}}</div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-2" style="margin-top: 40px;">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-click="showCard(cards[i*4+3])">
+                <img height="100%" width="100%" src="{{cards[i*4+3].image}}">
+            </div>
+            <div class="panel-footer">{{cards[i*4 + 3].name}}</div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal" class="modal" style="display: none;">
+    <div class="modal-dialog" style="height:100%; width: 30%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{card.name}}</h4>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <img class="modal-image" id="modal-card-image" ng-src="{{card.image}}" height="80%" width="80%">
+                <p style="text-align:center">{{card.description}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="button_close_modal" ng-click="hideCard()">CERRAR<div class="ripple-wrapper"></div></button>
+            </div>
+        </div>
+    </div>
+</div>

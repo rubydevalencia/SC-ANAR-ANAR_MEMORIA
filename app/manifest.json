@@ -23,8 +23,7 @@
         "background": {
             "scripts": [
                 "scripts/main.js",
-                "scripts/chromereload.js",
-                "scripts/vendor/angular.min.js"
+                "scripts/chromereload.js"
             ]
         }
     },
