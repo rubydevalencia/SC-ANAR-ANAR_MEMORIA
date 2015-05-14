@@ -1,10 +1,10 @@
 // Atts: id, password, levels [1..*], cards [1..*], highscore
-var db_user = new PouchDB('ANAR_USER7');
+var db_user = new PouchDB('ANAR_USER');
 // Atts: id, name, cards, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
-var db_level = new PouchDB('ANAR_LEVEL7');
+var db_level = new PouchDB('ANAR_LEVEL');
 // Atts: id, name, image, description, number
-var db_card = new PouchDB('ANAR_CARD7');
+var db_card = new PouchDB('ANAR_CARD');
 
 function DBCreateDB() {
     // Buscamos todos los docs en la base de niveles. Si no hay los creamos.
@@ -76,7 +76,6 @@ function DBGetHighscores(callback) {
     });
 }
 
-
 function DBUpdateUser(user, callback) {
     db_user.put(user).then(function(result) {
         callback(null, user);
@@ -87,8 +86,6 @@ function DBUpdateUser(user, callback) {
     /*
      * End User module
      */
-
-
 
 function shuffle(o){ //try this shuffle function
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
