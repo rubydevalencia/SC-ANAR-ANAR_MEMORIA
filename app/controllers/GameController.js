@@ -32,7 +32,9 @@ app.controller('GameController', function($scope, $timeout) {
             card.imageShown = 'images/card.png';
             card.position = i;
             cards.push(card);
-        }
+        };
+
+        cards = shuffle(cards);
 
         $scope.$apply(function(){
             $scope.cards = cards;

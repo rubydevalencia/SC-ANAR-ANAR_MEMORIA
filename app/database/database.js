@@ -1,10 +1,10 @@
 // Atts: id, password, levels [1..*], cards [1..*], highscore
-var db_user = new PouchDB('ANAR_USER');
+var db_user = new PouchDB('ANAR_USER7');
 // Atts: id, name, cards, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
-var db_level = new PouchDB('ANAR_LEVEL');
+var db_level = new PouchDB('ANAR_LEVEL7');
 // Atts: id, name, image, description, number
-var db_card = new PouchDB('ANAR_CARD');
+var db_card = new PouchDB('ANAR_CARD7');
 
 function DBCreateDB() {
     // Buscamos todos los docs en la base de niveles. Si no hay los creamos.
@@ -90,15 +90,24 @@ function DBUpdateUser(user, callback) {
 
 
 
+function shuffle(o){ //try this shuffle function
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
+
 /*
  * Level module
  */
 
  function getArray(min, max) {
+    // var array = [];
     var result = [];
-    for (var i = min; i < max / 2; i++) {
+
+    for (var i = min; i < max; i++) {
         result.push(i.toString());
     }
+
+    result = shuffle(result);
 
     var reverse = result.reverse();
 
@@ -107,44 +116,177 @@ function DBUpdateUser(user, callback) {
 
 function DBCreateLevels() {
     var level = {};
+    var j;
 
-
-    for (var i = 0; i < 30; i++) {
-        if (i < 10)
+    for (var i = 0; i < 70; i++) {
+        if (i < 5) {
             level = {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
-                cards: getArray(0, 10),
+                cards: getArray(0, 5),
                 numPieces: 10,
-                time: '120',
+                time: '100',
                 difficulty: 'Fácil',
-                imageName: 'icon-128.png',
+                imageName: 'done.png',
                 nextLevel: (i+1).toString()
             };
 
-        else if (i < 20)
+        } else if (i < 10) {
             level = {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
-                cards: getArray(0, 20),
-                numPieces: 20,
-                time: '60',
-                difficulty: 'Normal',
-                imageName: 'icon-128.png',
+                cards: getArray(5, 10),
+                numPieces: 10,
+                time: '80',
+                difficulty: 'Fácil',
+                imageName: 'done.png',
                 nextLevel: (i+1).toString()
             };
-        else
+
+        } else if (i < 15) {
             level = {
                 _id: i.toString(),
                 name: 'Nivel ' + i,
-                cards: getArray(0, 30),
-                numPieces: 30,
-                cards: getArray(0, 30),
+                cards: getArray(10, 15),
+                numPieces: 10,
+                time: '60',
+                difficulty: 'Intermedio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 20) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(15, 20),
+                numPieces: 10,
+                time: '60',
+                difficulty: 'Intermedio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 25) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(20, 25),
+                numPieces: 10,
+                time: '60',
+                difficulty: 'Intermedio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 30) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(25, 30),
+                numPieces: 10,
+                time: '45',
+                difficulty: 'Medio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 35) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(30, 35),
+                numPieces: 10,
+                time: '45',
+                difficulty: 'Medio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 40) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(35, 40),
+                numPieces: 10,
+                time: '45',
+                difficulty: 'Medio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 45) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(40, 45),
+                numPieces: 10,
+                time: '45',
+                difficulty: 'Medio',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 50) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(45, 50),
+                numPieces: 10,
                 time: '30',
                 difficulty: 'Difícil',
-                imageName: 'icon-128.png',
+                imageName: 'done.png',
                 nextLevel: (i+1).toString()
             };
+
+        } else if (i < 55) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(50, 55),
+                numPieces: 10,
+                time: '30',
+                difficulty: 'Difícil',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 60) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(60, 65),
+                numPieces: 10,
+                time: '30',
+                difficulty: 'Difícil',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 65) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(60, 65),
+                numPieces: 10,
+                time: '30',
+                difficulty: 'Difícil',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+
+        } else if (i < 65) {
+            level = {
+                _id: i.toString(),
+                name: 'Nivel ' + i,
+                cards: getArray(65, 70),
+                numPieces: 10,
+                time: '30',
+                difficulty: 'Difícil',
+                imageName: 'done.png',
+                nextLevel: (i+1).toString()
+            };
+        };
 
         db_level.put(level);
     }
@@ -191,12 +333,12 @@ function DBUnlocklevel(user, level, callback) {
 function DBCreateCards() {
     var card = {};
 
-    for (var i = 0; i < 60; i++) {
+    for (var i = 0; i < 70; i++) {
         card = {
             _id: i.toString(),
             name: 'Carta ' + i,
-            image: "images/icon-128.png",
-            description: 'Lorem ipsum donor amet.',
+            image: 'images/cards/' + i + '.png',
+            description: '',
             number: i
         };
 
