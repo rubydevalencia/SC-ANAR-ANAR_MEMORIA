@@ -41,6 +41,10 @@ Para generar un ejecutable del proyecto deberas ir al directorio de la app y cor
   grunt build
 ```
 
+Luego extraer los contenidos en una carpeta, ir a chrome://extensions/, darle al boton de Pack extension y seleccionar la carpeta. Esto generara un .crx y un .pem. El .pem se usara si se quiere subir la app a la web store y el .crx es el "ejecutable". Para correr la app basta con hacer drag del archivo a la ventana de chrome y darle aceptar.
+
+Si la app generada no funciona correctamente se puede seleccionar la carpeta app del directorio y hacer pack de ella. No estara optimizada pero funcionara.
+
 ## Referencias
 - https://nodejs.org/
 - https://www.npmjs.com/
