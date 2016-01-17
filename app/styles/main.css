@@ -1,7 +1,7 @@
-/* Colors 
+/* Colors
  *
- * Primary #4DAF4E
- * Primary Dark 
+ * Primary #993300
+ * Primary Dark
  */
 
 html {
@@ -25,7 +25,7 @@ body {
 
 #credit {
     height: 8%;
-    background-color: #4DAF4E;
+    background-color: #993300;
     color: white;
 }
 
@@ -38,20 +38,20 @@ body {
 
 #button_login {
     color: white;
-    background-color: #4DAF4E;
+    background-color: #993300;
 }
 
 #button_register {
-    color: #4DAF4E;
+    color: #993300;
 }
 
 #button_close_modal {
     background-color: white;
-    color: #4DAF4E;
+    color: #993300;
 }
 
 #modal-card-image{
-    margin-bottom:30px;    
+    margin-bottom:30px;
 }
 
 .row {
@@ -63,11 +63,11 @@ body {
 }
 
 .primary {
-    color: #4DAF4E !important;
+    color: #993300 !important;
 }
 
 .primary_background {
-    background-color: #4DAF4E !important;
+    background-color: #993300 !important;
 }
 
 .navbar-brand {
