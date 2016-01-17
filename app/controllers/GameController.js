@@ -29,7 +29,7 @@ app.controller('GameController', function($scope, $timeout) {
         totalCards = result.rows.length;
         for (var i = 0; i < result.rows.length; i++) {
             var card = result.rows[i].doc;
-            card.imageShown = 'images/card.png';
+            card.imageShown = 'images/done.png';
             card.position = i;
             cards.push(card);
         };
@@ -51,8 +51,8 @@ app.controller('GameController', function($scope, $timeout) {
             if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
                 removeCard(selectedCards.card1);
             } else {
-                selectedCards.card1.imageShown = 'images/card.png';
-                selectedCards.card2.imageShown = 'images/card.png';
+                selectedCards.card1.imageShown = 'images/done.png';
+                selectedCards.card2.imageShown = 'images/done.png';
             }
 
             delete selectedCards.card1;
@@ -117,7 +117,7 @@ app.controller('GameController', function($scope, $timeout) {
         var card;
         for (var i = 0; i < $scope.cards.length; ++i) {
             card = $scope.cards[i];
-            card.imageShown = 'images/card.png';
+            card.imageShown = 'images/done.png';
             document.getElementsByClassName(card._id)[0].style.display='block';
             document.getElementsByClassName(card._id)[1].style.display='block';
         }
