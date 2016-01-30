@@ -42,7 +42,8 @@ body {
 }
 
 #button_register {
-    color: #993300;
+    color: white;
+    background-color: #993300;
 }
 
 #button_close_modal {

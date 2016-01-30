@@ -23,9 +23,13 @@
                         <input required type="password" class="form-control" id="inputPassword" placeholder="Contraseña" ng-model="user.password">
                     </div>
                 </div>
-                <div style="text-align: right">
-                    <button id="button_register" type="button" ng-click="registerUser(user.id, user.password)" class="btn">Registrarse<div class="ripple-wrapper"></div></button>
+                <div>
+                <div style="float: left">
+                    <button id="button_register" type="submit" ng-click="registerUser(user.id, user.password)" class="btn">Registrar<div class="ripple-wrapper"></div></button>
+                </div>
+                <div style="float: right">
                     <button id="button_login" type="submit" ng-click="loginUser(user.id, user.password)" class="btn">Ingresar<div class="ripple-wrapper"></div></button>
+                </div>
                 </div>
             </fieldset>
         </form>
