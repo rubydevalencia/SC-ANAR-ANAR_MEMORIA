@@ -1,5 +1,5 @@
 // Atts: id, password, levels [1..*], cards [1..*], highscore
-var db_user = new PouchDB('http://192.168.1.2:5984/anar_user');
+var db_user = new PouchDB('http://memoria-anar-alfjf.c9users.io:8081/anar_user');
 // Atts: id, name, cards, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
 var db_level = new PouchDB('anar_level');
