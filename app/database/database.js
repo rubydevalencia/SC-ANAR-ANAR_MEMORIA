@@ -1,10 +1,10 @@
 // Atts: id, password, levels [1..*], cards [1..*], highscore
-var db_user = new PouchDB('ANAR_USER');
+var db_user = new PouchDB('http://192.168.1.2:5984/anar_user');
 // Atts: id, name, cards, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
-var db_level = new PouchDB('ANAR_LEVEL');
+var db_level = new PouchDB('anar_level');
 // Atts: id, name, image, description, number
-var db_card = new PouchDB('ANAR_CARD');
+var db_card = new PouchDB('anar_card');
 
 function DBCreateDB() {
     // Buscamos todos los docs en la base de niveles. Si no hay los creamos.
