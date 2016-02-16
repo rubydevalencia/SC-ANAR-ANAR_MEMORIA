@@ -6,7 +6,7 @@ app.controller('HomeController', function ($scope) {
     $scope.levelsByCategory = {};
     $scope.array = [0, 1, 2, 3, 4];
 
-    /* 
+    /*
      * The first thing the controller will do is get the user levels
      */
     DBGetUserLevels($scope.user, function (err, result) {
@@ -17,9 +17,9 @@ app.controller('HomeController', function ($scope) {
 
         $scope.unlockedLevels = levels;
         $scope.$apply();
-    });
 
-    /* 
+
+    /*
      * Then we get all the levels and place them on the view.
      * This will take into consideration if the level has been unlocked or not.
      */
@@ -42,7 +42,7 @@ app.controller('HomeController', function ($scope) {
         // {difficulty, [levels]}
         for (var i = 0; i < difficulties.length; i++) {
             levels.push({
-                name : difficulties[i], 
+                name : difficulties[i],
                 levels : []
             });
         }
@@ -56,7 +56,7 @@ app.controller('HomeController', function ($scope) {
                     if (!$scope.unlockedLevels.contains(level)) {
                         level.imageName = 'lock.png';
                         level.isUnlocked = false;
-                    } else 
+                    } else
                         level.isUnlocked = true;
 
                     levels[j].levels.push(level);
@@ -69,7 +69,7 @@ app.controller('HomeController', function ($scope) {
         // Then we fill the levels array with actual levels
         $scope.levels = levels;
         $scope.$apply();
-    });
+    });});
 
     /*
      * This is the definition for the contains function for arrays.
@@ -92,4 +92,3 @@ app.controller('HomeController', function ($scope) {
         return new Array(length / 5);
     };
 });
-
