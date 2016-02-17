@@ -31,9 +31,10 @@
     </div>
 </div>
 
-
 <div class="col-xs-1"></div>
 <div class="col-xs-10">
+<div recuadro="recuadro">
+    <div class="well">
     <table style="margin:auto;text-align: left;">
         <thead>
             <tr>
@@ -45,7 +46,9 @@
             <tr style="border-bottom: 1px solid #E0E0E0; height:50px;" ng-repeat='u in users' ng-class="{'current_user': u.doc._id == user._id}">
                 <td class="col-xs-7" style="text-align: left !important; font-weight: bold;">{{u.doc._id}}</td>
                 <td class="col-xs-3"style="">{{u.doc.highscore}}</td>
-            </tr>    
+            </tr>
         </tbody>
     </table>
+    </div>
+</div>
 </div>

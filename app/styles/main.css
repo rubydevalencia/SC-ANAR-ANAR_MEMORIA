@@ -6,10 +6,15 @@
 
 html {
     height: 100%;
+
 }
 
 body {
     height: 100%;
+    background-image:url(../images/back.png);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    background-attachment:fixed;
 }
 
 .container {
@@ -104,3 +109,7 @@ table {
  .current_user {
      background-color:#D0D0D0;
  }
+
+.recuadro {
+    padding: 2.5%;
+}
