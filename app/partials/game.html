@@ -3,9 +3,9 @@
 <div class="primary_background navbar navbar-default ">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
         </button>
         <a href="#" class="navbar-brand" ng-click="changePage('home')">
             <i class="mdi-navigation-arrow-back navbar-icon"></i>
@@ -39,7 +39,7 @@
         <div id="win_screen" style="display: none">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="images/win-left.png" width="100%" height="100%">
+                    <img src="images/inicio-der1.png" width="100%" height="100%">
                 </div>
                 <div class="col-md-6">
                     <h1>¡GANASTE!</h1>
@@ -51,7 +51,7 @@
                     </button>
                 </div>
                 <div class="col-md-3">
-                    <img src="images/win-right.png" width="100%" height="100%">
+                    <img src="images/inicio-izq1.png" width="100%" height="100%">
                 </div>
             </div>
 
@@ -61,28 +61,29 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <div class="panel panel-default">
-                    <div class="panel-body">
-                        <img height="100%" width="100%" ng-src="{{obtainedCard.image}}">
+                        <div class="panel-body">
+                            <img height="100%" width="100%" ng-src="{{obtainedCard.image}}">
+                        </div>
+                        <div class="panel-footer">{{obtainedCard.name}}</div>
                     </div>
-                    <div class="panel-footer">{{obtainedCard.name}}</div>
+                    <div class="col-md-4"></div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
         </div>
 
         <div id="loser_screen" class="row" style="display: none">
             <div class="col-md-3">
-                <img src="images/win-left.png" width="100%" height="100%">
+                <img src="images/inicio-der1.png" width="100%" height="100%">
             </div>
             <div class="col-md-6">
                 <h1>PERDISTE</h1>
-                <h2>Se te acabo el tiempo</h2>
+                <h2>Se te acabó el tiempo</h2>
                 <br><br>
                 <h3>¡Intentalo de nuevo!</h3>
                 <i href="#" class="mdi-action-autorenew navbar-icon" ng-click="restartGame()"></i>
             </div>
             <div class="col-md-3">
-                <img src="images/win-right.png" width="100%" height="100%">
+                <img src="images/inicio-izq1.png" width="100%" height="100%">
             </div>
         </div>
     </div>

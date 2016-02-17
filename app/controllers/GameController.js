@@ -8,16 +8,16 @@ app.controller('GameController', function($scope, $timeout) {
     $scope.counter = $scope.level.time;
 
     // The first thing we do is set up the timer countdown
-    $scope.onTimeout = function() {
+    onTimeout = function() {
         $scope.counter--;
         if ($scope.counter == 0) {
             document.getElementById("game_screen").style.display='none';
             document.getElementById("loser_screen").style.display='block';
         } else {
-            mytimeout = $timeout($scope.onTimeout,1000);
+            mytimeout = $timeout(onTimeout,1000);
         }
     }
-    var mytimeout = $timeout($scope.onTimeout,1000);
+    var mytimeout = $timeout(onTimeout,1000);
 
     $scope.stop = function(){
         $timeout.cancel(mytimeout);
@@ -43,7 +43,7 @@ app.controller('GameController', function($scope, $timeout) {
 
     // This functions are used to handle the game cards
     $scope.showCard = function(card) {
-        if (!selectedCards.card1) 
+        if (!selectedCards.card1)
             selectedCards.card1 = card;
         else if (!selectedCards.card2)
             selectedCards.card2 = card;
@@ -59,7 +59,7 @@ app.controller('GameController', function($scope, $timeout) {
             delete selectedCards.card2;
             return;
         }
-        
+
         card.imageShown = card.image;
     }
 
@@ -110,8 +110,6 @@ app.controller('GameController', function($scope, $timeout) {
     }
 
     $scope.restartGame = function() {
-        // Tecnicamente se puede usar route pero nunca configure el provider asi que
-        // queda hacer esta fealdad
 
         // Reinicio el estado de las cartas
         var card;
@@ -128,10 +126,11 @@ app.controller('GameController', function($scope, $timeout) {
 
         // Reinicio el contador
         $scope.counter = $scope.level.time;
+        mytimeout = $timeout(onTimeout,1000);
 
         // Me aseguro que las pantallas correctas se esten mostrando
         document.getElementById("game_screen").style.display='block';
-        document.getElementById("loser_screen").style.display='none';  
-        document.getElementById("win_screen").style.display='none'; 
+        document.getElementById("loser_screen").style.display='none';
+        document.getElementById("win_screen").style.display='none';
     }
 });
