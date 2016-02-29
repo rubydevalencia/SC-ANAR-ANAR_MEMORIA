@@ -39,41 +39,32 @@
         <div id="win_screen" style="display: none">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="images/inicio-der1.png" width="100%" height="100%">
+                    <img src="images/inicio-der1.png" width="60%" height="60%">
                 </div>
                 <div class="col-md-6">
                     <h1>¡GANASTE!</h1>
-                    <h2>Haz ganado {{score}} puntos</h2>
-                    <br><br>
+                    <h2>Has ganado {{score}} puntos</h2>
                     <button id="button_confirm" ng-click="changePage('home')" class="btn">
                         Continuar
                         <div class="ripple-wrapper"></div>
                     </button>
+                    <h2>Has desbloqueado esta carta</h2>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <img height="80%" width="80%" ng-src="{{obtainedCard.image}}">
+                        <p>{{obtainedCard.name}}<p>
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
                 <div class="col-md-3">
-                    <img src="images/inicio-izq1.png" width="100%" height="100%">
-                </div>
-            </div>
-
-            <h2>Has desbloqueado esta carta</h2>
-            <br>
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img height="100%" width="100%" ng-src="{{obtainedCard.image}}">
-                        </div>
-                        <div class="panel-footer">{{obtainedCard.name}}</div>
-                    </div>
-                    <div class="col-md-4"></div>
+                    <img src="images/inicio-izq1.png" width="60%" height="60%">
                 </div>
             </div>
         </div>
 
         <div id="loser_screen" class="row" style="display: none">
             <div class="col-md-3">
-                <img src="images/inicio-der1.png" width="100%" height="100%">
+                <img src="images/inicio-der1.png" width="60%" height="60%">
             </div>
             <div class="col-md-6">
                 <h1>PERDISTE</h1>
@@ -83,7 +74,7 @@
                 <i href="#" class="mdi-action-autorenew navbar-icon" ng-click="restartGame()"></i>
             </div>
             <div class="col-md-3">
-                <img src="images/inicio-izq1.png" width="100%" height="100%">
+                <img src="images/inicio-izq1.png" width="60%" height="60%">
             </div>
         </div>
     </div>
