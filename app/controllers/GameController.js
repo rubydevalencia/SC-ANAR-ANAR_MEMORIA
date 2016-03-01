@@ -38,10 +38,8 @@ app.controller('GameController', function($scope, $timeout) {
 
         cards = shuffle(cards);
 
-        /*$scope.$apply(function(){
-            $scope.cards = cards;
-        });*/
         $scope.cards = cards;
+        $scope.$apply();
     });
 
     // This functions are used to handle the game cards
