@@ -24,7 +24,7 @@ app.controller('AuthController', function($scope) {
 
             $scope.changeUser(response);
             $scope.changePage('home');
-            $scope.$apply();  
+            $scope.$apply();
         });
     }
 
@@ -49,6 +49,7 @@ app.controller('AuthController', function($scope) {
 
             $scope.changeUser(response);
             $scope.changePage('home');
+            $scope.$apply();
         });
     }
 
