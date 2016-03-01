@@ -16,7 +16,7 @@ app.controller('HomeController', function ($scope) {
         }
 
         $scope.unlockedLevels = levels;
-        $scope.$apply();
+        //$scope.$apply();
 
     /*
      * Then we get all the levels and place them on the view.

@@ -1,4 +1,7 @@
 .card {
+    position: relative;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     padding: 2%;
@@ -23,6 +26,15 @@
 
 .row {
     padding-bottom: 50px;
+}
+
+.lupa{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20%;
+    width: auto;
+    display: none;
 }
 
 #timer {
@@ -68,4 +80,21 @@
 #button_confirm {
     background-color: #993300;
     color: white;
+}
+
+#invisible {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(150, 150, 150, 0.5);
+    z-index: 999;
+    text-align: center;
+}
+
+#invisible_interno {
+    display:table-cell;
+    vertical-align: middle;
 }

@@ -24,12 +24,28 @@
 </div>
 <div class="recuadro">
     <div class="well page">
+
+        <div id="invisible" ng-click="quitarZoom()">
+            <div id="invisible_interno">
+                <img ng-src="{{zoom}}"/>
+            </div>
+        </div>
+
         <div id="game_screen">
             <div ng-repeat="i in [] | range: cards.length / 5">
                 <div class="row"  ng-class="{'last':$last}">
                     <div class="col-md-1"></div>
-                    <div  class="col-xs-6 col-md-2" ng-repeat="j in array" ng-click="showCard(cards[i*5 + j])">
-                        <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
+                    <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
+                        <div style="position: relative; left: 0; top: 0;">
+                            <div ng-click="showCard(cards[i*5 + j])">
+                                <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
+                            </div>
+                            <div ng-if="conLupa">
+                                <div ng-click="hacerZoom(cards[i*5 + j])">
+                                    <img class="lupa" id="{{cards[i*5+j].position}}" src="images/lupa.png"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -48,7 +64,7 @@
                         Continuar
                         <div class="ripple-wrapper"></div>
                     </button>
-                    <h2>Has desbloqueado esta carta</h2>
+                    <h2>Desbloqueaste esta carta</h2>
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <img height="80%" width="80%" ng-src="{{obtainedCard.image}}">

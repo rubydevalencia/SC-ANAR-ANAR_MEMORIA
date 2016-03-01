@@ -6,11 +6,13 @@ app.controller('GameController', function($scope, $timeout) {
     $scope.cards = [];
     $scope.array = [0, 1, 2, 3, 4];
     $scope.counter = $scope.level.time;
+    $scope.conLupa = $scope.level._id >= 25;
+    $scope.zoom = "";
 
     // The first thing we do is set up the timer countdown
     onTimeout = function() {
         $scope.counter--;
-        if ($scope.counter == 0) {
+        if ($scope.counter <= 0) {
             document.getElementById("game_screen").style.display='none';
             document.getElementById("loser_screen").style.display='block';
         } else {
@@ -19,7 +21,7 @@ app.controller('GameController', function($scope, $timeout) {
     }
     var mytimeout = $timeout(onTimeout,1000);
 
-    $scope.stop = function(){
+    stop = function(){
         $timeout.cancel(mytimeout);
     }
 
@@ -54,6 +56,12 @@ app.controller('GameController', function($scope, $timeout) {
                 selectedCards.card1.imageShown = 'images/done.png';
                 selectedCards.card2.imageShown = 'images/done.png';
             }
+            if ($scope.conLupa) {
+                var pos = selectedCards.card1.position.toString();
+                document.getElementById(pos).style.display='none';
+                pos = selectedCards.card2.position.toString();
+                document.getElementById(pos).style.display='none';
+            }
 
             delete selectedCards.card1;
             delete selectedCards.card2;
@@ -61,8 +69,24 @@ app.controller('GameController', function($scope, $timeout) {
         }
 
         card.imageShown = card.image;
+        if ($scope.conLupa) {
+            document.getElementById(card.position.toString()).style.display='initial';
+        }
     }
 
+    // Hace zoom de una carta
+    $scope.hacerZoom = function(card) {
+        document.getElementById('invisible').style.display='table';
+        $scope.zoom = card.image;
+    }
+
+    // Quita el zoom y regresa a la pantalla de juego
+    $scope.quitarZoom = function() {
+        document.getElementById('invisible').style.display='none';
+    }
+
+    // Se encarga de eliminar cartas iguales y manejar el fin de juego
+    // cuando el usuario gana
     var removeCard = function(card) {
         document.getElementsByClassName(card._id)[0].style.display='none';
         document.getElementsByClassName(card._id)[1].style.display='none';
@@ -71,7 +95,7 @@ app.controller('GameController', function($scope, $timeout) {
 
         if (totalCards == 0) {
             // El timer se detiene y esconde
-            $scope.stop();
+            stop();
             document.getElementById("timer").style.display='none';
 
             // Se actualiza el puntaje del nivel
@@ -109,6 +133,7 @@ app.controller('GameController', function($scope, $timeout) {
         }
     }
 
+    // Reinicio del juego luego de perder o con el botón de la esquina
     $scope.restartGame = function() {
 
         // Reinicio el estado de las cartas
@@ -118,6 +143,10 @@ app.controller('GameController', function($scope, $timeout) {
             card.imageShown = 'images/done.png';
             document.getElementsByClassName(card._id)[0].style.display='block';
             document.getElementsByClassName(card._id)[1].style.display='block';
+            if ($scope.conLupa) {
+                pos = card.position.toString();
+                document.getElementById(pos).style.display='None';
+            }
         }
 
         // Reinicio las variables internas del controlador
@@ -125,6 +154,7 @@ app.controller('GameController', function($scope, $timeout) {
         selectedCards = {};
 
         // Reinicio el contador
+        stop();
         $scope.counter = $scope.level.time;
         mytimeout = $timeout(onTimeout,1000);
 
@@ -133,4 +163,10 @@ app.controller('GameController', function($scope, $timeout) {
         document.getElementById("loser_screen").style.display='none';
         document.getElementById("win_screen").style.display='none';
     }
+
+    // Se cancela el timeout cuando el usuario abandona el nivel
+    $scope.$on("$destroy", function (event) {
+        stop();
+    });
+
 });
