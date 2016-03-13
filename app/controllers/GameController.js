@@ -108,8 +108,17 @@ app.controller('GameController', function($scope, $timeout) {
             // y se le desbloquea la nueva carta para luego actualizar la base
             var newUser = $scope.user;
             var addCard = true;
+            var addLevel = true;
             newUser.highscore += $scope.score;
-            newUser.levels.push($scope.level.nextLevel);
+            
+            for (var i = 0; i < newUser.levels.length; ++i) {
+                if (newUser.levels[i] == $scope.level.nextLevel) {
+                    addLevel= false;
+                }
+            }
+            
+            if (addLevel)
+                newUser.levels.push($scope.level.nextLevel);
 
             for (var i = 0; i < newUser.cards.length; ++i) {
                 if (newUser.cards[i] == $scope.obtainedCard._id) {
