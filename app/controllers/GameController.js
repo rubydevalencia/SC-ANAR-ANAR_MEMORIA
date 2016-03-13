@@ -110,13 +110,13 @@ app.controller('GameController', function($scope, $timeout) {
             var addCard = true;
             var addLevel = true;
             newUser.highscore += $scope.score;
-            
+
             for (var i = 0; i < newUser.levels.length; ++i) {
-                if (newUser.levels[i] == $scope.level.nextLevel) {
+                if (newUser.levels[i]._id === $scope.level.nextLevel) {
                     addLevel= false;
                 }
             }
-            
+
             if (addLevel)
                 newUser.levels.push($scope.level.nextLevel);
 
