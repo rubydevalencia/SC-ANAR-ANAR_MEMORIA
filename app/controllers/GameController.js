@@ -15,6 +15,7 @@ app.controller('GameController', function($scope, $timeout) {
         if ($scope.counter <= 0) {
             document.getElementById("game_screen").style.display='none';
             document.getElementById("loser_screen").style.display='block';
+            document.getElementById("obtenidas").style.display='none';
         } else {
             mytimeout = $timeout(onTimeout,1000);
         }
@@ -87,9 +88,11 @@ app.controller('GameController', function($scope, $timeout) {
     // Se encarga de eliminar cartas iguales y manejar el fin de juego
     // cuando el usuario gana
     var removeCard = function(card) {
-        document.getElementsByClassName(card._id)[0].style.display='none';
-        document.getElementsByClassName(card._id)[1].style.display='none';
-
+        //document.getElementsByClassName(card._id)[0].style.display='none';
+        //document.getElementsByClassName(card._id)[1].style.display='none';
+        var nuevas = $("." + card._id).clone().appendTo("#obtenidas");
+        $("." + card._id).hide();
+        nuevas.first().show().css('width', '110px').css('height','110px').css('padding', '0');
         totalCards -= 2;
 
         if (totalCards == 0) {
@@ -138,8 +141,11 @@ app.controller('GameController', function($scope, $timeout) {
 
             document.getElementById("game_screen").style.display='none';
             document.getElementById("win_screen").style.display='block';
+            document.getElementById("obtenidas").style.display='none';
         }
     }
+
+
 
     // Reinicio del juego luego de perder o con el botón de la esquina
     $scope.restartGame = function() {

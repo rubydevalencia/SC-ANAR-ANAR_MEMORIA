@@ -104,8 +104,6 @@ function shuffle(o){ //try this shuffle function
         result.push(i.toString());
     }
 
-    result = shuffle(result);
-
     var reverse = result.reverse();
 
     return result.concat(reverse);

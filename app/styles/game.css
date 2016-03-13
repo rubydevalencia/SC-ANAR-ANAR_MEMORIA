@@ -51,6 +51,15 @@
     color: white;
 }
 
+#obtenidas {
+    height: 125px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    padding-bottom: 2%;
+    padding-left:2%
+}
+
 .last {
     padding-bottom: 0;
 }
