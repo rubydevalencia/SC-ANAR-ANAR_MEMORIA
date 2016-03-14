@@ -52,12 +52,12 @@
 }
 
 #obtenidas {
-    height: 125px;
     position: fixed;
+    height: 125px;
     bottom: 0px;
     left: 0px;
     padding-bottom: 2%;
-    padding-left:2%
+    padding-left:2%;
 }
 
 .last {

@@ -88,11 +88,10 @@ app.controller('GameController', function($scope, $timeout) {
     // Se encarga de eliminar cartas iguales y manejar el fin de juego
     // cuando el usuario gana
     var removeCard = function(card) {
-        //document.getElementsByClassName(card._id)[0].style.display='none';
-        //document.getElementsByClassName(card._id)[1].style.display='none';
-        var nuevas = $("." + card._id).clone().appendTo("#obtenidas");
-        $("." + card._id).hide();
-        nuevas.first().show().css('width', '110px').css('height','110px').css('padding', '0');
+
+        if (totalCards > 2 && $scope.counter > 1)
+            moveToBottom(card);
+
         totalCards -= 2;
 
         if (totalCards == 0) {
@@ -115,7 +114,7 @@ app.controller('GameController', function($scope, $timeout) {
             newUser.highscore += $scope.score;
 
             for (var i = 0; i < newUser.levels.length; ++i) {
-                if (newUser.levels[i]._id === $scope.level.nextLevel) {
+                if (newUser.levels[i] === $scope.level.nextLevel) {
                     addLevel= false;
                 }
             }
@@ -141,11 +140,40 @@ app.controller('GameController', function($scope, $timeout) {
 
             document.getElementById("game_screen").style.display='none';
             document.getElementById("win_screen").style.display='block';
+
             document.getElementById("obtenidas").style.display='none';
         }
     }
 
-
+    // Animación del movimiento de las cartas hacia abajo
+    var moveToBottom = function (card) {
+        var old = $("." + card._id);
+        var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
+        newcard.css('width', '110px').css('height','110px').css('padding', '0')
+               .css('float','left');
+        var newOffset = newcard.offset();
+        var oldOffset1 = old.first().offset();
+        var oldOffset2 = old.last().offset();
+        var temp = old.clone().appendTo('body');
+        temp.css('position', 'absolute').css('zIndex', 999)
+            .css('top', oldOffset1.top).css('left', oldOffset1.left)
+            .css('width', old.first().width())
+            .css('height', old.first().height())
+            .css('padding', 0);
+        temp.last().css('top', oldOffset2.top).css('left',oldOffset2.left);
+        old.hide();
+        newcard.hide();
+        console.log(newOffset.top);
+        temp.animate({
+            top: newOffset.top,
+            left: newOffset.left,
+            width: newcard.width(),
+            height: newcard.height(),
+        }, 700, function () {
+            newcard.show();
+            temp.remove();
+        });
+    }
 
     // Reinicio del juego luego de perder o con el botón de la esquina
     $scope.restartGame = function() {
@@ -176,6 +204,10 @@ app.controller('GameController', function($scope, $timeout) {
         document.getElementById("game_screen").style.display='block';
         document.getElementById("loser_screen").style.display='none';
         document.getElementById("win_screen").style.display='none';
+
+        // reinicio las cartas obtenidas
+        $('#obtenidas').empty();
+        document.getElementById("obtenidas").style.display='block';
     }
 
     // Se cancela el timeout cuando el usuario abandona el nivel
