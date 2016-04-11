@@ -8,13 +8,13 @@ app.controller('PageController', function($scope) {
     $scope.changePage = function (page) {
         //console.log(page);
         $scope.page = page;
-        $scope.$apply();
+        //$scope.$apply();
     }
 
     $scope.changeUser = function (user) {
         console.log(user);
         $scope.user = user;
-        $scope.$apply();
+        //$scope.$apply();
     }
 
     $scope.startGame = function (level) {
@@ -27,6 +27,6 @@ app.controller('PageController', function($scope) {
     $scope.logOut = function() {
         $scope.page = 'auth';
         $scope.user = {};
-        $scope.$apply();
+        //$scope.$apply();
     }
 });
