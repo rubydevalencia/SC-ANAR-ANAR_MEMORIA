@@ -23,7 +23,7 @@ app.controller('AuthController', function($scope) {
             }
 
             $scope.changeUser(response);
-            $scope.changePage('home');
+            $scope.changePage('profile');
             $scope.$apply();
         });
     }
@@ -48,7 +48,7 @@ app.controller('AuthController', function($scope) {
             }
 
             $scope.changeUser(response);
-            $scope.changePage('home');
+            $scope.changePage('profile');
             $scope.$apply();
         });
     }

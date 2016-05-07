@@ -51,6 +51,22 @@ body {
     background-color: #993300;
 }
 
+#button_play {
+    color: white;
+    background-color: #993300;
+    height: 100px;
+    font-size: 25px;
+}
+
+#button_multiplayer {
+    color: white;
+    background-color: #993300;
+    height: 100px;
+    font-size: 25px;
+}
+
+
+
 #button_close_modal {
     background-color: white;
     color: #993300;

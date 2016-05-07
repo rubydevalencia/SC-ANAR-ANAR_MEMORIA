@@ -1,0 +1,54 @@
+<div class="primary_background navbar navbar-default ">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Bienvenido, {{user._id}}</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" ng-click="changePage('collection')">
+                    <i class="mdi-content-content-copy navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" ng-click="changePage('highscores')">
+                    <i class="mdi-editor-insert-chart navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" ng-click="logOut()">
+                    <i class="mdi-action-exit-to-app navbar-icon"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="main" class="row">
+    <div class="col-xs-1 col-md-1"></div>
+    <div class="col-xs-2 col-md-2 well" style="margin-top:1%">
+        <h2 class="title text-center">{{user._id}}</h2>
+        <!-- Imagen de perfil que deberia buscarse en la base de datos -->
+        <img src="images/cards/3.png" width="100%" height="100%">
+        <h4 class="title text-left"> Niveles Desbloqueados: </h4>
+        <h4 class="subtitle text-center"> {{user.levels.length}} </h4>
+        <h4 class="title text-left"> Mayor Puntaje: </h4>
+        <h4 class="subtitle text-center"> {{user.highscore}} </h4>
+        <h4 class="title text-left"> Categoria: </h4>
+        <h4 class="subtitle text-center"> {{category}} </h4>
+        <h4 class="title text-left"> Cartas Ganadas: </h4>
+        <h4 class="subtitle text-center"> {{user.cards.length}} </h4>
+
+    </div>
+    <div class="col-xs-2 col-md-2" style="margin-top:1%">
+    </div>
+    <div class="col-xs-8 col-md-6 well page active container" style="margin-left:5%">
+      <button id="button_play" type="button" class="btn btn-block" ng-click="changePage('home')"> Jugar</button>
+      <button id="button_multiplayer" type="button" class="btn btn-block" ng-click="changePage('multiplayer')"> Multijugador </button>
+    </div>
+    <div class="col-xs-2 col-md-2"></div>
+</div>

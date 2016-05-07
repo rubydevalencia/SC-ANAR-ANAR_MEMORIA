@@ -1,4 +1,3 @@
-
 app.controller('GameController', function($scope, $timeout) {
     var selectedCards = {};
     var totalCards;

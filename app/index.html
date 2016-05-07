@@ -28,7 +28,15 @@
         </div>
 
         <!--                -->
-        <!--      Home      -->
+        <!--     Profile    -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="profile" ng-controller="ProfileController">
+            <div style="height: 100%" ng-include=" ' partials/profile.html ' "></div>
+        </div>
+
+        <!--                -->
+        <!--     Home       -->
         <!--                -->
 
         <div style="height: 100%" ng-switch-when="home" ng-controller="HomeController">
@@ -79,6 +87,7 @@
         <!-- Controllers -->
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
+        <script src="controllers/ProfileController.js"></script>
         <script src="controllers/HomeController.js"></script>
         <script src="controllers/GameController.js"></script>
         <script src="controllers/CollectionController.js"></script>
