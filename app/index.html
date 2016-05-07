@@ -36,6 +36,14 @@
         </div>
 
         <!--                -->
+        <!-- Multiplayer    -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="multiplayer" ng-controller="MultiplayerController">
+            <div style="height: 100%" ng-include=" ' partials/multiplayer.html ' "></div>
+        </div>
+
+        <!--                -->
         <!--     Home       -->
         <!--                -->
 
@@ -88,6 +96,7 @@
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/ProfileController.js"></script>
+        <script src="controllers/MultiplayerController.js"></script>
         <script src="controllers/HomeController.js"></script>
         <script src="controllers/GameController.js"></script>
         <script src="controllers/CollectionController.js"></script>
