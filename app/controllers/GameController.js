@@ -8,11 +8,19 @@ app.controller('GameController', function($scope, $timeout) {
     $scope.counter = $scope.level.time;
     $scope.conLupa = $scope.level._id >= 25;
     $scope.zoom = "";
-
+    
+    // Sonidos
+    var quitarPar = new Audio("audio/quitarPar.mp3");
+    var derrota = new Audio("audio/derrota.mp3");
+    var victoria = new Audio("audio/victoria.mp3");
+    var comienzo = new Audio("audio/comienzo.mp3");
+    comienzo.play();
+    
     // The first thing we do is set up the timer countdown
     onTimeout = function() {
         $scope.counter--;
         if ($scope.counter <= 0) {
+            derrota.play();
             document.getElementById("game_screen").style.display='none';
             document.getElementById("loser_screen").style.display='block';
             document.getElementById("obtenidas").style.display='none';
@@ -137,10 +145,9 @@ app.controller('GameController', function($scope, $timeout) {
                 else
                     $scope.changeUser(response);
             });
-
+            victoria.play();
             document.getElementById("game_screen").style.display='none';
             document.getElementById("win_screen").style.display='block';
-
             document.getElementById("obtenidas").style.display='none';
         }
     }
@@ -164,6 +171,7 @@ app.controller('GameController', function($scope, $timeout) {
         old.hide();
         newcard.hide();
         console.log(newOffset.top);
+        quitarPar.play();
         temp.animate({
             top: newOffset.top,
             left: newOffset.left,
