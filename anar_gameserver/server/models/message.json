@@ -1,0 +1,24 @@
+{
+  "name": "Message",
+  "plural": "messages",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "text": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Player": {
+      "type": "hasOne",
+      "model": "Player",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -44,6 +44,15 @@
         </div>
 
         <!--                -->
+        <!-- ChatTest    -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="chat" ng-controller="ChatController">
+            <div style="height: 100%" ng-include=" ' partials/chat.html ' "></div>
+        </div>
+
+
+        <!--                -->
         <!--     Home       -->
         <!--                -->
 
@@ -85,6 +94,7 @@
         <script src="scripts/vendor/jquery.min.js"></script>
         <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
         <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+        <script src="/bower_components/socket.io-client/socket.io.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js scripts/index.js -->
@@ -97,9 +107,18 @@
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/ProfileController.js"></script>
         <script src="controllers/MultiplayerController.js"></script>
+        <script src="controllers/ChatController.js"></script>
         <script src="controllers/HomeController.js"></script>
         <script src="controllers/GameController.js"></script>
         <script src="controllers/CollectionController.js"></script>
         <script src="controllers/HighscoresController.js"></script>
-    </body>
+        <!--Socket communication -->
+        <!-- <script>
+          // var socket = io.connect('http://0.0.0.0:3000/');
+          // socket.on('connect', function () {
+          //   // socket connected
+          //   socket.emit('server custom event', { my: 'data' });
+          // });
+        </script> -->
+        </body>
 </html>

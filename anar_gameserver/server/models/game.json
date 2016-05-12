@@ -1,0 +1,39 @@
+{
+  "name": "Game",
+  "plural": "games",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "difficulty": {
+      "type": "string",
+      "required": true,
+      "default": "easy"
+    },
+    "is_free": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "game_set": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "Messages": {
+      "type": "hasMany",
+      "model": "Message",
+      "foreignKey": ""
+    },
+    "players": {
+      "type": "hasMany",
+      "model": "Player",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
