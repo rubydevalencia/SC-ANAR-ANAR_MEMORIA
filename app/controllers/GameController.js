@@ -142,8 +142,9 @@ app.controller('GameController', function($scope, $timeout) {
             DBUpdateUser(newUser, function(err, response) {
                 if (err)
                     console.log(err);
-                else
-                    $scope.changeUser(response);
+                else {
+                    $scope.user._rev = response.rev
+                }
             });
             victoria.play();
             document.getElementById("game_screen").style.display='none';
@@ -170,7 +171,6 @@ app.controller('GameController', function($scope, $timeout) {
         temp.last().css('top', oldOffset2.top).css('left',oldOffset2.left);
         old.hide();
         newcard.hide();
-        console.log(newOffset.top);
         quitarPar.play();
         temp.animate({
             top: newOffset.top,
