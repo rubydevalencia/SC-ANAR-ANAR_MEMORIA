@@ -11,10 +11,11 @@
 
 .circle {
     position: relative;
-    border-radius: 50%;
+    border-radius: 35%;
     width: 100%;
     padding-bottom: 100%;
     background-color: #993300;
+    padding-right: 10px;
 }
 
 .game_card {
@@ -38,7 +39,7 @@
 }
 
 #timer {
-    width: 100px;
+    width: 125px;
     height: 100px;
     position: fixed;
     bottom: 0px;
