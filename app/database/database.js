@@ -81,7 +81,7 @@ function DBGetHighscores(callback) {
 
 function DBUpdateUser(user, callback) {
     db_user.put(user).then(function(result) {
-        callback(null, user);
+        callback(null, result);
     }).catch(function(err) {
         callback(err.status, null);
     });

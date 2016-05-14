@@ -33,12 +33,26 @@
 
 <div class="col-xs-1"></div>
 <div class="col-xs-10">
-<div recuadro="recuadro">
+<div class="recuadro">
     <div class="well">
+        <table style="margin:auto;text-align: left;">
+            <thead>
+                    <th class="col-xs-7">Tu usuario</th>
+                    <th class="col-xs-3">Tu puntuación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #E0E0E0; height:50px;" ng-class="{'current_user': false}">
+                    <td class="col-xs-7" style="text-align: left !important; font-weight: bold;">{{user._id}}</td>
+                    <td class="col-xs-3"style="">{{user.highscore}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<div class="well">
     <table style="margin:auto;text-align: left;">
         <thead>
-            <tr>
-                <th class="col-xs-7">Usuario</th>
+                <th class="col-xs-7">Los 25 mejores</th>
                 <th class="col-xs-3">Puntuación</th>
             </tr>
         </thead>
