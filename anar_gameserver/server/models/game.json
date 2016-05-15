@@ -1,6 +1,6 @@
 {
   "name": "Game",
-  "plural": "games",
+  "plural": "Games",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,28 +9,28 @@
   "properties": {
     "difficulty": {
       "type": "string",
-      "required": true,
-      "default": "easy"
+      "required": true
     },
-    "is_free": {
+    "available": {
       "type": "boolean",
       "required": true,
       "default": false
     },
-    "game_set": {
+    "card_set": {
       "type": "string"
+    },
+    "player1": {
+      "type": "number"
+    },
+    "player2": {
+      "type": "number"
     }
   },
   "validations": [],
   "relations": {
-    "Messages": {
+    "gamePlays": {
       "type": "hasMany",
-      "model": "Message",
-      "foreignKey": ""
-    },
-    "players": {
-      "type": "hasMany",
-      "model": "Player",
+      "model": "GamePlay",
       "foreignKey": ""
     }
   },

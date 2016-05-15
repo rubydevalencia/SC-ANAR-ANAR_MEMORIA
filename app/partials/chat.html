@@ -31,18 +31,18 @@
     </div>
 </div>
 
-<div class="container" ng-controller="ChatController">
+<div class="container">
     <!--Cabecera-->
         <div class="jumbotron text-center">
             <h2>Prueba Multijugador<span class="label label-info"></span></h2>
-            <h4>Sala de Juego {{gameID}}<span class="label label-info"></span></h4>
+            <h4>Sala de Juego {{gamedata.id}}<span class="label label-info"></span></h4>
         </div>
         <!--Lista de Todos-->
         <div id="todo-list" class="row">
             <div class="col-sm-4 col-sm-offset-4">
-                <div class="checkbox" ng-repeat="each_message in all_messages">
+                <div class="checkbox" ng-repeat="gameplay in all_gameplays">
                     <label>
-                      {{ each_message.text }}
+                      [{{gameplay.from}}]: {{ gameplay.text }}
                     </label>
                  </div>
              </div>
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control input-lg text-center" placeholder="Diga Algo" ng-model="jugada">
                     </div>
-                    <button class="btn btn-primary btn-lg" ng-click="sendMessage()">Enviar</button>
+                    <button class="btn btn-primary btn-lg" ng-click="sendGameplay()">Enviar</button>
                 </form>
             </div>
         </div>

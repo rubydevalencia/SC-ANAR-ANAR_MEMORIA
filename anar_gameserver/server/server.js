@@ -29,17 +29,23 @@ boot(app, __dirname, function(err) {
 
     // Escuchamos a conexiones entrantes
     app.io.on('connection', function(socket){
-      console.log('a user connected');
+      console.log('Un usuario se conecto');
 
       // El usuario se desconecta
       socket.on('disconnect', function(){
-          console.log('user disconnected');
+          console.log('Un usuario se desconecto');
       });
 
       // El socket recibe un mensaje, y le dice a los clientes que se actualicen
       socket.on('message', function(message){
-          console.log('Received message:' + message);
+          console.log('Mensaje recibido:' + message);
           app.io.sockets.emit("update");
       });
+
+      socket.on('players_ready',function() {
+          console.log('Los jugadores estan listos.');
+          app.io.sockets.emit('start_game');
+      });
+
     });
 });
