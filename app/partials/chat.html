@@ -5,23 +5,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a href="#" class="navbar-brand" ng-click="changePage('profile')">
-            <i class="mdi-navigation-arrow-back navbar-icon"></i>
-        </a>
-        <a class="navbar-brand">Bienvenido, {{user._id}}</a>
+        <a class="navbar-brand">Modo Multijugador | Sala de Juego {{gamedata.id}}</a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#" ng-click="changePage('collection')">
-                    <i class="mdi-content-content-copy navbar-icon"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#" ng-click="changePage('highscores')">
-                    <i class="mdi-editor-insert-chart navbar-icon"></i>
-                </a>
-            </li>
             <li>
                 <a href="#" ng-click="logOut()">
                     <i class="mdi-action-exit-to-app navbar-icon"></i>
@@ -31,12 +18,17 @@
     </div>
 </div>
 
+<div class="primary_background navbar navbar-default ">
+    <div class="navbar-header">
+        <a class=navbar-brand> {{mydata.username}} | {{mydata.score}} puntos</a>
+    </div>
+    <div class="navbar-nav navbar-right">
+      <a class=navbar-brand>  {{other_player_data.username}} | {{other_player_data.score}} puntos </a>
+    </div>
+</div>
+
 <div class="container">
     <!--Cabecera-->
-        <div class="jumbotron text-center">
-            <h2>Prueba Multijugador<span class="label label-info"></span></h2>
-            <h4>Sala de Juego {{gamedata.id}}<span class="label label-info"></span></h4>
-        </div>
         <!--Lista de Todos-->
         <div id="todo-list" class="row">
             <div class="col-sm-4 col-sm-offset-4">
@@ -58,5 +50,5 @@
                 </form>
             </div>
         </div>
-    </div>
+</div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

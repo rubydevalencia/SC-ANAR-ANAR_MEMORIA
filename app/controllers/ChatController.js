@@ -17,6 +17,7 @@ app.controller('ChatController', function($scope, $http, $q) {
 
         //Creating connection with server
         var socket = io.connect('http://0.0.0.0:3000/');
+
         socket.on('connect', function () {
 
           // Escuchamos a que el servidor envie el evento update
@@ -29,10 +30,16 @@ app.controller('ChatController', function($scope, $http, $q) {
           // Cuando el jugador_2 se une al juego, comienza este.
           socket.on('start_game',function(){
             console.log('iniciando juego ');
+            console.log('actualizando datos del juego');
+
+            updateGameData().then(function() {
+                console.log('actualizando datos de los jugadores.');
+                updatePlayers();
+            }, function(reason) {
+                console.log(reason);
+            });
           });
-
         });
-
       return socket;
     };
 
@@ -139,22 +146,59 @@ app.controller('ChatController', function($scope, $http, $q) {
             });
       };
 
-      // Actualiza los datos de los jugadores.
-
-      var getPlayer = function(almacenar, id) {
-        $http.get('http://0.0.0.0:3000/api/Players/' + id)
+      // Actualiza los datos del juego, al momento de iniciar a jugar.
+      var updateGameData = function() {
+        var deferred = $q.defer();  // Me permite saber si actualizamos los satisfactoriamente
+        $http.get('http://0.0.0.0:3000/api/Games/' + $scope.gamedata.id)
           .success(function(data){
-              almacenar = data;
+              $scope.gamedata = data;
               console.log(data)
+              return deferred.resolve();
           })
           .error(function(data){
               console.log('Error: '+ data);
+              return deferred.reject('No se pudieron actualizar los datos del juego');
           });
-      }
 
+          return deferred.promise;
+      };
 
-      // Obtenemos los mensajes del chat
-      //getGameplays();
+      // Actualiza los datos de un jugador, almaacenar es la variable donde
+      // se guardara la informacion
+
+      var updateMydata = function(id) {
+        $http.get('http://0.0.0.0:3000/api/Players/' + id)
+          .success(function(data){
+              $scope.mydata = data;
+          })
+          .error(function(data){
+              console.log('Error updating my data' + data);
+          });
+      };
+
+      var updateOponentData = function(id) {
+        console.log("buscando al usuario con el id "+ id);
+        $http.get('http://0.0.0.0:3000/api/Players/' + id)
+          .success(function(data){
+              $scope.other_player_data = data;
+          })
+          .error(function(data){
+              console.log("Error updating my oponent's" + data);
+          });
+      };
+
+      // Actualizamos los datos de ambos jugadores
+      var updatePlayers = function() {
+
+        // Actualizamos los datos del contrincante y los propios
+        if ($scope.mynumber == 1) {
+          updateMydata($scope.gamedata.player1);
+          updateOponentData($scope.gamedata.player2);
+        } else {
+          updateMydata($scope.gamedata.player2);
+          updateOponentData($scope.gamedata.player1);
+        }
+      };
 
       // Enviamos un nuevo mensaje al chat
       $scope.sendGameplay = function() {
