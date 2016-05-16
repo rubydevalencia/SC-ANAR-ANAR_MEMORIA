@@ -39,6 +39,11 @@ app.controller('ChatController', function($scope, $http, $q) {
                 console.log(reason);
             });
           });
+
+          // cuando suba el puntaje, actualizamos los jugadores.
+          socket.on('update_scores',function(){
+            updatePlayers();
+          });
         });
       return socket;
     };
@@ -200,6 +205,17 @@ app.controller('ChatController', function($scope, $http, $q) {
         }
       };
 
+      var updateScore = function(points) {
+        $http.put('http://0.0.0.0:3000/api/Players/'+ $scope.playerID, {'score':$scope.mydata.score+points})
+            .success(function(data){
+                console.log(data)
+            })
+            .error(function(data){
+                console.log('Error: '+ data);
+            });
+            serverConnection.emit("new_score");
+      };
+
       // Enviamos un nuevo mensaje al chat
       $scope.sendGameplay = function() {
           // Guarda la jugada obtenida desde el input
@@ -212,6 +228,7 @@ app.controller('ChatController', function($scope, $http, $q) {
             .success(function(data) {
                 console.log('Mensaje que enviare es: ' + $scope.jugada);
                 // refrescamos los mensajes
+                updateScore(10);
                 getGameplays();
                 serverConnection.emit('message',$scope.jugada);
                 console.log("Se envió al juego con ID: " + $scope.gamedata.id);

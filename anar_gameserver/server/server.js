@@ -47,5 +47,9 @@ boot(app, __dirname, function(err) {
           app.io.sockets.emit('start_game');
       });
 
+      socket.on('new_score',function(){
+          console.log("Actualicen los puntajes.");
+          app.io.sockets.emit("update_scores");
+      });
     });
 });
