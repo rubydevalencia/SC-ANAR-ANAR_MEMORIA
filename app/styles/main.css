@@ -19,7 +19,7 @@ body {
 
 .container {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
@@ -39,6 +39,7 @@ body {
 }
 
 #dialog {
+    border-radius: 20px;;
 }
 
 #button_login {
@@ -47,7 +48,9 @@ body {
 }
 
 #button_register {
+    text-transform: capitalize;
     color: white;
+    border-radius: 20px;
     background-color: #993300;
 }
 
