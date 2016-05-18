@@ -40,15 +40,17 @@ body {
 
 #dialog {
     border-radius: 20px;;
+    z-index: 10;
+    padding: 30px 30px 10px 30px;
 }
 
 #button_login {
-    color: white;
-    background-color: #993300;
+    font-weight: bold;
 }
 
 #button_register {
     text-transform: capitalize;
+    font-weight: bold;
     color: white;
     border-radius: 20px;
     background-color: #993300;

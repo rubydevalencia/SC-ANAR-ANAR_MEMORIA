@@ -7,7 +7,7 @@
     </div>
     <div class="col-xs-2 col-md-2" style="margin-top:200px">
     </div>
-    <div class="col-xs-6 col-md-6 well page active container" id="dialog" style="z-index: 10; padding: 30px 30px 10px 30px">
+    <div class="col-xs-6 col-md-6 well page active container" id="dialog">
         <form class="form-horizontal" >
             <fieldset>
                 <legend>Iniciar Sesión</legend>
@@ -24,9 +24,9 @@
                     </div>
                 </div>
                 <div>
-                <div style="float: right">
+                <div style="float: right" >
                             <input type="image" ng-click="loginUser(user.id, user.password)" src="images/mano-ingresar.png" style="width: 80;"/>
-                            <p>Ingresar</p>
+                            <p id="button_login">Ingresar</p>
                 </div>
                 <div style="float: left; margin-top:3%">
                     <button id="button_register" type="submit" ng-click="registerUser(user.id, user.password)" class="btn">Registrar<div class="ripple-wrapper"></div></button>
