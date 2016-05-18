@@ -88,8 +88,11 @@
 }
 
 #button_confirm {
-    background-color: #993300;
+    text-transform: capitalize;
+    font-weight: bold;
     color: white;
+    border-radius: 20px;
+    background-color: #993300;
 }
 
 #invisible {
