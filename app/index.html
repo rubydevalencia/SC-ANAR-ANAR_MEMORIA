@@ -39,16 +39,16 @@
         <!-- Multiplayer    -->
         <!--                -->
 
-        <div style="height: 100%" ng-switch-when="multiplayer" ng-controller="MultiplayerController">
-            <div style="height: 100%" ng-include=" ' partials/multiplayer.html ' "></div>
+        <div style="height: 100%" ng-switch-when="multiplayer" ng-controller="MultiplayerLevelController">
+            <div style="height: 100%" ng-include=" ' partials/multiplayerLevel.html ' "></div>
         </div>
 
         <!--                -->
         <!-- ChatTest    -->
         <!--                -->
 
-        <div style="height: 100%" ng-switch-when="chat" ng-controller="ChatController">
-            <div style="height: 100%" ng-include=" ' partials/chat.html ' "></div>
+        <div style="height: 100%" ng-switch-when="chat" ng-controller="MultiplayerGameController">
+            <div style="height: 100%" ng-include=" ' partials/multiplayerGame.html ' "></div>
         </div>
 
 
@@ -106,8 +106,8 @@
         <script src="controllers/PageController.js"></script>
         <script src="controllers/AuthController.js"></script>
         <script src="controllers/ProfileController.js"></script>
-        <script src="controllers/MultiplayerController.js"></script>
-        <script src="controllers/ChatController.js"></script>
+        <script src="controllers/MultiplayerLevelController.js"></script>
+        <script src="controllers/MultiplayerGameController.js"></script>
         <script src="controllers/HomeController.js"></script>
         <script src="controllers/GameController.js"></script>
         <script src="controllers/CollectionController.js"></script>

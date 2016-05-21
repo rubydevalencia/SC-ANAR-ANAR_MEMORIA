@@ -30,4 +30,17 @@ app.factory('socket', function(){
 
 });
 
+app.service('sharedGlobals', function () {
+        var multiplayerDifficulty = '';
+
+        return {
+            getDifficulty: function () {
+                return multiplayerDifficulty;
+            },
+            setDifficulty: function(value) {
+                multiplayerDifficulty = value;
+            }
+        };
+});
+
 DBCreateDB();
