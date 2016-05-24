@@ -6,7 +6,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var serverURL = 'http://0.0.0.0:3000/';
 
   // Obtenemos la dificultad del juego que escogimos anteriormente.
-  $scope.gameDifficulty = sharedGlobals.getDifficulty();
+  var dificultad = sharedGlobals.getDifficulty();
+  $scope.gameDifficulty = dificultad;
 
   // Para Manejar las jugadas
   $scope.jugada = "";
@@ -19,6 +20,73 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Guarda los datos del juego
   $scope.gamedata = {};          // Almacena los datos del juego en el que estoy unido
+
+  // ------------------- PARA LA SELECCIÓN DE LAS CARTAS. ----------------------
+  var idFinal; // Indicará el id de la última carta.
+
+  // Se selecciona el id de la última carta dependiendo de la dificultad elegida.
+  switch (dificultad) {
+    case 'Facil':
+      var limListas = [5, 10];
+      idFinal = limListas[Math.floor(Math.random() * limListas.length)];
+      break;
+    case 'Intermedio':
+      var limListas = [15, 20, 25];
+      idFinal = limListas[Math.floor(Math.random() * limListas.length)];
+      break;
+    case 'Medio':
+      var limListas = [30, 35, 40, 45];
+      idFinal = limListas[Math.floor(Math.random() * limListas.length)];
+      break;
+    case 'Dificil':
+      var limListas = [50, 55, 60, 65, 70];
+      idFinal = limListas[Math.floor(Math.random() * limListas.length)];
+      break;
+  }
+
+  // Se crea el nivel a jugar.
+  var level = {
+      _id: "-1",                  // Se establece el id en -1 ya que no pertenece a ninguno de los niveles en solitario.
+      difficulty: dificultad,
+      name: 'Nivel Multijugador ' + dificultad, // Nombre inicial de la sala.
+      cards: getArray(idFinal - 5, idFinal),    // Id de las cartas a elegir.
+      numPieces: 10,                            // Número de piezas que estarán en el tablero.
+      time: '100',                              // Tiempo que tendrá cada jugador en la partida.
+      imageName: 'done.png',
+      nextLevel: "Ninguno"                     // Como es multijugador no habrá ningún nivel desbloqueable.
+  };
+  console.log("El nivel es:");
+  console.log(level);
+  $scope.level = level   // "Nivel" que jugará los jugadores.
+
+// -----------------------------------------------------------------------------
+
+  // Para el uso de las cartas.
+  var selectedCards = {}         // Conjunto con todas las cartas que aparecerán.
+  var totalCards;
+
+  $scope.cards = [];
+  $scope.array = [0, 1, 2, 3, 4];
+
+  // Para obtener las cartas que se utilizarán en la partida.
+  DBGetLevelCards($scope.level, function (err, result) {
+      var cards = [];
+      totalCards = result.rows.length;
+      //console.log("Generando cartas.");
+      //console.log("La cantidad de cartas es:");
+      //console.log(totalCards);
+      for (var i = 0; i < result.rows.length; i++) {
+          var card = result.rows[i].doc;
+          card.imageShown = 'images/done.png';
+          card.position = i;
+          cards.push(card);
+      };
+      cards = shuffle(cards);
+      //console.log("Las cartas son:");
+      //console.log(cards);
+      $scope.cards = cards;
+      $scope.$apply();
+  });
 
   // CONEXION CON EL SERVIDOR PARA EL MULTIJUGADOR
   var connectSocket = function(){
