@@ -69,33 +69,36 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   $scope.array = [0, 1, 2, 3, 4];
 
   // Para obtener las cartas que se utilizarán en la partida.
-  DBGetLevelCards($scope.level, function (err, result) {
-      var cards = [];
-      totalCards = result.rows.length;
-
-      // Se preparan las cartas que se utilizarán.
-      for (var i = 0; i < result.rows.length; i++) {
-          var card = result.rows[i].doc;
-          card.imageShown = 'images/done.png';
-          card.position = i;
-          cards.push(card);
-      };
-
-      // Se barajean las cartas.
-      cards = shuffle(cards);
-      console.log(cards);
-
-      $scope.cards = cards;
-      $scope.$apply();
-  });
+  // DBGetLevelCards($scope.level, function (err, result) {
+  //     var cards = [];
+  //     totalCards = result.rows.length;
+  //
+  //     // Se preparan las cartas que se utilizarán.
+  //     for (var i = 0; i < result.rows.length; i++) {
+  //         var card = result.rows[i].doc;
+  //         card.imageShown = 'images/done.png';
+  //         card.position = i;
+  //         cards.push(card);
+  //
+  //     };
+  //
+  //     // Se barajean las cartas.
+  //     cards = shuffle(cards);
+  //     console.log(cards);
+  //
+  //     $scope.cards = cards;
+  //     $scope.$apply();
+  // });
 
   // Permite controlar las cartas.
   $scope.showCard = function(card) {
-      if (!selectedCards.card1)
+      if (!selectedCards.card1){
+          console.log("--------------");
+          console.log("volteando la carta "+ card.position);
           selectedCards.card1 = card;
-      else if (!selectedCards.card2)
+      } else if (!selectedCards.card2){
           selectedCards.card2 = card;
-      else {
+      } else {
           if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
               removeCard(selectedCards.card1);
           } else {
@@ -109,6 +112,31 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       }
 
       card.imageShown = card.image;
+      //serverConnection.emit("show_card",card);
+  }
+
+  var flipCard = function(card) {
+      if (!selectedCards.card1){
+          console.log("--------------");
+          console.log("volteando la carta "+ card.position);
+          selectedCards.card1 = card;
+      } else if (!selectedCards.card2){
+          selectedCards.card2 = card;
+      } else {
+          if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+              removeCard(selectedCards.card1);
+          } else {
+              selectedCards.card1.imageShown = 'images/done.png';
+              selectedCards.card2.imageShown = 'images/done.png';
+          }
+
+          delete selectedCards.card1;
+          delete selectedCards.card2;
+          return;
+      }
+
+      card.imageShown = card.image;
+      //serverConnection.emit("show_card",card);
   }
 
 
@@ -144,6 +172,19 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         socket.on('update_scores',function(){
           updatePlayers();
         });
+
+        // Cuando el contrincante abanona la partida
+        socket.on("player_logout",function(username){
+            console.log('Mi contrincante ' + username + " ha abandonado la partida.");
+            showPlayerLogout();
+        });
+
+        // Cuando me toque voltear una carta
+        socket.on("show_card",function(card){
+            console.log('Me dijeron que volteara la carta ' + card);
+            flipCard(card);
+        });
+
       });
     return socket;
   };
@@ -234,11 +275,33 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
     // PARA CREAR UN NUEVO JUEGO
     var createGame = function() {
+
+      DBGetLevelCards($scope.level, function (err, result) {
+          var cards = [];
+          totalCards = result.rows.length;
+
+          // Se preparan las cartas que se utilizarán.
+          for (var i = 0; i < result.rows.length; i++) {
+              var card = result.rows[i].doc;
+              card.imageShown = 'images/done.png';
+              card.position = i;
+              cards.push(card);
+
+          };
+
+          // Se barajean las cartas.
+          cards = shuffle(cards);
+          console.log(cards);
+
+          $scope.cards = cards;
+          $scope.$apply();
+      });
+
       // dificultad, juego_libre, distribucion del tablero (para despues)
       $http.post(serverURL + 'api/Games', {
-            'difficulty' :  $scope.gameDifficulty,
-            'available'    : true,
-            'game_set'   : '--'
+            'difficulty' : $scope.gameDifficulty,
+            'available'  : true,
+            'game_set'   : $scope.cards
       })
       .success(function(data){
           $scope.gamedata = data;
@@ -378,6 +441,54 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
               console.log("NO se envió al juego con ID: " + $scope.gamedata.id);
           });
     };
+
+    // ----------- PARA EL CIERRE DE JUEGO Y DESLOGGEO DEL SERVIDOR ---------------
+
+    // Desloguea a un jugador del servidor de juego.
+    var unregiterUser = function(playerID)  {
+      $http.delete(serverURL + 'api/Players/' + playerID)
+      .success(function(data){
+        console.log("Se ha deslogueado el jugador " + playerID);
+      })
+      .error(function(data){
+        console.log("No se pudo desloguear al jugador " + playerID);
+      });
+    };
+
+    // Muestra la pantalla al jugador cuando el contrincante abandona la partida
+
+    var showPlayerLogout = function(){
+      document.getElementById("multiplayer_game").style.display='none';
+      document.getElementById("player_logout").style.display='block';
+    };
+
+    // Inicia el proceso cuando un jugador decide abandonar la partida.
+    $scope.leaveGame = function() {
+      // Sacamos al jugador actual del juego
+      unregiterUser($scope.mydata.id);
+      // Le informamos al contrincario que el jugador actual ha abandonado la
+      // partida
+      serverConnection.emit("player_logout",$scope.mydata.username);
+      // Regresamos al jugador a su perfil
+      $scope.changePage('profile');
+
+    }
+
+    // Termina el juego, asigna los puntajes al jugador ganador.
+    $scope.endGame = function() {
+      // Abandonamos el juego
+      $scope.leaveGame();
+      $http.delete(serverURL + 'api/Games/' + $scope.gamedata.id)
+      .success(function(data){
+        console.log("Se ha eliminado el juego del servidor " + $scope.gamedata.id);
+        $scope.changePage("profile");
+      })
+      .error(function(data){
+        console.log("No se ha eliminado el juego del servidor " + $scope.gamedata.id);
+      });
+
+
+    }
 
     // Iniciamos el proceso de multijugaor
     // searchGames solo se ejecuta si el usuario se registro en el servidor satisfactoriamente.
