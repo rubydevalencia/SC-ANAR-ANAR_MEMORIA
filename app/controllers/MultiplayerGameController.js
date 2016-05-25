@@ -123,7 +123,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
         socket.on("player_logout",function(username){
             console.log('Mi contrincante ' + username + " ha abandonado la partida.");
-            $window.alert(username + " ha abandonado la partida.");
+            showPlayerLogout();
         });
 
       });
@@ -336,6 +336,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       });
     };
 
+    // Muestra la pantalla al jugador cuando el contrincante abandona la partida
+
+    var showPlayerLogout = function(){
+      document.getElementById("multiplayer_game").style.display='none';
+      document.getElementById("player_logout").style.display='block';
+    };
+
     // Inicia el proceso cuando un jugador decide abandonar la partida.
     $scope.leaveGame = function() {
       // Sacamos al jugador actual del juego
@@ -345,6 +352,22 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       serverConnection.emit("player_logout",$scope.mydata.username);
       // Regresamos al jugador a su perfil
       $scope.changePage('profile');
+
+    }
+
+    // Termina el juego, asigna los puntajes al jugador ganador.
+    $scope.endGame = function() {
+      // Abandonamos el juego
+      $scope.leaveGame();
+      $http.delete(serverURL + 'api/Games/' + $scope.gamedata.id)
+      .success(function(data){
+        console.log("Se ha eliminado el juego del servidor " + $scope.gamedata.id);
+        $scope.changePage("profile");
+      })
+      .error(function(data){
+        console.log("No se ha eliminado el juego del servidor " + $scope.gamedata.id);
+      });
+
 
     }
 
