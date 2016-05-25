@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styles/game.css">
+
 <div class="primary_background navbar navbar-default ">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -27,25 +29,29 @@
     </div>
 </div>
 
-<div id="game_screen">
-    <div ng-repeat="i in [] | range: cards.length / 5">
-        <div class="row"  ng-class="{'last':$last}">
-            <div class="col-md-1"></div>
-            <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
-                <div style="position: relative; left: 0; top: 0;">
-                    <div ng-click="showCard(cards[i*5 + j])">
-                        <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
-                    </div>
-                    <div ng-if="conLupa">
-                        <div ng-click="hacerZoom(cards[i*5 + j])">
-                            <img class="lupa" id="{{cards[i*5+j].position}}" src="images/lupa.png"/>
+<div class="recuadro">
+    <div class="well page">
+        <div id="game_screen">
+            <div ng-repeat="i in [] | range: cards.length / 5">
+                <div class="row"  ng-class="{'last':$last}">
+                    <div class="col-md-1"></div>
+                    <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
+                        <div style="position: relative; left: 0; top: 0;">
+                            <div ng-click="showCard(cards[i*5 + j])">
+                                <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
+                            </div>
+                            <div ng-if="conLupa">
+                                <div ng-click="hacerZoom(cards[i*5 + j])">
+                                    <img class="lupa" id="{{cards[i*5+j].position}}" src="images/lupa.png"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-1"></div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
         </div>
-    </div>
+   </div>
 </div>
-
+<div id="obtenidas"></div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

@@ -72,23 +72,24 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   DBGetLevelCards($scope.level, function (err, result) {
       var cards = [];
       totalCards = result.rows.length;
-      //console.log("Generando cartas.");
-      //console.log("La cantidad de cartas es:");
-      //console.log(totalCards);
+
+      // Se preparan las cartas que se utilizarán.
       for (var i = 0; i < result.rows.length; i++) {
           var card = result.rows[i].doc;
           card.imageShown = 'images/done.png';
           card.position = i;
           cards.push(card);
       };
+
+      // Se barajean las cartas.
       cards = shuffle(cards);
       console.log(cards);
-      //console.log("Las cartas son:");
-      //console.log(cards);
+
       $scope.cards = cards;
       $scope.$apply();
   });
 
+  // Permite controlar las cartas.
   $scope.showCard = function(card) {
       if (!selectedCards.card1)
           selectedCards.card1 = card;
@@ -97,7 +98,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       else {
           if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
               removeCard(selectedCards.card1);
-              console.log("Eliminando.");
           } else {
               selectedCards.card1.imageShown = 'images/done.png';
               selectedCards.card2.imageShown = 'images/done.png';
@@ -150,7 +150,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   var removeCard = function(card) {
 
-      if (totalCards > 2 && $scope.counter > 1)
+      if (totalCards > 2)
           moveToBottom(card);
 
       totalCards -= 2;
@@ -174,7 +174,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       temp.last().css('top', oldOffset2.top).css('left',oldOffset2.left);
       old.hide();
       newcard.hide();
-      quitarPar.play();
+      //quitarPar.play();
       temp.animate({
           top: newOffset.top,
           left: newOffset.left,
