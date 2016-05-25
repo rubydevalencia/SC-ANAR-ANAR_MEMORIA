@@ -82,11 +82,35 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           cards.push(card);
       };
       cards = shuffle(cards);
+      console.log(cards);
       //console.log("Las cartas son:");
       //console.log(cards);
       $scope.cards = cards;
       $scope.$apply();
   });
+
+  $scope.showCard = function(card) {
+      if (!selectedCards.card1)
+          selectedCards.card1 = card;
+      else if (!selectedCards.card2)
+          selectedCards.card2 = card;
+      else {
+          if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+              removeCard(selectedCards.card1);
+              console.log("Eliminando.");
+          } else {
+              selectedCards.card1.imageShown = 'images/done.png';
+              selectedCards.card2.imageShown = 'images/done.png';
+          }
+
+          delete selectedCards.card1;
+          delete selectedCards.card2;
+          return;
+      }
+
+      card.imageShown = card.image;
+  }
+
 
   // CONEXION CON EL SERVIDOR PARA EL MULTIJUGADOR
   var connectSocket = function(){
@@ -123,6 +147,44 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       });
     return socket;
   };
+
+  var removeCard = function(card) {
+
+      if (totalCards > 2 && $scope.counter > 1)
+          moveToBottom(card);
+
+      totalCards -= 2;
+  }
+
+  // Animación del movimiento de las cartas hacia abajo
+  var moveToBottom = function (card) {
+      var old = $("." + card._id);
+      var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
+      newcard.css('width', '110px').css('height','110px').css('padding', '0')
+             .css('float','left');
+      var newOffset = newcard.offset();
+      var oldOffset1 = old.first().offset();
+      var oldOffset2 = old.last().offset();
+      var temp = old.clone().appendTo('body');
+      temp.css('position', 'absolute').css('zIndex', 999)
+          .css('top', oldOffset1.top).css('left', oldOffset1.left)
+          .css('width', old.first().width())
+          .css('height', old.first().height())
+          .css('padding', 0);
+      temp.last().css('top', oldOffset2.top).css('left',oldOffset2.left);
+      old.hide();
+      newcard.hide();
+      quitarPar.play();
+      temp.animate({
+          top: newOffset.top,
+          left: newOffset.left,
+          width: newcard.width(),
+          height: newcard.height(),
+      }, 700, function () {
+          newcard.show();
+          temp.remove();
+      });
+  }
 
   // Nos conectamos al servidor via socket. serverConnection contiene el socket a usar.
   var serverConnection = connectSocket();
