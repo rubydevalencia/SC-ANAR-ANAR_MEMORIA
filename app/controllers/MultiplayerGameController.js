@@ -120,6 +120,12 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         socket.on('update_scores',function(){
           updatePlayers();
         });
+
+        socket.on("player_logout",function(username){
+            console.log('Mi contrincante ' + username + " ha abandonado la partida.");
+            $window.alert(username + " ha abandonado la partida.");
+        });
+
       });
     return socket;
   };
@@ -316,6 +322,31 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
               console.log("NO se envió al juego con ID: " + $scope.gamedata.id);
           });
     };
+
+    // ----------- PARA EL CIERRE DE JUEGO Y DESLOGGEO DEL SERVIDOR ---------------
+
+    // Desloguea a un jugador del servidor de juego.
+    var unregiterUser = function(playerID)  {
+      $http.delete(serverURL + 'api/Players/' + playerID)
+      .success(function(data){
+        console.log("Se ha deslogueado el jugador " + playerID);
+      })
+      .error(function(data){
+        console.log("No se pudo desloguear al jugador " + playerID);
+      });
+    };
+
+    // Inicia el proceso cuando un jugador decide abandonar la partida.
+    $scope.leaveGame = function() {
+      // Sacamos al jugador actual del juego
+      unregiterUser($scope.mydata.id);
+      // Le informamos al contrincario que el jugador actual ha abandonado la
+      // partida
+      serverConnection.emit("player_logout",$scope.mydata.username);
+      // Regresamos al jugador a su perfil
+      $scope.changePage('profile');
+
+    }
 
     // Iniciamos el proceso de multijugaor
     // searchGames solo se ejecuta si el usuario se registro en el servidor satisfactoriamente.
