@@ -162,10 +162,14 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
           updateGameData().then(function() {
               console.log('actualizando datos de los jugadores.');
+              $scope.cards = $scope.gamedata.game_set;
+              console.log("Datos de las cartas: " + $scope.cards);
               updatePlayers();
           }, function(reason) {
               console.log(reason);
           });
+
+
         });
 
         // cuando suba el puntaje, actualizamos los jugadores.
@@ -273,8 +277,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           });
       };
 
-    // PARA CREAR UN NUEVO JUEGO
-    var createGame = function() {
+
+    var sortCards = function () {
+
+      var deferred = $q.defer();
 
       DBGetLevelCards($scope.level, function (err, result) {
           var cards = [];
@@ -293,25 +299,36 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           cards = shuffle(cards);
           console.log(cards);
 
-          $scope.cards = cards;
+          $scope.game_set = cards;
           $scope.$apply();
+          return deferred.resolve();
       });
 
-      // dificultad, juego_libre, distribucion del tablero (para despues)
-      $http.post(serverURL + 'api/Games', {
-            'difficulty' : $scope.gameDifficulty,
-            'available'  : true,
-            'game_set'   : $scope.cards
-      })
-      .success(function(data){
-          $scope.gamedata = data;
-          // Unimos al jugador al nuevo juego creado
-          $scope.mynumber = 1;
-          joinGame($scope.gamedata.id,$scope.playerID,$scope.mynumber);
-          console.log(data)
-      })
-      .error(function(data){
-          console.log('Error: '+ data);
+          return deferred.promise;
+    };
+
+    // PARA CREAR UN NUEVO JUEGO
+    var createGame = function() {
+
+      sortCards().then(function() {
+        // dificultad, juego_libre, distribucion del tablero (para despues)
+        $http.post(serverURL + 'api/Games', {
+              'difficulty' : $scope.gameDifficulty,
+              'available'  : true,
+              'game_set'   : $scope.game_set
+        })
+        .success(function(data){
+            $scope.gamedata = data;
+            // Unimos al jugador al nuevo juego creado
+            $scope.mynumber = 1;
+            joinGame($scope.gamedata.id,$scope.playerID,$scope.mynumber);
+            console.log(data)
+        })
+        .error(function(data){
+            console.log('Error: '+ data);
+        });
+      }, function(reason) {
+          console.log(reason);
       });
     };
 
