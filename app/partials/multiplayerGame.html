@@ -37,7 +37,7 @@
                     <div class="col-md-1"></div>
                     <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
                         <div style="position: relative; left: 0; top: 0;">
-                            <div ng-click="showCard(cards[i*5 + j])">
+                            <div ng-click="showCard(i*5 + j)">
                                 <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
                             </div>
                             <div ng-if="conLupa">

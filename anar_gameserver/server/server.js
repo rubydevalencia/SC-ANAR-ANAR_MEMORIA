@@ -65,7 +65,7 @@ boot(app, __dirname, function(err) {
       // Cuado se pide que se muestre la carta
       socket.on("show_card",function(card){
           console.log('Uno de los jugadore volteo la carta ' + card);
-          app.io.sockets.emit("show_card",card);
+          socket.broadcast.emit("show_card",card);
       });
     });
 });

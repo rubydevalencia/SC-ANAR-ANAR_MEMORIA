@@ -91,10 +91,12 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // });
 
   // Permite controlar las cartas.
-  $scope.showCard = function(card) {
+  $scope.showCard = function(position) {
+      // Buscamos la carta en el arreglo de cartas.
+      var card = $scope.cards[position];
       if (!selectedCards.card1){
-          console.log("--------------");
-          console.log("volteando la carta "+ card.position);
+        //console.log("--------------");
+        //console.log("volteando la carta "+ card.position);
           selectedCards.card1 = card;
       } else if (!selectedCards.card2){
           selectedCards.card2 = card;
@@ -112,31 +114,33 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       }
 
       card.imageShown = card.image;
-      //serverConnection.emit("show_card",card);
+      serverConnection.emit("show_card",position);
   }
 
-  var flipCard = function(card) {
-      if (!selectedCards.card1){
-          console.log("--------------");
-          console.log("volteando la carta "+ card.position);
-          selectedCards.card1 = card;
-      } else if (!selectedCards.card2){
-          selectedCards.card2 = card;
-      } else {
-          if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-              removeCard(selectedCards.card1);
-          } else {
-              selectedCards.card1.imageShown = 'images/done.png';
-              selectedCards.card2.imageShown = 'images/done.png';
-          }
-
-          delete selectedCards.card1;
-          delete selectedCards.card2;
-          return;
-      }
+  var flipCard = function(position) {
+      var card = $scope.cards[position];
+      console.log("esta es la carta a voltear" + card);
+      // if (!selectedCards.card1){
+      //     //console.log("--------------");
+      //     //console.log("volteando la carta "+ card.position);
+      //     selectedCards.card1 = card;
+      // } else if (!selectedCards.card2){
+      //     selectedCards.card2 = card;
+      // } else {
+      //     if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+      //         removeCard(selectedCards.card1);
+      //     } else {
+      //         selectedCards.card1.imageShown = 'images/done.png';
+      //         selectedCards.card2.imageShown = 'images/done.png';
+      //     }
+      //
+      //     delete selectedCards.card1;
+      //     delete selectedCards.card2;
+      //     return;
+      // }
 
       card.imageShown = card.image;
-      //serverConnection.emit("show_card",card);
+      console.log("Selected card 1 es:")
   }
 
 
@@ -184,9 +188,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         });
 
         // Cuando me toque voltear una carta
-        socket.on("show_card",function(card){
-            console.log('Me dijeron que volteara la carta ' + card);
-            flipCard(card);
+        socket.on("show_card",function(position){
+            console.log('Me dijeron que volteara la carta ' + position);
+            flipCard(position);
         });
 
       });
