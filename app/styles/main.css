@@ -4,9 +4,19 @@
  * Primary Dark
  */
 
+@font-face {
+    font-family: myFirstFont;
+    src: url(GOTHIC.TTF);
+}
+
+@font-face {
+    font-family: myFontEpistolar;
+    src: url(Epistolar.ttf);
+}
+	
+
 html {
     height: 100%;
-
 }
 
 body {
@@ -15,6 +25,7 @@ body {
     background-repeat:no-repeat;
     background-size:100% 100%;
     background-attachment:fixed;
+    font-family:"myFirstFont", sans-serif;
 }
 
 .container {
@@ -26,26 +37,31 @@ body {
 
 #main {
     height: 92%;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #credit {
     height: 8%;
     background-color: #993300;
     color: white;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #credit h4 {
     margin-top: 0;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #dialog {
     border-radius: 20px;;
     z-index: 10;
     padding: 30px 30px 10px 30px;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #button_login {
     font-weight: bold;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #button_register {
@@ -54,15 +70,18 @@ body {
     color: white;
     border-radius: 20px;
     background-color: #993300;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #button_close_modal {
     background-color: white;
     color: #993300;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #modal-card-image{
     margin-bottom:30px;
+    font-family:"myFirstFont", sans-serif;
 }
 
 .row {
@@ -71,6 +90,7 @@ body {
 
 .title {
     border-bottom: 1px solid lightgrey;
+
 }
 
 .primary {
@@ -102,6 +122,7 @@ body {
  */
 table {
     width:100%;
+    font-family:"myFirstFont", sans-serif;
 }
  table > thead > tr > th {
      border-bottom: 2px solid #E0E0E0;
@@ -109,11 +130,29 @@ table {
      text-align: left;
      padding-bottom: 25px;
      padding-top: 10px;
+     font-family:"myFirstFont", sans-serif;
  }
+
+div{
+	font-family:"myFirstFont", sans-serif;
+}
+
+a{
+	font-family:"myFirstFont", sans-serif;
+}
+
+p{
+	font-family:"myFirstFont", sans-serif;
+}
+
+h4{
+	font-family:"myFirstFont", sans-serif;
+}
 
  .current_user {
      background-color:#D0D0D0;
  }
+ 
 
 .recuadro {
     padding: 2.5%;
