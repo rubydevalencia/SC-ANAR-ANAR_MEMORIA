@@ -119,28 +119,34 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   var flipCard = function(position) {
       var card = $scope.cards[position];
-      console.log("esta es la carta a voltear" + card);
-      // if (!selectedCards.card1){
-      //     //console.log("--------------");
-      //     //console.log("volteando la carta "+ card.position);
-      //     selectedCards.card1 = card;
-      // } else if (!selectedCards.card2){
-      //     selectedCards.card2 = card;
-      // } else {
-      //     if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-      //         removeCard(selectedCards.card1);
-      //     } else {
-      //         selectedCards.card1.imageShown = 'images/done.png';
-      //         selectedCards.card2.imageShown = 'images/done.png';
-      //     }
-      //
-      //     delete selectedCards.card1;
-      //     delete selectedCards.card2;
-      //     return;
-      // }
+      //.log("esta es la carta a voltear" + card);
+      console.log("--------------");
+      console.log("SELECTED CARDS: " + selectedCards);
+      console.log("--------------");
+      if (!selectedCards.card1){
+          console.log("--------------");
+          console.log("volteando la carta 1"+ card.position);
+          selectedCards.card1 = card;
+      } else if (!selectedCards.card2){
+        console.log("--------------");
+        console.log("volteando la carta 2"+ card.position);
+          selectedCards.card2 = card;
+      if (selectedCards.card1 && selectedCards.card2)
+          if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+              removeCard(selectedCards.card1);
+          } else {
+              selectedCards.card1.imageShown = 'images/done.png';
+              selectedCards.card2.imageShown = 'images/done.png';
+          }
 
+          delete selectedCards.card1;
+          delete selectedCards.card2;
+          return;
+      }
       card.imageShown = card.image;
-      console.log("Selected card 1 es:")
+      console.log(card.imageShown);
+      console.log("Selected card 1 es:");
+      $scope.$apply();
   }
 
 
@@ -172,8 +178,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           }, function(reason) {
               console.log(reason);
           });
-
-
         });
 
         // cuando suba el puntaje, actualizamos los jugadores.
