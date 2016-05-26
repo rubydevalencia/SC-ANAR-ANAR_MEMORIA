@@ -68,32 +68,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   $scope.cards = [];
   $scope.array = [0, 1, 2, 3, 4];
 
-  // Para obtener las cartas que se utilizarán en la partida.
-  // DBGetLevelCards($scope.level, function (err, result) {
-  //     var cards = [];
-  //     totalCards = result.rows.length;
-  //
-  //     // Se preparan las cartas que se utilizarán.
-  //     for (var i = 0; i < result.rows.length; i++) {
-  //         var card = result.rows[i].doc;
-  //         card.imageShown = 'images/done.png';
-  //         card.position = i;
-  //         cards.push(card);
-  //
-  //     };
-  //
-  //     // Se barajean las cartas.
-  //     cards = shuffle(cards);
-  //     console.log(cards);
-  //
-  //     $scope.cards = cards;
-  //     $scope.$apply();
-  // });
-
   // Permite controlar las cartas.
   $scope.showCard = function(position) {
       // Buscamos la carta en el arreglo de cartas.
       var card = $scope.cards[position];
+      card.imageShown = card.image;
+      serverConnection.emit("show_card",position);
+
       if (!selectedCards.card1){
         //console.log("--------------");
         //console.log("volteando la carta "+ card.position);
@@ -112,13 +93,14 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           delete selectedCards.card2;
           return;
       }
-
-      card.imageShown = card.image;
-      serverConnection.emit("show_card",position);
   }
 
   var flipCard = function(position) {
+
       var card = $scope.cards[position];
+      card.imageShown = card.image;
+      $scope.$apply();
+
       //.log("esta es la carta a voltear" + card);
       console.log("--------------");
       console.log("SELECTED CARDS: " + selectedCards);
@@ -143,10 +125,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           delete selectedCards.card2;
           return;
       }
-      card.imageShown = card.image;
+
       console.log(card.imageShown);
       console.log("Selected card 1 es:");
-      $scope.$apply();
+
   }
 
 
