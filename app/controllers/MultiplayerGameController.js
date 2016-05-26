@@ -157,6 +157,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
               $scope.cards = $scope.gamedata.game_set;
               console.log("Datos de las cartas: " + $scope.cards);
               updatePlayers();
+              showGameView();
           }, function(reason) {
               console.log(reason);
           });
@@ -467,6 +468,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     var showPlayerLogout = function(){
       document.getElementById("multiplayer_game").style.display='none';
       document.getElementById("player_logout").style.display='block';
+    };
+
+    // Muestra la pantalla al jugador cuando el contrincante abandona la partida
+
+    var showGameView = function(){
+      document.getElementById("wait_other_player").style.display='none';
+      document.getElementById("multiplayer_game").style.display='block';
     };
 
     // Inicia el proceso cuando un jugador decide abandonar la partida.

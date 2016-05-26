@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div id="multiplayer_game" class="recuadro">
+<div id="multiplayer_game" class="recuadro" style="display: none">
     <div class="well page">
         <div>
             <div ng-repeat="i in [] | range: cards.length / 5">
@@ -57,7 +57,7 @@
 <!--Para mostrar las cartas obtenidas-->
 <div id="obtenidas"></div>
 
-<div id="player_logout" class"well page active container" style="display: none">
+<div id="player_logout" class="well page active container" style="display: none">
     <div class="row">
         <div class="col-md-3">
             <img src="images/inicio-der1.png" width="60%" height="60%">
@@ -77,4 +77,23 @@
     </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- Esta es la primera vista que se muestra -->
+<div id="wait_other_player" class="well page active container" style="display: block">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="images/inicio-der1.png" width="60%" height="60%">
+        </div>
+        <div class="col-md-6">
+            <h1>Buscando Contrincante</h1>
+            <h2>Por favor espera</h2>
+            <button id="button_confirm" ng-click="endGame()" class="btn">
+                Cancelar
+                <div class="ripple-wrapper"></div>
+            </button>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="col-md-3">
+            <img src="images/inicio-izq1.png" width="60%" height="60%">
+        </div>
+    </div>
+</div>
