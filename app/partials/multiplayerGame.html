@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="styles/game.css">
+
+<div class="primary_background navbar navbar-default ">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Modo Multijugador | Sala de Juego {{gamedata.id}}</a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" ng-click="leaveGame()">
+                    <i class="mdi-action-exit-to-app navbar-icon"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="primary_background navbar navbar-default ">
+    <div class="navbar-header">
+        <a class=navbar-brand> {{mydata.username}} | {{mydata.score}} puntos</a>
+    </div>
+    <div class="navbar-nav navbar-right">
+      <a class=navbar-brand>  {{other_player_data.username}} | {{other_player_data.score}} puntos </a>
+    </div>
+</div>
+
+<div id="multiplayer_game" class="recuadro" style="display: none">
+    <div class="well page">
+        <div>
+            <div ng-repeat="i in [] | range: cards.length / 5">
+                <div class="row"  ng-class="{'last':$last}">
+                    <div class="col-md-1"></div>
+                    <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
+                        <div style="position: relative; left: 0; top: 0;">
+                            <div ng-click="showCard(i*5 + j)">
+                                <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
+                            </div>
+                            <div ng-if="conLupa">
+                                <div ng-click="hacerZoom(cards[i*5 + j])">
+                                    <img class="lupa" id="{{cards[i*5+j].position}}" src="images/lupa.png"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+
+<!--Para mostrar las cartas obtenidas-->
+<div id="obtenidas"></div>
+
+<div id="player_logout" class="well page active container" style="display: none">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="images/inicio-der1.png" width="60%" height="60%">
+        </div>
+        <div class="col-md-6">
+            <h1>¡Opps!</h1>
+            <h2>El jugador {{other_player_data.username}} ha abandonado la partida.</h2>
+            <button id="button_confirm" ng-click="endGame()" class="btn">
+                Finalizar Juego
+                <div class="ripple-wrapper"></div>
+            </button>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="col-md-3">
+            <img src="images/inicio-izq1.png" width="60%" height="60%">
+        </div>
+    </div>
+</div>
+
+<!-- Esta es la primera vista que se muestra -->
+<div id="wait_other_player" class="well page active container" style="display: block">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="images/inicio-der1.png" width="60%" height="60%">
+        </div>
+        <div class="col-md-6">
+            <h1>Buscando Contrincante</h1>
+            <h2>Por favor espera</h2>
+            <button id="button_confirm" ng-click="endGame()" class="btn">
+                Cancelar
+                <div class="ripple-wrapper"></div>
+            </button>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="col-md-3">
+            <img src="images/inicio-izq1.png" width="60%" height="60%">
+        </div>
+    </div>
+</div>

@@ -32,15 +32,15 @@
     "dataSource": "db",
     "public": false
   },
+  "Player": {
+    "dataSource": "db",
+    "public": true
+  },
   "Game": {
     "dataSource": "db",
     "public": true
   },
-  "Message": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Player": {
+  "GamePlay": {
     "dataSource": "db",
     "public": true
   }

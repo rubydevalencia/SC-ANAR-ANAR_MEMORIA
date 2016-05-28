@@ -31,32 +31,11 @@
     </div>
 </div>
 
-<div class="container" ng-controller="ChatController">
-    <!--Cabecera-->
-        <div class="jumbotron text-center">
-            <h2>Prueba Multijugador<span class="label label-info"></span></h2>
-            <h4>Sala de Juego {{gameID}}<span class="label label-info"></span></h4>
-        </div>
-        <!--Lista de Todos-->
-        <div id="todo-list" class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <div class="checkbox" ng-repeat="each_message in all_messages">
-                    <label>
-                      {{ each_message.text }}
-                    </label>
-                 </div>
-             </div>
-         </div>
-         <!--Formulario para insertar nuevos Todo-->
-         <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg text-center" placeholder="Diga Algo" ng-model="jugada">
-                    </div>
-                    <button class="btn btn-primary btn-lg" ng-click="sendMessage()">Enviar</button>
-                </form>
-            </div>
-        </div>
+<div id="main" class="row">
+    <div class="col-xs-4 col-md-6 well page active container" style="margin-left:0%">
+      <span ng-repeat="level in difficulty">
+      <button id="button_play" type="button" class="btn btn-block" ng-click="startMultiplayerGame(level)"> {{level}} </button>
+      </span>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <div class="col-xs-2 col-md-2"></div>
+</div>

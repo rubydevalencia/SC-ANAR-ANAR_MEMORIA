@@ -70,7 +70,7 @@
     padding: 5%;
 }
 
-#loser_screen, #win_screen {
+#loser_screen, #win_screen #player_logout {
     text-align: center;
 }
 
@@ -85,6 +85,12 @@
 #loser_screen i {
     color: #993300;
     font-size: 4em;
+}
+
+#player_logout {
+  background-color: white;
+  padding: 2%;
+  margin: auto;
 }
 
 #button_confirm {

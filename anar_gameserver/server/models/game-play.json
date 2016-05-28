@@ -1,6 +1,6 @@
 {
-  "name": "Message",
-  "plural": "messages",
+  "name": "GamePlay",
+  "plural": "GamePlays",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -8,17 +8,16 @@
   },
   "properties": {
     "text": {
+      "type": "string",
+      "required": true,
+      "default": "n"
+    },
+    "from": {
       "type": "string"
     }
   },
   "validations": [],
-  "relations": {
-    "Player": {
-      "type": "hasOne",
-      "model": "Player",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

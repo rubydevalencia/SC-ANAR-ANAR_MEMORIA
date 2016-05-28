@@ -1,6 +1,6 @@
 {
   "name": "Player",
-  "plural": "players",
+  "plural": "Players",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,16 +14,15 @@
     "category": {
       "type": "string",
       "required": true
+    },
+    "score": {
+      "type": "number",
+      "required": true,
+      "default": "0"
     }
   },
   "validations": [],
-  "relations": {
-    "Gameplays": {
-      "type": "hasMany",
-      "model": "Message",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

@@ -29,17 +29,43 @@ boot(app, __dirname, function(err) {
 
     // Escuchamos a conexiones entrantes
     app.io.on('connection', function(socket){
-      console.log('a user connected');
+      console.log('Un usuario se conecto');
 
       // El usuario se desconecta
       socket.on('disconnect', function(){
-          console.log('user disconnected');
+          console.log('Un usuario se desconecto');
       });
 
       // El socket recibe un mensaje, y le dice a los clientes que se actualicen
       socket.on('message', function(message){
-          console.log('Received message:' + message);
+          console.log('Mensaje recibido:' + message);
           app.io.sockets.emit("update");
+      });
+
+      // Cuando los dos jugadores estan listo, se emite el mensaje para comenzar
+      // el juego.
+      socket.on('players_ready',function() {
+          console.log('Los jugadores estan listos.');
+          app.io.sockets.emit('start_game');
+      });
+
+      // Cada vez que un jugador sube sus puntos, se actualizan ambos clientes.
+      socket.on('new_score',function(){
+          console.log("Actualicen los puntajes.");
+          app.io.sockets.emit("update_scores");
+      });
+
+      // Cada vez que un jugador abandona la partida, se le anuncia a su
+      // contrincante.
+      socket.on("player_logout",function(username){
+          console.log('El jugador ' + username + " ha abandonado la partida.");
+          app.io.sockets.emit("player_logout",username);
+      });
+
+      // Cuado se pide que se muestre la carta
+      socket.on("show_card",function(card){
+          console.log('Uno de los jugadore volteo la carta ' + card);
+          socket.broadcast.emit("show_card",card);
       });
     });
 });
