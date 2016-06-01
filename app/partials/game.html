@@ -22,16 +22,13 @@
         </ul>
     </div>
 </div>
-<div class="recuadro">
-    <div class="well page">
-
         <div id="invisible" ng-click="quitarZoom()">
             <div id="invisible_interno">
                 <img ng-src="{{zoom}}"/>
             </div>
         </div>
-
-        <div id="game_screen">
+<div class="recuadro">
+        <div id="game_screen" class="well page">
             <div ng-repeat="i in [] | range: cards.length / 5">
                 <div class="row"  ng-class="{'last':$last}">
                     <div class="col-md-1"></div>
@@ -51,49 +48,49 @@
                 </div>
             </div>
         </div>
-
-        <div id="win_screen" style="display: none">
+</div>
+<div class="recuadro" style="margin-left: 15%; margin-right: 15%; margin-top:-5%;">
+        <div id="win_screen" class="well page" style="display: none;">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="images/inicio-der1.png" width="60%" height="60%">
+                    <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
                 </div>
                 <div class="col-md-6">
                     <h1>¡GANASTE!</h1>
-                    <h2>Has ganado {{score}} puntos</h2>
+                    <h3>Has ganado {{score}} puntos</h3>
                     <button id="button_confirm" ng-click="changePage('home')" class="btn">
                         Continuar
                         <div class="ripple-wrapper"></div>
                     </button>
-                    <h2>Desbloqueaste esta carta</h2>
+                    <h3>Desbloqueaste esta carta</h3>
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
-                        <img height="80%" width="80%" ng-src="{{obtainedCard.image}}">
+                        <img height="120%" width="120%" ng-src="{{obtainedCard.image}}" style="margin-left:-10%">
                         <p>{{obtainedCard.name}}<p>
                     </div>
                     <div class="col-md-3"></div>
                 </div>
                 <div class="col-md-3">
-                    <img src="images/inicio-izq1.png" width="60%" height="60%">
+                    <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
                 </div>
             </div>
         </div>
 
-        <div id="loser_screen" class="row" style="display: none">
-            <div class="col-md-3">
-                <img src="images/inicio-der1.png" width="60%" height="60%">
-            </div>
-            <div class="col-md-6">
-                <h1>PERDISTE</h1>
-                <h2>Se te acabó el tiempo</h2>
-                <br><br>
-                <h3>¡Intentalo de nuevo!</h3>
-                <i href="#" class="mdi-action-autorenew navbar-icon" ng-click="restartGame()"></i>
-            </div>
-            <div class="col-md-3">
-                <img src="images/inicio-izq1.png" width="60%" height="60%">
-            </div>
+        <div id="loser_screen" class="well page" style="display: none">
+			<div class="row">
+				<div class="col-md-3">
+					<img src="images/inicio-der1.png" style="width: 55%; margin-top:30%">
+				</div>
+				<div class="col-md-6">
+					<h3>Se acabó el tiempo</h3>
+					<h1>¡Intentalo de nuevo!</h1>
+					<i href="#" class="mdi-action-autorenew navbar-icon" ng-click="restartGame()"></i>
+				</div>
+				<div class="col-md-3">
+					<img src="images/inicio-izq1.png" style="width: 60%; margin-top:30%">
+				</div>
+			</div>
         </div>
-    </div>
 </div>
 <div id="obtenidas"></div>
 <div id="timer" class="circle">
