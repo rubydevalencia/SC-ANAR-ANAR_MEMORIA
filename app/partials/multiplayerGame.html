@@ -29,6 +29,13 @@
     </div>
 </div>
 
+<!-- Para las alertas -->
+<div id="alerts" class="alert alert-danger" ng-show="showAlert" style="display: none">
+   <button type="button" class="close" data-ng-click="closeAlert('showAlert')" >×</button>
+   <strong>Advertencia!</strong> {{textAlert}}
+</div>
+
+<!-- Para el tablero multijugador -->
 <div id="multiplayer_game" class="recuadro" style="display: none">
     <div class="well page">
         <div>

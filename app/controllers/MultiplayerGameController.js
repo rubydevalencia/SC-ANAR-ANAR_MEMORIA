@@ -161,6 +161,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Permite controlar las cartas.
   $scope.showCard = function(position) {
+
+      if (!$scope.token) {
+          sendAlert("NO ES TU TURNO");
+          console.log("NO ES TU TURNO");
+          return;
+      }
+
       // Buscamos la carta en el arreglo de cartas.
       var card = $scope.cards[position];
       card.imageShown = card.image;
@@ -468,7 +475,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     console.log("Mi token ahora es: " + $scope.token);
 
   };
-  
+
   // -----------------------------------------------------------------------------
 
   // ----------- PARA EL CIERRE DE JUEGO Y DESLOGGEO DEL SERVIDOR ---------------
@@ -526,6 +533,24 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var showGameView = function(){
     document.getElementById("wait_other_player").style.display='none';
     document.getElementById("multiplayer_game").style.display='block';
+  };
+
+  // Alertas al jugador
+  $scope.textAlert = "";
+  $scope.showAlert = false;
+
+  var sendAlert = function(mensaje){
+    document.getElementById("alerts").style.display='block';
+    $scope.textAlert = mensaje;
+    $scope.showAlert = true;
+  }
+
+  // switch flag
+  $scope.closeAlert = function(value) {
+     document.getElementById("alerts").style.display='none';
+     console.log("close alert");
+     $scope.textAlert = "";
+     $scope[value] = !$scope[value];
   };
 
   // ---------------------------------------------------------------------------
