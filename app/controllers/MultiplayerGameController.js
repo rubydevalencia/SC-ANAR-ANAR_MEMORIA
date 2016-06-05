@@ -215,6 +215,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
     delete selectedCards.card1;
     delete selectedCards.card2;
+    // Si era mi turno al momento de voltear, las cartas, ya no lo es.
+    // y viceversa.
+    changeToken();
     return;
 
   };
@@ -317,6 +320,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
             // Unimos al jugador al nuevo juego creado
             $scope.mynumber = 1;
             joinGame($scope.gamedata.id,$scope.playerID,$scope.mynumber);
+            // Como es el primer jugador, le toca el token.
+            $scope.token = true;
+            console.log("Mi token es: " + $scope.token);
             console.log(data)
         })
         .error(function(data){
@@ -451,8 +457,18 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
               console.log('Error: ' + data);
               console.log("NO se envió al juego con ID: " + $scope.gamedata.id);
           });
-    };
+  };
 
+  var changeToken = function() {
+    if ($scope.token) {
+      $scope.token = false;
+    } else {
+      $scope.token = true;
+    }
+    console.log("Mi token ahora es: " + $scope.token);
+
+  };
+  
   // -----------------------------------------------------------------------------
 
   // ----------- PARA EL CIERRE DE JUEGO Y DESLOGGEO DEL SERVIDOR ---------------
