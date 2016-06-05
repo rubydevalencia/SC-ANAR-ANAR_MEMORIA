@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGlobals) {
+app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGlobals, $timeout) {
 
   // Direccion del servidor de juego
   var serverURL = 'http://0.0.0.0:3000/';
@@ -55,8 +55,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       imageName: 'done.png',
       nextLevel: "Ninguno"                     // Como es multijugador no habrá ningún nivel desbloqueable.
   };
-  console.log("El nivel es:");
-  console.log(level);
   $scope.level = level   // "Nivel" que jugará los jugadores.
 
 // -----------------------------------------------------------------------------
@@ -67,6 +65,26 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   $scope.cards = [];
   $scope.array = [0, 1, 2, 3, 4];
+
+  // Remueve o oculta las cartas una vez que hay dos cartas cara arriba.
+
+  function removeOrHideCard() {
+    console.log("Tengo que ocultar o remover las cartas.");
+    if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+        removeCard(selectedCards.card1);
+        console.log("Se supone que muevo las cartas al fondo");
+    } else {
+
+      $scope.$apply(function(){
+        selectedCards.card1.imageShown = 'images/done.png';
+        selectedCards.card2.imageShown = 'images/done.png';
+        console.log('--------------APPLY!');
+      });
+    }
+
+    delete selectedCards.card1;
+    delete selectedCards.card2;
+  };
 
   // Permite controlar las cartas.
   $scope.showCard = function(position) {
@@ -82,19 +100,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       } else if (!selectedCards.card2){
           selectedCards.card2 = card;
       } else {
-          if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-              removeCard(selectedCards.card1);
-          } else {
-              selectedCards.card1.imageShown = 'images/done.png';
-              selectedCards.card2.imageShown = 'images/done.png';
-          }
-
-          delete selectedCards.card1;
-          delete selectedCards.card2;
-          return;
+          // Conteo para voltear las cartas
+          console.log('--------------APPLY!');
+          $timeout(removeOrHideCard,3000);
       }
-  }
+  };
 
+  // Voltea la carta, si el otro jugador fue el que la jugo.
   var flipCard = function(position) {
 
       var card = $scope.cards[position];
@@ -114,22 +126,15 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         console.log("volteando la carta 2"+ card.position);
           selectedCards.card2 = card;
       if (selectedCards.card1 && selectedCards.card2)
-          if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-              removeCard(selectedCards.card1);
-          } else {
-              selectedCards.card1.imageShown = 'images/done.png';
-              selectedCards.card2.imageShown = 'images/done.png';
-          }
 
-          delete selectedCards.card1;
-          delete selectedCards.card2;
-          return;
+          $timeout(removeOrHideCard,3000);
+
       }
 
       console.log(card.imageShown);
       console.log("Selected card 1 es:");
 
-  }
+  };
 
 
   // CONEXION CON EL SERVIDOR PARA EL MULTIJUGADOR
