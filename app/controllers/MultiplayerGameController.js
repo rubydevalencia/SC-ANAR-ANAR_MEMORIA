@@ -61,7 +61,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Para el uso de las cartas.
   var selectedCards = {}         // Conjunto con todas las cartas que aparecerán.
-  var totalCards;
 
   $scope.cards = [];
   $scope.array = [0, 1, 2, 3, 4];
@@ -70,20 +69,21 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   function removeOrHideCard() {
     console.log("Tengo que ocultar o remover las cartas.");
-    if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-        removeCard(selectedCards.card1);
-        console.log("Se supone que muevo las cartas al fondo");
-    } else {
-
-      $scope.$apply(function(){
-        selectedCards.card1.imageShown = 'images/done.png';
-        selectedCards.card2.imageShown = 'images/done.png';
-        console.log('--------------APPLY!');
-      });
-    }
+    // $scope.$apply() verifica que hay cambios en la vista.
+    $scope.$apply(function(){
+      if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+          removeCard(selectedCards.card1);
+          console.log("Se supone que muevo las cartas al fondo");
+      } else {
+          selectedCards.card1.imageShown = 'images/done.png';
+          selectedCards.card2.imageShown = 'images/done.png';
+        }
+    });
 
     delete selectedCards.card1;
     delete selectedCards.card2;
+    return;
+
   };
 
   // Permite controlar las cartas.
@@ -91,19 +91,21 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // Buscamos la carta en el arreglo de cartas.
       var card = $scope.cards[position];
       card.imageShown = card.image;
+
+      // le informamos al otro jugador que tiene que voltear la carta tambien
       serverConnection.emit("show_card",position);
 
       if (!selectedCards.card1){
-        //console.log("--------------");
-        //console.log("volteando la carta "+ card.position);
           selectedCards.card1 = card;
       } else if (!selectedCards.card2){
           selectedCards.card2 = card;
-      } else {
-          // Conteo para voltear las cartas
-          console.log('--------------APPLY!');
-          $timeout(removeOrHideCard,3000);
+          if (selectedCards.card1 && selectedCards.card2) {
+              // Conteo para voltear las cartas
+              console.log("SHOW -- Estoy iniciando el contador para voltear las cartas.");
+              $timeout(removeOrHideCard,3000);
+          }
       }
+      return
   };
 
   // Voltea la carta, si el otro jugador fue el que la jugo.
@@ -112,28 +114,16 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       var card = $scope.cards[position];
       card.imageShown = card.image;
       $scope.$apply();
-
-      //.log("esta es la carta a voltear" + card);
-      console.log("--------------");
-      console.log("SELECTED CARDS: " + selectedCards);
-      console.log("--------------");
       if (!selectedCards.card1){
-          console.log("--------------");
-          console.log("volteando la carta 1"+ card.position);
           selectedCards.card1 = card;
       } else if (!selectedCards.card2){
-        console.log("--------------");
-        console.log("volteando la carta 2"+ card.position);
           selectedCards.card2 = card;
-      if (selectedCards.card1 && selectedCards.card2)
-
-          $timeout(removeOrHideCard,3000);
-
+          if (selectedCards.card1 && selectedCards.card2) {
+              console.log("FLIP -- Estoy iniciando el contador para voltear las cartas.");
+              $timeout(removeOrHideCard,3000);
+        }
       }
-
-      console.log(card.imageShown);
-      console.log("Selected card 1 es:");
-
+      return;
   };
 
 
@@ -191,10 +181,11 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   var removeCard = function(card) {
 
-      if (totalCards > 2)
-          moveToBottom(card);
+      console.log('Estoy removiendo la carta con el id ' + card._id);
+      console.log('El total de las cartas es: ');
+      
+      moveToBottom(card);
 
-      totalCards -= 2;
   }
 
   // Animación del movimiento de las cartas hacia abajo
@@ -280,7 +271,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
       DBGetLevelCards($scope.level, function (err, result) {
           var cards = [];
-          totalCards = result.rows.length;
 
           // Se preparan las cartas que se utilizarán.
           for (var i = 0; i < result.rows.length; i++) {
