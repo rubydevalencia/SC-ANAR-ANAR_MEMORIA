@@ -72,15 +72,23 @@
 
 #loser_screen, #win_screen #player_logout {
     text-align: center;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #win_screen h1 {
     color: #993300;
+	font-family:"myFirstFont", sans-serif;
 }
 
 #loser_screen h1 {
     color: #F44336;
+	font-family:"myFirstFont", sans-serif;
 }
+
+#win_screen h3 {
+	font-family:"myFirstFont", sans-serif;
+}
+
 
 #loser_screen i {
     color: #993300;
@@ -94,8 +102,11 @@
 }
 
 #button_confirm {
-    background-color: #993300;
+    text-transform: capitalize;
+    font-weight: bold;
     color: white;
+    border-radius: 20px;
+    background-color: #993300;
 }
 
 #invisible {
@@ -108,6 +119,7 @@
     background-color: rgba(150, 150, 150, 0.5);
     z-index: 999;
     text-align: center;
+    font-family:"myFirstFont", sans-serif;
 }
 
 #invisible_interno {
