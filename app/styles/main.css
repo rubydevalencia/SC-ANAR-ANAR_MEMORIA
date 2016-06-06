@@ -36,12 +36,15 @@ body {
 }
 
 #main {
-    height: 92%;
     font-family:"myFirstFont", sans-serif;
 }
 
 #credit {
-    height: 8%;
+	position: fixed;
+	bottom: 0px;
+	left:0px;
+	right: 0px;
+	height:45px;
     background-color: #993300;
     color: white;
     font-family:"myFirstFont", sans-serif;
@@ -166,7 +169,11 @@ p{
 	font-weight:bold;
 }
 
- .current_user {
+.reducir_margen {
+	margin-bottom:10px;
+}
+ 
+.current_user {
      background-color:#D0D0D0;
 }
 
