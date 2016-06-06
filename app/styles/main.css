@@ -36,15 +36,12 @@ body {
 }
 
 #main {
+    height: 92%;
     font-family:"myFirstFont", sans-serif;
 }
 
 #credit {
-	position: fixed;
-	bottom: 0px;
-	left:0px;
-	right: 0px;
-	height:45px;
+    height: 8%;
     background-color: #993300;
     color: white;
     font-family:"myFirstFont", sans-serif;
@@ -167,10 +164,6 @@ p{
 .gothic{
 	font-family:"myFirstFont", sans-serif;
 	font-weight:bold;
-}
-
-.reducir_margen {
-	margin-bottom:10px;
 }
  
 .current_user {
