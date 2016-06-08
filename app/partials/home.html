@@ -47,6 +47,21 @@
                         <div class="panel-footer">{{category.levels[i*5 + j].name}}</div>
                     </div>
                 </div>
-                <div class="col-md-1"></div>
+                
+                <div class="col-md-1">
+					<div style="margin-top:135px; text-align: center;" 
+						 ng-if="showHand(category, i)">
+						<img height="45%" width="45%" 
+							 ng-src="images/mano-{{chooseHand(category, i)}}.png"
+							ng-click="mostrarDato(category, i)">
+						<p style="font-size: 80%;">dato curioso</p>
+					</div>
+				</div>
             </div>
 </div>
+
+ <div id="invisible">
+    <div id="invisible_interno">
+        <img ng-src="images/mano-izq.png"/>
+    </div>
+ </div>
