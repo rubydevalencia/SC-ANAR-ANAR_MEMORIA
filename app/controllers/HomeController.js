@@ -5,6 +5,20 @@ app.controller('HomeController', function ($scope) {
     $scope.unlockedLevels = [];
     $scope.levelsByCategory = {};
     $scope.array = [0, 1, 2, 3, 4];
+	$scope.datoCurioso = "";
+
+	//El texto de los datos curiosos se define aquí
+	var datosCuriosos = [
+"En las figuras rupestres, priva la frontalidad\n, lo plano, lo lineal y\
+ una\n marcada inclinación hacia lo geométrico.",
+"Una de las características más resaltantes de\n las figuras rupestres en\
+ general, \nes la pureza de sus formas.",
+"Los Petroglifos, son figuras realizadas en bajorrelieve\n, grabadas en las\
+ rocas o piedras\n, con diferentes técnicas de percusión o abrasión.",
+"Las Pinturas Rupestres, también llamadas Pictografías, son\n dibujos realizados\
+ sobre las rocas, mediante la aplicación\n de pigmentos, de origen mineral, vegetal\
+ y animal." 
+]
 
     /*
      * The first thing the controller will do is get the user levels
@@ -141,6 +155,13 @@ app.controller('HomeController', function ($scope) {
 		}
 		
 		// ahora mostramos el dato curioso
-		
+		var estilo = document.getElementById('invisible').style;
+		estilo.backgroundColor='transparent';
+		estilo.display='table';
+		$scope.datoCurioso = datosCuriosos[numDato];
+    }
+    
+    $scope.esconderDato = function () {
+		document.getElementById('invisible').style.display='none';
 	}
 });

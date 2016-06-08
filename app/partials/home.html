@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styles/invisible.css">
+
 <div class="primary_background navbar navbar-default ">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -60,8 +62,9 @@
             </div>
 </div>
 
- <div id="invisible">
-    <div id="invisible_interno">
-        <img ng-src="images/mano-izq.png"/>
+ <div id="invisible" 
+	  ng-click="esconderDato()">
+    <div id="invisible_interno" class="gothic dato">
+        <p>{{datoCurioso}}</p>
     </div>
  </div>
