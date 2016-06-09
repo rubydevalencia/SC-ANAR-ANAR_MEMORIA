@@ -40,7 +40,8 @@ function DBregisterUser(id, password, callback) {
         password: password,
         highscore: 0,
         levels: ["0"],
-        cards: []
+        cards: [], 
+        hands: 0
     };
 
     db_user.put(user).then(function(result) {

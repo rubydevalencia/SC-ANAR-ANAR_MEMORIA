@@ -10,8 +10,8 @@
 }
 
 @font-face {
-    font-family: myFontEpistolar;
-    src: url(Epistolar.ttf);
+    font-family: Florencesans;
+    src: url(florencesans.ttf);
 }
 	
 
@@ -36,12 +36,15 @@ body {
 }
 
 #main {
-    height: 92%;
     font-family:"myFirstFont", sans-serif;
 }
 
 #credit {
-    height: 8%;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+    height: 6%;
     background-color: #993300;
     color: white;
     font-family:"myFirstFont", sans-serif;
@@ -161,14 +164,19 @@ p{
 	font-family:"myFirstFont", sans-serif;
 }
 
-h4{
+.gothic{
 	font-family:"myFirstFont", sans-serif;
+	font-weight:bold;
+}
+ 
+.titulo {
+	font-family:"Florencesans", sans-serif;
+	font-weight:bold;
 }
 
- .current_user {
+.current_user {
      background-color:#D0D0D0;
- }
- 
+}
 
 .recuadro {
     padding: 2.5%;
