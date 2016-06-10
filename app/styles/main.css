@@ -178,6 +178,10 @@ p{
      background-color:#D0D0D0;
 }
 
+.redondeado{
+	border-radius: 20px !important;
+}
+
 .recuadro {
     padding: 2.5%;
 }
