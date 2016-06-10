@@ -29,6 +29,13 @@
     </div>
 </div>
 
+<!-- Para las alertas -->
+<div id="alerts" class="alert alert-danger" ng-show="showAlert" style="display: none">
+   <button type="button" class="close" data-ng-click="closeAlert('showAlert')" >×</button>
+   <strong>Advertencia!</strong> {{textAlert}}
+</div>
+
+<!-- Para el tablero multijugador -->
 <div id="multiplayer_game" class="recuadro" style="display: none">
     <div class="well page">
         <div>
@@ -37,8 +44,8 @@
                     <div class="col-md-1"></div>
                     <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
                         <div style="position: relative; left: 0; top: 0;">
-                            <div ng-click="showCard(i*5 + j)">
-                                <img class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
+                            <div>
+                                <img ng-click="showCard(i*5 + j)" class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
                             </div>
                             <div ng-if="conLupa">
                                 <div ng-click="hacerZoom(cards[i*5 + j])">
