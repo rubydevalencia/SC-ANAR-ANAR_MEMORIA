@@ -10,6 +10,11 @@
 }
 
 @font-face {
+	font-family: GothicBI;
+	src: url(GOTHICBI.TTF);
+}
+
+@font-face {
     font-family: Florencesans;
     src: url(florencesans.ttf);
 }
