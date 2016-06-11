@@ -7,6 +7,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
+        <a href="#" class="navbar-brand" ng-click="changePage('profile')">
+            <i class="mdi-navigation-arrow-back navbar-icon"></i>
+        </a>
         <a class="navbar-brand">Bienvenido, {{user._id}}</a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
@@ -19,6 +22,11 @@
             <li>
                 <a href="#" ng-click="changePage('highscores')">
                     <i class="mdi-editor-insert-chart navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" ng-click="changePage('credits')">
+                    <i class="mdi-action-receipt navbar-icon"></i>
                 </a>
             </li>
             <li>

@@ -37,7 +37,7 @@
 
 <!-- Para el tablero multijugador -->
 <div id="multiplayer_game" class="recuadro" style="display: none">
-    <div class="well page">
+    <div class="well page redondeado">
         <div>
             <div ng-repeat="i in [] | range: cards.length / 5">
                 <div class="row"  ng-class="{'last':$last}">
@@ -64,7 +64,7 @@
 <!--Para mostrar las cartas obtenidas-->
 <div id="obtenidas"></div>
 
-<div id="player_logout" class="well page active container" style="display: none">
+<div id="player_logout" class="well page active container redondeado" style="display: none">
     <div class="row">
         <div class="col-md-3">
             <img src="images/inicio-der1.png" width="60%" height="60%">
@@ -85,7 +85,7 @@
 </div>
 
 <!-- Esta es la primera vista que se muestra -->
-<div id="wait_other_player" class="well page active container" style="display: block">
+<div id="wait_other_player" class="well page active container redondeado" style="display: block">
     <div class="row">
         <div class="col-md-3">
             <img src="images/inicio-der1.png" width="60%" height="60%">
