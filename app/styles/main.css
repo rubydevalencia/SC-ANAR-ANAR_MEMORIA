@@ -218,3 +218,18 @@ p{
     margin-bottom: 60px;
     font-family:"Florencesans", sans-serif;
 }
+
+#greeting {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#greeting p {
+    font-size: 140%;
+    margin: 1em;
+    line-height: 1.25;
+    font-family:"Florencesans", sans-serif;
+}
+
