@@ -18,12 +18,36 @@
         <!-- endbuild -->
     </head>
     <body ng-switch="page" ng-controller="PageController">
+        
+        <!--                -->
+        <!--     Landing    -->
+        <!--                -->
 
+        <div style="height: 100%" ng-switch-default>
+            <div style="height: 100%" ng-include=" ' partials/landing.html ' "></div>
+        </div>
+        
+        <!--                -->
+        <!--     Greeting   -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="greeting">
+            <div style="height: 100%" ng-include=" ' partials/greeting.html ' "></div>
+        </div>
+        
+        <!--                -->
+        <!--  Instructions  -->
+        <!--                -->
+
+        <div style="height: 100%" ng-switch-when="instructions">
+            <div style="height: 100%" ng-include=" ' partials/instructions.html ' "></div>
+        </div>
+        
         <!--                -->
         <!-- Authentication -->
         <!--                -->
 
-        <div style="height: 100%" ng-switch-default ng-controller="AuthController">
+        <div style="height: 100%" ng-switch-when="auth" ng-controller="AuthController">
             <div style="height: 100%" ng-include=" ' partials/auth.html ' "></div>
         </div>
 
