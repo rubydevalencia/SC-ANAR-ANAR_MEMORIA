@@ -237,7 +237,7 @@ p{
 #instructions p {
     font-size: 140%;
     margin: 1em;
-    line-height: 1.25;
+    line-height: 1;
     font-family:"Florencesans", sans-serif;
 }
 
@@ -251,7 +251,7 @@ p{
 #greeting p {
     font-size: 140%;
     margin: 1em;
-    line-height: 1.25;
+    line-height: 1;
     font-family:"Florencesans", sans-serif;
 }
 
