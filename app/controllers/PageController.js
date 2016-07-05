@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('PageController', function($scope) {
-    $scope.page = 'auth';
+    $scope.page = 'landing';
     $scope.user = {};
     $scope.level = {};
 

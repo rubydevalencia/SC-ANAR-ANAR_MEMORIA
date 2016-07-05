@@ -190,3 +190,12 @@ p{
 .recuadro {
     padding: 2.5%;
 }
+
+#bottom {
+    position: fixed;
+    left:0px;
+    right:0px;
+    bottom: 0px;
+    margin-bottom: 0px;
+    background-color: #993300;
+}
