@@ -4,19 +4,19 @@ app.factory('DatosCuriosos', function () {
     return [
 "Las figuras rupestres, son planas, lineales\ny casi siempre están de frente.",
 "Representan a la naturaleza,\na los hombres y a los animales juntos.",
-"Los Petroglifos, son figuras grabadas en las rocas,\ncon diferentes\
+"Los <i>Petroglifos</i>, son figuras grabadas en las rocas,\ncon diferentes\
  técnicas de percusión o abrasión.",
-"Las Pinturas Rupestres, conocidas como Pictografías,\nson dibujos realizados\
- sobre las rocas,\nmediante la aplicación de pigmentos.",
-"Los surcos  en los Petroglifos\nlos trabajaron con puntas de piedra,\n\
+"Las <i>Pinturas Rupestres</i>, conocidas como <i>Pictografías</i>,\nson dibujos\
+ realizados sobre las rocas,\nmediante la aplicación de pigmentos.",
+"Los surcos  en los <i>Petroglifos</i>\nlos trabajaron con puntas de piedra,\n\
  y para  alisarlos utilizaban conchas o arena.",
-"El rojo es el color más utilizado\nen la mayoría de las Pinturas Rupestres,\n\
+"El rojo es el color más utilizado\nen la mayoría de las <i>Pinturas Rupestres</i>,\n\
  halladas en Venezuela y alrededor del mundo.",
-"Las Pinturas Rupestres se hicieron  utilizando un palito\no huesito hueco\
+"Las <i>Pinturas Rupestres</i> se hicieron  utilizando un palito\no huesito hueco\
  para soplar, y dibujaron con ramas\ncomo si fuera un pincel o usando el dedo.",
 "Aprovecharon las grietas\ny relieves naturales de la roca;\npara con el\
  color ocre y el carbón,\ndar volumen a los animales.",
-"Se han encontrado Pinturas rupestres\ntambién en colores negro, naranja,\
+"Se han encontrado <i>Pinturas rupestres</i>\ntambién en colores negro, naranja,\
  amarillo y blanco.",
 "Al ser humano lo representaban,\nde cuerpo entero, la cabeza,\ny con huellas\
  de manos y pies,\ncomo abstracción de la figura.",

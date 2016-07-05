@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('HomeController', ['$scope','DatosCuriosos', 
-function ($scope, DatosCuriosos) {
+app.controller('HomeController', ['$scope','DatosCuriosos', '$sce',
+function ($scope, DatosCuriosos, $sce) {
     $scope.levels = {};
     $scope.unlockedLevels = [];
     $scope.levelsByCategory = {};
@@ -145,7 +145,7 @@ function ($scope, DatosCuriosos) {
 		// ahora mostramos el dato curioso
 		var estilo = document.getElementById('invisible').style;
 		estilo.display='table';
-		$scope.datoCurioso = DatosCuriosos[numDato];
+		$scope.datoCurioso = $sce.trustAsHtml(DatosCuriosos[numDato]);
     }
     
     $scope.esconderDato = function () {
