@@ -199,3 +199,22 @@ p{
     margin-bottom: 0px;
     background-color: #993300;
 }
+
+#landing {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#landing h1 {
+    font-size: 400%;
+    margin-bottom: 15px;
+    font-family:"Florencesans", sans-serif;
+}
+
+#landing p {
+    font-size: 200%;
+    margin-bottom: 60px;
+    font-family:"Florencesans", sans-serif;
+}
