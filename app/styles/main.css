@@ -218,3 +218,31 @@ p{
     margin-bottom: 60px;
     font-family:"Florencesans", sans-serif;
 }
+
+#instructions {
+    display: table-cell;
+    width: 75%;
+    margin-left: 25%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#instructions h1 {
+    font-size: 220%;
+    font-style: italic;
+    margin-bottom: 15px;
+    font-family:"Florencesans", sans-serif;
+}
+
+#instructions p {
+    font-size: 140%;
+    margin: 1em;
+    line-height: 1.25;
+    font-family:"Florencesans", sans-serif;
+}
+
+.enfasis {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 110%;
+}
