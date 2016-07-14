@@ -10,8 +10,13 @@
 }
 
 @font-face {
-    font-family: myFontEpistolar;
-    src: url(Epistolar.ttf);
+	font-family: GothicBI;
+	src: url(GOTHICBI.TTF);
+}
+
+@font-face {
+    font-family: Florencesans;
+    src: url(florencesans.ttf);
 }
 	
 
@@ -36,12 +41,15 @@ body {
 }
 
 #main {
-    height: 92%;
     font-family:"myFirstFont", sans-serif;
 }
 
 #credit {
-    height: 8%;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+    height: 6%;
     background-color: #993300;
     color: white;
     font-family:"myFirstFont", sans-serif;
@@ -161,15 +169,94 @@ p{
 	font-family:"myFirstFont", sans-serif;
 }
 
-h4{
+.gothic{
 	font-family:"myFirstFont", sans-serif;
+	font-weight:bold;
+}
+ 
+.titulo {
+	font-family:"Florencesans", sans-serif;
+	font-weight:bold;
 }
 
- .current_user {
+.current_user {
      background-color:#D0D0D0;
- }
- 
+}
+
+.redondeado{
+	border-radius: 20px !important;
+}
 
 .recuadro {
     padding: 2.5%;
+}
+
+#bottom {
+    position: fixed;
+    left:0px;
+    right:0px;
+    bottom: 0px;
+    margin-bottom: 0px;
+    background-color: #993300;
+}
+
+#landing {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#landing h1 {
+    font-size: 400%;
+    margin-bottom: 15px;
+    font-family:"Florencesans", sans-serif;
+}
+
+#landing p {
+    font-size: 200%;
+    margin-bottom: 60px;
+    font-family:"Florencesans", sans-serif;
+}
+
+#instructions {
+    display: table-cell;
+    width: 75%;
+    margin-left: 25%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#instructions h1 {
+    font-size: 220%;
+    font-style: italic;
+    margin-bottom: 15px;
+    font-family:"Florencesans", sans-serif;
+}
+
+#instructions p {
+    font-size: 140%;
+    margin: 1em;
+    line-height: 1;
+    font-family:"Florencesans", sans-serif;
+}
+
+#greeting {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#greeting p {
+    font-size: 140%;
+    margin: 1em;
+    line-height: 1;
+    font-family:"Florencesans", sans-serif;
+}
+
+.enfasis {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 110%;
 }

@@ -1,10 +1,12 @@
 'use strict';
 
-app.controller('HomeController', function ($scope) {
+app.controller('HomeController', ['$scope','DatosCuriosos', '$sce',
+function ($scope, DatosCuriosos, $sce) {
     $scope.levels = {};
     $scope.unlockedLevels = [];
     $scope.levelsByCategory = {};
     $scope.array = [0, 1, 2, 3, 4];
+	$scope.datoCurioso = "";
 
     /*
      * The first thing the controller will do is get the user levels
@@ -91,4 +93,62 @@ app.controller('HomeController', function ($scope) {
     $scope.divideRows = function(length) {
         return new Array(length / 5);
     };
-});
+    
+    /* Returns true if the row's hand must be shown, false otherwise */
+    $scope.showHand = function (categoria, fila) {
+		var numHands = $scope.user.hands;
+		var level = parseInt(categoria.levels[fila*5 + 4]._id);
+		if (numHands * 5 > level)
+			return true;
+		else
+			return false;
+	}
+	
+	/* Alternates between "izq" and "der" for each hand. Returns "der" for
+	 *  even row numbers and "izq" for odd row numbers.
+	 */
+	$scope.chooseHand = function(category, row) {
+		var numHand = parseInt(category.levels[row*5 + 4]._id);
+		numHand = Math.floor(numHand/5);
+		if (numHand % 2 == 0)
+			return "der";
+		else
+			return "izq";
+	}
+	
+	// Muestra un dato curioso. De ser necesario desbloquea el siguiente nivel
+	$scope.mostrarDato = function (categoria, fila) {
+		var levelId = parseInt(categoria.levels[fila*5 + 4]._id);
+		var numDato = Math.floor(levelId/5);
+		
+		// se busca el nivel y se desbloquea de ser necesario
+		var categoria;
+		for (categoria in $scope.levels) {
+			var levels = $scope.levels[categoria].levels;
+			var i;
+			for (i in levels) {
+				if ((parseInt(levels[i]._id) == levelId + 1) && (!levels[i].isUnlocked)) {
+					levels[i].isUnlocked = true;
+					levels[i].imageName = "done.png";
+					$scope.user.levels.push((levelId + 1).toString());
+					DBUpdateUser($scope.user, function(err, response) {
+						if (err)
+							console.log(err);
+						else {
+							$scope.user._rev = response.rev
+						}
+					});
+				}
+			}
+		}
+		
+		// ahora mostramos el dato curioso
+		var estilo = document.getElementById('invisible').style;
+		estilo.display='table';
+		$scope.datoCurioso = $sce.trustAsHtml(DatosCuriosos[numDato]);
+    }
+    
+    $scope.esconderDato = function () {
+		document.getElementById('invisible').style.display='none';
+	}
+}]);

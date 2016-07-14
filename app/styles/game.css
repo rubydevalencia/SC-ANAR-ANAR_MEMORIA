@@ -81,25 +81,18 @@
     padding: 5%;
 }
 
-#loser_screen, #win_screen #player_logout {
+#loser_screen, #win_screen, #player_logout {
     text-align: center;
     font-family:"myFirstFont", sans-serif;
 }
 
 #win_screen h1 {
     color: #993300;
-	font-family:"myFirstFont", sans-serif;
 }
 
 #loser_screen h1 {
     color: #F44336;
-	font-family:"myFirstFont", sans-serif;
 }
-
-#win_screen h3 {
-	font-family:"myFirstFont", sans-serif;
-}
-
 
 #loser_screen i {
     color: #993300;

@@ -10,17 +10,26 @@
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#" ng-click="changePage('collection')">
+                <a title="Tu colección de cartas"
+                   href="#" ng-click="changePage('collection')">
                     <i class="mdi-content-content-copy navbar-icon"></i>
                 </a>
             </li>
             <li>
-                <a href="#" ng-click="changePage('highscores')">
+                <a title="Puntuaciones más altas" 
+                   href="#" ng-click="changePage('highscores')">
                     <i class="mdi-editor-insert-chart navbar-icon"></i>
                 </a>
             </li>
             <li>
-                <a href="#" ng-click="logOut()">
+                <a title="Créditos"
+                   href="#" ng-click="changePage('credits')">
+                    <i class="mdi-action-receipt navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a title="Salir"
+                   href="#" ng-click="logOut()">
                     <i class="mdi-action-exit-to-app navbar-icon"></i>
                 </a>
             </li>
@@ -28,25 +37,25 @@
     </div>
 </div>
 
-<div id="main" class="row">
+<div id="main" class="row" style='font-family: "myFirstFont", sans-serif;'>
     <div class="col-xs-1 col-md-1"></div>
-    <div class="col-xs-2 col-md-2 well" style="margin-top:1%">
-        <h2 class="title text-center">{{user._id}}</h2>
+    <div class="col-xs-2 col-md-2 well redondeado" style="margin-top:1%;">
+        <h2 class="title text-center gothic">{{user._id}}</h2>
         <!-- Imagen de perfil que deberia buscarse en la base de datos -->
         <img src="images/cards/3.png" width="100%" height="100%">
-        <h4 class="title text-left"> Niveles Desbloqueados: </h4>
-        <h4 class="subtitle text-center"> {{user.levels.length}} </h4>
-        <h4 class="title text-left"> Mayor Puntaje: </h4>
-        <h4 class="subtitle text-center"> {{user.highscore}} </h4>
-        <h4 class="title text-left"> Categoria: </h4>
-        <h4 class="subtitle text-center"> {{category}} </h4>
-        <h4 class="title text-left"> Cartas Ganadas: </h4>
-        <h4 class="subtitle text-center"> {{user.cards.length}} </h4>
+        <h4 class="title text-left gothic"> Niveles Desbloqueados: </h4>
+        <h4 class="subtitle text-center gothic"> {{user.levels.length}} </h4>
+        <h4 class="title text-left gothic"> Mayor Puntaje: </h4>
+        <h4 class="subtitle text-center gothic"> {{user.highscore}} </h4>
+        <h4 class="title text-left gothic"> Categoria: </h4>
+        <h4 class="subtitle text-center gothic"> {{category}} </h4>
+        <h4 class="title text-left gothic"> Cartas Ganadas: </h4>
+        <h4 class="subtitle text-center gothic"> {{user.cards.length}} </h4>
 
     </div>
     <div class="col-xs-2 col-md-2" style="margin-top:1%">
     </div>
-    <div class="col-xs-8 col-md-6 well page active container" style="margin-left:5%">
+    <div class="col-xs-8 col-md-6 well page active container redondeado" style="margin-left:5%">
       <button id="button_play" type="button" class="btn btn-block" ng-click="changePage('home')"> Jugar</button>
       <button id="button_multiplayer" type="button" class="btn btn-block" ng-click="changePage('multiplayer')"> Multijugador </button>
     </div>

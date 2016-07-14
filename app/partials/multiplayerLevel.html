@@ -13,17 +13,26 @@
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#" ng-click="changePage('collection')">
+                <a title="Tu colección de cartas"
+                   href="#" ng-click="changePage('collection')">
                     <i class="mdi-content-content-copy navbar-icon"></i>
                 </a>
             </li>
             <li>
-                <a href="#" ng-click="changePage('highscores')">
+                <a title="Puntuaciones más altas" 
+                   href="#" ng-click="changePage('highscores')">
                     <i class="mdi-editor-insert-chart navbar-icon"></i>
                 </a>
             </li>
             <li>
-                <a href="#" ng-click="logOut()">
+                <a title="Créditos"
+                   href="#" ng-click="changePage('credits')">
+                    <i class="mdi-action-receipt navbar-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a title="Salir"
+                   href="#" ng-click="logOut()">
                     <i class="mdi-action-exit-to-app navbar-icon"></i>
                 </a>
             </li>
@@ -32,7 +41,7 @@
 </div>
 
 <div id="main" class="row">
-    <div class="col-xs-4 col-md-6 well page active container" style="margin-left:0%">
+    <div class="col-xs-4 col-md-6 well page active container redondeado" style="margin-left:0%">
       <span ng-repeat="level in difficulty">
       <button id="button_play" type="button" class="btn btn-block" ng-click="startMultiplayerGame(level)"> {{level}} </button>
       </span>
