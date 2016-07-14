@@ -13,14 +13,42 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
 
-                <a href="#" ng-click="leaveGame()">
+                <a href="#" ng-click="isLeaving()">
                     <i class="mdi-action-exit-to-app navbar-icon"></i>
                 </a>
 
             </li>
         </ul>
     </div>
+
+    <!-- Modal que aparecerá antes de salir -->
+    <div id="complete-dialog" class="modal fade" tabindex="-1" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="color: black; text-align: center;">
+            <h4 class="modal-title">¿Abandonarás la partida?</h4>
+          </div>
+          <div class="modal-body" style="color: black;">
+            <p>Estas apunto de abandonar la partida, si sales ahora no ganarás puntos. ¿Seguro quieres salir?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
+                    ng-click="notLeaveGame()">
+              No
+            </button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
+                    ng-click="leaveGame()">
+              Si
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
+
+
+
 
 <div id ="player_info" style="float:left;">
     {{mydata.username}} | {{mydata.category}} <br> {{mydata.score}} puntos
