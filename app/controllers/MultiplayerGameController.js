@@ -182,7 +182,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           if (selectedCards.card1 && selectedCards.card2) {
               // Conteo para voltear las cartas
               console.log("SHOW -- Estoy iniciando el contador para voltear las cartas.");
-              $timeout(removeOrHideCard,3000);
+              $timeout(removeOrHideCard,1000);
           }
       }
       return
@@ -200,18 +200,19 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           selectedCards.card2 = card;
           if (selectedCards.card1 && selectedCards.card2) {
               console.log("FLIP -- Estoy iniciando el contador para voltear las cartas.");
-              $timeout(removeOrHideCard,3000);
+              $timeout(removeOrHideCardOpponent,1000);
         }
       }
       return;
   };
 
-  // Remueve o oculta las cartas una vez que hay dos cartas cara arriba.
+  // Remueve o oculta las cartas una vez que hay dos cartas cara arriba y fue el usuario.
   function removeOrHideCard() {
     console.log("Tengo que ocultar o remover las cartas.");
     // $scope.$apply() verifica que hay cambios en la vista.
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+          updateScore(10);
           removeCard(selectedCards.card1);
           console.log("Se supone que muevo las cartas al fondo");
       } else {
@@ -229,10 +230,40 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   };
 
+  // Remueve o oculta las cartas una vez que hay dos cartas cara arriba y no jugó el usuario.
+  function removeOrHideCardOpponent() {
+    console.log("Tengo que ocultar o remover las cartas.");
+    // $scope.$apply() verifica que hay cambios en la vista.
+    $scope.$apply(function(){
+      if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
+          updateScore(0);
+          removeCardOp(selectedCards.card1);
+          console.log("Se supone que muevo las cartas al fondo");
+      } else {
+          selectedCards.card1.imageShown = 'images/done.png';
+          selectedCards.card2.imageShown = 'images/done.png';
+        }
+    });
+
+    delete selectedCards.card1;
+    delete selectedCards.card2;
+    // Si era mi turno al momento de voltear, las cartas, ya no lo es.
+    // y viceversa.
+    changeToken();
+    return;
+
+  };
+
+
   // Inicia el proceso para remover las cartas del juego
   var removeCard = function(card) {
       // Mueve las cartas al fondo.
       moveToBottom(card);
+  }
+
+  var removeCardOp = function(card) {
+      // Mueve las cartas al fondo.
+      moveToBottomRight(card);
   }
 
   // Animación del movimiento de las cartas hacia abajo
@@ -265,6 +296,35 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       });
   }
 
+  var moveToBottomRight = function (card) {
+      var old = $("." + card._id);
+      var newcard = $("." + card._id).first().clone().appendTo('#obtenidasOp');
+      newcard.css('width', '110px').css('height','110px').css('padding', '0')
+             .css('float','right');
+      var newOffset = newcard.offset();
+      var oldOffset1 = old.first().offset();
+      var oldOffset2 = old.last().offset();
+      var temp = old.clone().appendTo('body');
+      temp.css('position', 'absolute').css('zIndex', 999)
+          .css('top', oldOffset1.top).css('left', oldOffset1.left)
+          .css('width', old.first().width())
+          .css('height', old.first().height())
+          .css('padding', 0);
+      temp.last().css('top', oldOffset2.top).css('left',oldOffset2.left);
+      old.hide();
+      newcard.hide();
+      //quitarPar.play();
+      temp.animate({
+          top: newOffset.top,
+          left: newOffset.left,
+          width: newcard.width(),
+          height: newcard.height(),
+      }, 700, function () {
+          newcard.show();
+          temp.remove();
+      });
+  }
+
   // -----------------------------------------------------------------------------
 
   // ----------------- MANEJO DE LA MECANICA MULTIJUGADOR ------------------------
@@ -272,9 +332,19 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Registra al jugador en el servidor.
   var registerUser = function() {
     var deferred = $q.defer();  // Me permite saber si el usuario se registro satisfactoriamente
+
+    // Se "calcula" la categoria a la que pertenece el jugador.
+    var userCategory = "";
+    var unlockedLevels = $scope.user.levels.length;
+
+    if (unlockedLevels < 10) userCategory = "Principiante";
+    else if (unlockedLevels >= 10 && unlockedLevels < 25 ) userCategory = "Investigador";
+    else if (unlockedLevels >= 25 && unlockedLevels < 45 ) userCategory = "Aventurero";
+    else userCategory = "Investigador";
+
     $http.post(serverURL + 'api/players', {
             'username' : $scope.user._id,
-            'category' : 'Principiante',
+            'category' : userCategory,
             'score'    : 0
         })
         .success(function(data){
@@ -453,7 +523,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           .success(function(data) {
               console.log('Mensaje que enviare es: ' + $scope.jugada);
               // refrescamos los mensajes
-              updateScore(10);
+              //updateScore(10);
               getGameplays();
               serverConnection.emit('message',$scope.jugada);
               console.log("Se envió al juego con ID: " + $scope.gamedata.id);

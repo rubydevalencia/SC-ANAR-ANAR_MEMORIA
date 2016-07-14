@@ -54,11 +54,22 @@
 
 #obtenidas {
     position: fixed;
+    width: 50%;
     height: 125px;
     bottom: 0px;
     left: 0px;
     padding-bottom: 2%;
     padding-left:2%;
+}
+
+#obtenidasOp {
+    position: fixed;
+    width: 50%;
+    height: 125px;
+    bottom: 0px;
+    left: 50%;
+    padding-bottom: 2%;
+    padding-right: 2%;
 }
 
 .last {
@@ -98,7 +109,10 @@
 #player_logout {
   background-color: white;
   padding: 2%;
-  margin: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
 }
 
 #button_confirm {
@@ -125,4 +139,18 @@
 #invisible_interno {
     display:table-cell;
     vertical-align: middle;
+}
+
+#player_info{
+  padding-top: 3px;
+  color: white;
+  width: 50%;
+  height: 10%;
+  font-size: 1.5em;
+  text-align: center;
+  background-color: #993300;
+}
+
+#multiplayer_game_space, #wait_other_player{
+  margin-top: 5%;
 }
