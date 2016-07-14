@@ -563,8 +563,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Inicia el proceso cuando un jugador decide abandonar la partida.
   $scope.isLeaving = function() {
-    document.getElementById("complete-dialog").className = "modal fade in";
-    document.getElementById("complete-dialog").style.display='block';
+    document.getElementById("exitModal").className = "modal fade in";
+    document.getElementById("exitModal").style.display='block';
   }
 
 
@@ -580,8 +580,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   }
 
   $scope.notLeaveGame = function() {
-    document.getElementById("complete-dialog").className = "modal fade";
-    document.getElementById("complete-dialog").style.display='none';
+    document.getElementById("exitModal").className = "modal fade";
+    document.getElementById("exitModal").style.display='none';
   }
 
   // Termina el juego, asigna los puntajes al jugador ganador.
