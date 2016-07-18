@@ -9,6 +9,12 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var dificultad = sharedGlobals.getDifficulty();
   $scope.gameDifficulty = dificultad;
 
+  // Sonidos del Juego
+  var sonidoQuitar   = new Audio("audio/quitarPar.mp3");
+  var sonidoDerrota  = new Audio("audio/derrota.mp3");
+  var sonidoVictoria = new Audio("audio/victoria.mp3");
+  var sonidoComienzo = new Audio("audio/comienzo.mp3");
+
   // Para Manejar las jugadas
   $scope.jugada = "";
   $scope.all_gameplays = [];
@@ -54,6 +60,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
               console.log("Datos de las cartas: " + $scope.cards);
               updatePlayers();
               showGameView();
+              sonidoComienzo.play();
           }, function(reason) {
               console.log(reason);
           });
@@ -162,10 +169,16 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Permite controlar las cartas.
   $scope.showCard = function(position) {
 
+      // Muestra un mensaje de alerta si no es el turno del jugador.
       if (!$scope.token) {
           sendAlert("NO ES TU TURNO");
           console.log("NO ES TU TURNO");
           return;
+      }
+
+      // El jugador solo puede voltear dos cartas.
+      if (selectedCards.card2) {
+        return;
       }
 
       // Buscamos la carta en el arreglo de cartas.
@@ -215,6 +228,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           updateScore(10);
           removeCard(selectedCards.card1);
           console.log("Se supone que muevo las cartas al fondo");
+          sonidoQuitar.play();
       } else {
           selectedCards.card1.imageShown = 'images/done.png';
           selectedCards.card2.imageShown = 'images/done.png';
@@ -238,6 +252,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
           updateScore(0);
           removeCardOp(selectedCards.card1);
+          sonidoQuitar.play();
           console.log("Se supone que muevo las cartas al fondo");
       } else {
           selectedCards.card1.imageShown = 'images/done.png';

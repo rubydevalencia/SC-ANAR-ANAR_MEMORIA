@@ -18,7 +18,7 @@
     font-family: Florencesans;
     src: url(florencesans.ttf);
 }
-	
+
 
 html {
     height: 100%;
@@ -81,21 +81,23 @@ body {
     font-family:"myFirstFont", sans-serif;
 }
 
-#button_play {
-    color: white;
-    background-color: #993300;
-    height: 100px;
+.button_play, .button_multiplayer {
+    color: black;
+    background-image:url(../images/back.png);
+    border: 2px solid #993300;
+    border-radius: 10px;
+    height: 150px;
     font-size: 25px;
 }
 
-#button_multiplayer {
-    color: white;
-    background-color: #993300;
-    height: 100px;
-    font-size: 25px;
+.button_level {
+  color: black;
+  background-image:url(../images/back.png);
+  border: 2px solid #993300;
+  border-radius: 10px;
+  height: 100px;
+  font-size: 30px;
 }
-
-
 
 #button_close_modal {
     background-color: white;
@@ -173,7 +175,7 @@ p{
 	font-family:"myFirstFont", sans-serif;
 	font-weight:bold;
 }
- 
+
 .titulo {
 	font-family:"Florencesans", sans-serif;
 	font-weight:bold;
@@ -189,6 +191,18 @@ p{
 
 .recuadro {
     padding: 2.5%;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.recuadro-blanco {
+  background-color: white;
+  padding: 1%;
+  margin-bottom: 1%;
+  box-shadow: 7px 7px 5px rgba(0,0,0,0.2);
 }
 
 #bottom {
