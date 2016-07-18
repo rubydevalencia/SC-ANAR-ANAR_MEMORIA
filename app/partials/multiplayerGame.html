@@ -22,7 +22,7 @@
     </div>
 
     <!-- Modal que aparecerá antes de salir -->
-    <div id="complete-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div id="exitModal" class="modal fade" style="display: none; border-radius: 25px;">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="color: black; text-align: center;">
@@ -44,17 +44,22 @@
         </div>
       </div>
     </div>
-
 </div>
 
-<div id ="player_info" style="float:left;">
-    {{mydata.username}} | {{mydata.category}} <br> {{mydata.score}} puntos
+<!-- ....................................................................... -->
+<!-- Barras donde se mostrarán la información del score de los jugadores. -->
+<div id ="player_info">
+    {{mydata.username}} <br> {{mydata.score}} puntos
 </div>
 
-<div id ="player_info" style="float:right;">
-    {{other_player_data.username}} | {{other_player_data.category}} <br> {{other_player_data.score}} puntos
+<div id ="timerBar">
+    Aqui va el timer.
 </div>
 
+<div id ="player_info">
+    {{other_player_data.username}} <br> {{other_player_data.score}} puntos
+</div>
+<!-- ....................................................................... -->
 
 <!-- Para las alertas -->
 <div id="alerts" class="alert alert-danger" ng-show="showAlert" style="display: none">
@@ -88,11 +93,42 @@
           </div>
      </div>
   </div>
+
+  <!-- ....................................................................... -->
+  <div id="win_screen" class="well page redondeado" style="display: none;">
+      <div class="row">
+          <div class="col-md-3">
+              <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
+          </div>
+          <div class="col-md-6">
+              <h1>¡GANASTE!</h1>
+              <!--<h3>Has ganado {{score}} puntos</h3>-->
+              <button id="button_confirm" ng-click="changePage('home')" class="btn">
+                  Continuar
+                  <div class="ripple-wrapper"></div>
+              </button>
+              <h3>Desbloqueaste esta carta</h3>
+    <div class="col-md-3"></div>
+              <div class="col-md-6">
+                  <img height="120%" width="120%" ng-src="{{obtainedCard.image}}" style="margin-left:-10%">
+                  <!--<p>{{obtainedCard.name}}</p>-->
+              </div>
+              <div class="col-md-3"></div>
+          </div>
+          <div class="col-md-3">
+              <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
+          </div>
+      </div>
+  </div>
 </div>
 
+<!-- ....................................................................... -->
 <!--Para mostrar las cartas obtenidas-->
 <div id="obtenidas"></div>
 <div id="obtenidasOp"></div>
+
+<!-- ....................................................................... -->
+
 <div id="player_logout" class="well page active container" style="display: none">
     <div class="row">
         <div class="col-md-3">
