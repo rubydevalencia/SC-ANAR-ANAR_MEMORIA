@@ -2,6 +2,8 @@
 
 app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGlobals, $timeout) {
 
+  var totalCards = 10;
+
   // Direccion del servidor de juego
   var serverURL = 'http://0.0.0.0:3000/';
 
@@ -24,6 +26,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Token. Si tengo el token, es mi turno de jugar.
   $scope.token = false;
 
+  $scope.winner = false; // Indica si acabo de ganar el juego o no.
+
   // ------------------- PARA LA CONEXION CON EL SERVIDOR ----------------------
   // Permite el correcto funcionaiento de la parte multijugador
   // ---------------------------------------------------------------------------
@@ -39,23 +43,23 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         // Escuchamos a que el servidor envie el evento update
         // cada vez que se envie un nuevo mensaje.
         socket.on('update',function(){
-          console.log('Me dijeron que me actualizara');
+          //console.log('Me dijeron que me actualizara');
           getGameplays();
         });
 
         // Cuando el jugador_2 se une al juego, comienza este.
         socket.on('start_game',function(){
-          console.log('iniciando juego ');
-          console.log('actualizando datos del juego');
+          //console.log('iniciando juego ');
+          //console.log('actualizando datos del juego');
 
           updateGameData().then(function() {
-              console.log('actualizando datos de los jugadores.');
+              //console.log('actualizando datos de los jugadores.');
               $scope.cards = $scope.gamedata.game_set;
-              console.log("Datos de las cartas: " + $scope.cards);
+              //console.log("Datos de las cartas: " + $scope.cards);
               updatePlayers();
               showGameView();
           }, function(reason) {
-              console.log(reason);
+              //console.log(reason);
           });
         });
 
@@ -66,13 +70,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
         // Cuando el contrincante abanona la partida
         socket.on("player_logout",function(username){
-            console.log('Mi contrincante ' + username + " ha abandonado la partida.");
+            //console.log('Mi contrincante ' + username + " ha abandonado la partida.");
             showPlayerLogout();
         });
 
         // Cuando me toque voltear una carta
         socket.on("show_card",function(position){
-            console.log('Me dijeron que volteara la carta ' + position);
+            //console.log('Me dijeron que volteara la carta ' + position);
             flipCard(position);
         });
 
@@ -84,7 +88,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var serverConnection = connectSocket();
 
   // ---------------------------------------------------------------------------
-
   // ------------------- PARA LA SELECCIÓN DE LAS CARTAS. ----------------------
 
   var idFinal; // Indicará el id de la última carta.
@@ -149,7 +152,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
         // Se barajean las cartas.
         cards = shuffle(cards);
-        console.log(cards);
+        //console.log(cards);
 
         $scope.game_set = cards;
         $scope.$apply();
@@ -161,10 +164,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Permite controlar las cartas.
   $scope.showCard = function(position) {
-
       if (!$scope.token) {
           sendAlert("NO ES TU TURNO");
-          console.log("NO ES TU TURNO");
+          //console.log("NO ES TU TURNO");
           return;
       }
 
@@ -181,7 +183,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           selectedCards.card2 = card;
           if (selectedCards.card1 && selectedCards.card2) {
               // Conteo para voltear las cartas
-              console.log("SHOW -- Estoy iniciando el contador para voltear las cartas.");
+              //console.log("SHOW -- Estoy iniciando el contador para voltear las cartas.");
               $timeout(removeOrHideCard,1000);
           }
       }
@@ -199,7 +201,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       } else if (!selectedCards.card2){
           selectedCards.card2 = card;
           if (selectedCards.card1 && selectedCards.card2) {
-              console.log("FLIP -- Estoy iniciando el contador para voltear las cartas.");
+              //console.log("FLIP -- Estoy iniciando el contador para voltear las cartas.");
               $timeout(removeOrHideCardOpponent,1000);
         }
       }
@@ -208,13 +210,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Remueve o oculta las cartas una vez que hay dos cartas cara arriba y fue el usuario.
   function removeOrHideCard() {
-    console.log("Tengo que ocultar o remover las cartas.");
+    //console.log("Tengo que ocultar o remover las cartas.");
     // $scope.$apply() verifica que hay cambios en la vista.
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
           updateScore(10);
           removeCard(selectedCards.card1);
-          console.log("Se supone que muevo las cartas al fondo");
+          //console.log("Se supone que muevo las cartas al fondo");
       } else {
           selectedCards.card1.imageShown = 'images/done.png';
           selectedCards.card2.imageShown = 'images/done.png';
@@ -232,13 +234,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Remueve o oculta las cartas una vez que hay dos cartas cara arriba y no jugó el usuario.
   function removeOrHideCardOpponent() {
-    console.log("Tengo que ocultar o remover las cartas.");
+    //console.log("Tengo que ocultar o remover las cartas.");
     // $scope.$apply() verifica que hay cambios en la vista.
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
           updateScore(0);
           removeCardOp(selectedCards.card1);
-          console.log("Se supone que muevo las cartas al fondo");
+          //console.log("Se supone que muevo las cartas al fondo");
       } else {
           selectedCards.card1.imageShown = 'images/done.png';
           selectedCards.card2.imageShown = 'images/done.png';
@@ -257,13 +259,35 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Inicia el proceso para remover las cartas del juego
   var removeCard = function(card) {
-      // Mueve las cartas al fondo.
-      moveToBottom(card);
+
+      if (totalCards > 2)
+        // Mueve las cartas al fondo.
+        moveToBottom(card);
+
+        totalCards -= 2;
+        console.log("El numero total de cartas actual es: " + totalCards);
+        if (totalCards == 0)
+        {
+            document.getElementById("game_screen").style.display = 'none';
+            document.getElementById("win_screen").style.display  = 'block';
+            document.getElementById("obtenidas").style.display   = 'none';
+        }
   }
 
   var removeCardOp = function(card) {
-      // Mueve las cartas al fondo.
-      moveToBottomRight(card);
+      if (totalCards > 2)
+        // Mueve las cartas al fondo.
+        moveToBottomRight(card);
+
+      totalCards -= 2;
+      console.log("El numero total de cartas actual es: " + totalCards);
+
+      if (totalCards == 0)
+      {
+          document.getElementById("multiplayer_game").style.display='none';
+          document.getElementById("win_screen").style.display='block';
+          document.getElementById("obtenidas").style.display='none';
+      }
   }
 
   // Animación del movimiento de las cartas hacia abajo
@@ -349,11 +373,11 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         })
         .success(function(data){
             $scope.playerID = data.id;
-            console.log(data)
+            //console.log(data)
             return deferred.resolve();
         })
         .error(function(data){
-            console.log('Error: '+ data);
+            //console.log('Error: '+ data);
             return deferred.reject('No se pudo registrar el usuario');
         });
 
@@ -365,20 +389,20 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
       var data = {}
       if (playerNumber == 1) {
-          console.log("Soy el jugador1");
+          //console.log("Soy el jugador1");
           data = {"player1": playerID};
       } else {
-          console.log("Soy el jugador2");
+          //console.log("Soy el jugador2");
           data = {"available":false,"player2": playerID};
-          console.log(data);
+          //console.log(data);
       }
 
       $http.put(serverURL + 'api/Games/'+ gameID, data)
           .success(function(data){
-              console.log(data)
+              //console.log(data)
           })
           .error(function(data){
-              console.log('Error: '+ data);
+              //console.log('Error: '+ data);
           });
       };
 
@@ -399,38 +423,38 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
             joinGame($scope.gamedata.id,$scope.playerID,$scope.mynumber);
             // Como es el primer jugador, le toca el token.
             $scope.token = true;
-            console.log("Mi token es: " + $scope.token);
-            console.log(data)
+            //console.log("Mi token es: " + $scope.token);
+            //console.log(data)
         })
         .error(function(data){
-            console.log('Error: '+ data);
+            //console.log('Error: '+ data);
         });
       }, function(reason) {
-          console.log(reason);
+          //console.log(reason);
       });
     };
 
     // Busca si hay juegos disponibles en nuestra difucultad,
     // si no hy ninguno, creamos uno nuevo.
     var searchGames = function() {
-      console.log('Buscando juegos disponibles.')
+      //console.log('Buscando juegos disponibles.')
       $http.get(serverURL + 'api/Games/findOne?filter[where][available]=true' +
                             '&filter[where][difficulty]=' + $scope.gameDifficulty)
       .success(function(data){
           if (data) {
             $scope.gamedata = data;
-            console.log('Estoy ingresando al juego' + $scope.gamedata.id);
+            //console.log('Estoy ingresando al juego' + $scope.gamedata.id);
             $scope.mynumber = 2;
-            console.log("this is mi id as player2 " + $scope.playerID);
+            //console.log("this is mi id as player2 " + $scope.playerID);
             joinGame($scope.gamedata.id, $scope.playerID, $scope.mynumber);
             serverConnection.emit('players_ready');
           } else {
-            console.log('Ni hay juegos disponibles. Creando un juego nuevo.');
+            //console.log('Ni hay juegos disponibles. Creando un juego nuevo.');
             createGame();
           }
       })
       .error(function(data){
-          console.log('Creando primer juego del servidor.');
+          //console.log('Creando primer juego del servidor.');
           createGame();
       });
     };
@@ -441,10 +465,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         $http.get(serverURL + 'api/Games/' + $scope.gamedata.id + '/gamePlays')
           .success(function(data){
               $scope.all_gameplays = data;
-              console.log(data)
+              //console.log(data)
           })
           .error(function(data){
-              console.log('Error: '+ data);
+              //console.log('Error: '+ data);
           });
     };
 
@@ -454,11 +478,11 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       $http.get(serverURL + 'api/Games/' + $scope.gamedata.id)
         .success(function(data){
             $scope.gamedata = data;
-            console.log(data)
+            //console.log(data)
             return deferred.resolve();
         })
         .error(function(data){
-            console.log('Error: '+ data);
+            //console.log('Error: '+ data);
             return deferred.reject('No se pudieron actualizar los datos del juego');
         });
 
@@ -472,19 +496,19 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
             $scope.mydata = data;
         })
         .error(function(data){
-            console.log('Error updating my data' + data);
+            //console.log('Error updating my data' + data);
         });
     };
 
     // Actualiza los datos de juego del jugador contrincante.
     var updateOponentData = function(id) {
-      console.log("buscando al usuario con el id "+ id);
+      //console.log("buscando al usuario con el id "+ id);
       $http.get(serverURL + 'api/Players/' + id)
         .success(function(data){
             $scope.other_player_data = data;
         })
         .error(function(data){
-            console.log("Error updating my oponent's" + data);
+            //console.log("Error updating my oponent's" + data);
         });
     };
 
@@ -503,10 +527,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     var updateScore = function(points) {
       $http.put(serverURL + 'api/Players/'+ $scope.playerID, {'score':$scope.mydata.score+points})
           .success(function(data){
-              console.log(data)
+              //console.log(data)
           })
           .error(function(data){
-              console.log('Error: '+ data);
+              //console.log('Error: '+ data);
           });
           serverConnection.emit("new_score");
     };
@@ -521,18 +545,18 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           'from'   : $scope.user._id
       })
           .success(function(data) {
-              console.log('Mensaje que enviare es: ' + $scope.jugada);
+              //console.log('Mensaje que enviare es: ' + $scope.jugada);
               // refrescamos los mensajes
               //updateScore(10);
               getGameplays();
               serverConnection.emit('message',$scope.jugada);
-              console.log("Se envió al juego con ID: " + $scope.gamedata.id);
-              console.log('El mensaje enviado fue:' + data.text);
+              //console.log("Se envió al juego con ID: " + $scope.gamedata.id);
+              //console.log('El mensaje enviado fue:' + data.text);
               $scope.jugada = '';
           })
           .error(function(data){
-              console.log('Error: ' + data);
-              console.log("NO se envió al juego con ID: " + $scope.gamedata.id);
+              //console.log('Error: ' + data);
+              //console.log("NO se envió al juego con ID: " + $scope.gamedata.id);
           });
   };
 
@@ -542,7 +566,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     } else {
       $scope.token = true;
     }
-    console.log("Mi token ahora es: " + $scope.token);
+    //console.log("Mi token ahora es: " + $scope.token);
 
   };
 
@@ -554,10 +578,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var unregiterUser = function(playerID)  {
     $http.delete(serverURL + 'api/Players/' + playerID)
     .success(function(data){
-      console.log("Se ha deslogueado el jugador " + playerID);
+      //console.log("Se ha deslogueado el jugador " + playerID);
     })
     .error(function(data){
-      console.log("No se pudo desloguear al jugador " + playerID);
+      //console.log("No se pudo desloguear al jugador " + playerID);
     });
   };
 
@@ -590,11 +614,11 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     $scope.leaveGame();
     $http.delete(serverURL + 'api/Games/' + $scope.gamedata.id)
     .success(function(data){
-      console.log("Se ha eliminado el juego del servidor " + $scope.gamedata.id);
+      //console.log("Se ha eliminado el juego del servidor " + $scope.gamedata.id);
       $scope.changePage("profile");
     })
     .error(function(data){
-      console.log("No se ha eliminado el juego del servidor " + $scope.gamedata.id);
+      //console.log("No se ha eliminado el juego del servidor " + $scope.gamedata.id);
     });
   }
 
@@ -629,7 +653,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // switch flag
   $scope.closeAlert = function(value) {
      document.getElementById("alerts").style.display='none';
-     console.log("close alert");
+     //console.log("close alert");
      $scope.textAlert = "";
      $scope[value] = !$scope[value];
   };
@@ -644,7 +668,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   registerUser().then(function() {
       searchGames();
   }, function(reason) {
-      console.log(reason);
+      //console.log(reason);
   });
 
   getGameplays();

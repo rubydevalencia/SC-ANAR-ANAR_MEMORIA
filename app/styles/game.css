@@ -134,16 +134,28 @@
     vertical-align: middle;
 }
 
-#player_info{
+#player_info, #timerBar{
   padding-top: 3px;
   color: white;
-  width: 50%;
   height: 10%;
   font-size: 1.5em;
+  float:left;
   text-align: center;
   background-color: #993300;
 }
 
-#multiplayer_game_space, #wait_other_player{
+#player_info{
+  width: 35%;
+}
+
+#timerBar{
+  width: 30%;
+}
+
+#wait_other_player, #multiplayer_game_space{
   margin-top: 5%;
+}
+
+#player_info{
+  margin-bottom: 5%;
 }
