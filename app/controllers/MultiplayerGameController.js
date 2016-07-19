@@ -10,6 +10,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Obtenemos la dificultad del juego que escogimos anteriormente.
   var dificultad = sharedGlobals.getDifficulty();
   $scope.gameDifficulty = dificultad;
+  $scope.counter = 100;  // Se establece el timer para el jugador.
 
   // Sonidos del Juego
   var sonidoQuitar   = new Audio("audio/quitarPar.mp3");
@@ -33,6 +34,21 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   $scope.token = false;
 
   $scope.winner = false; // Indica si acabo de ganar el juego o no.
+
+  // Se establece el contador.
+  onTimeout = function() {
+      $scope.counter--;
+      if ($scope.counter <= 0) {
+      } else {
+          mytimeout = $timeout(onTimeout,1000);
+      }
+  }
+  var mytimeout = $timeout(onTimeout,1000);
+
+  stop = function(){
+      $timeout.cancel(mytimeout);
+  }
+
 
   // ------------------- PARA LA CONEXION CON EL SERVIDOR ----------------------
   // Permite el correcto funcionaiento de la parte multijugador
@@ -276,7 +292,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Inicia el proceso para remover las cartas del juego
   var removeCard = function(card) {
 
-      if (totalCards > 2)
+      if (totalCards > 2 && $scope.counter > 1)
         // Mueve las cartas al fondo.
         moveToBottom(card);
 

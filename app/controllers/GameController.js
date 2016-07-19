@@ -128,7 +128,7 @@ app.controller('GameController', function($scope, $timeout) {
                     addLevel= false;
                 }
             }
-            
+
             // Revisamos si es un fin de línea de niveles
             if (parseInt($scope.level._id) % 5 == 4) {
 				addLevel = false;
