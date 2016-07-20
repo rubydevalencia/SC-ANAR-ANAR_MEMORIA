@@ -36,14 +36,14 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   $scope.winner = false; // Indica si acabo de ganar el juego o no.
 
   // Se establece el contador.
-  onTimeout = function() {
+  function onTimeout() {
       $scope.counter--;
       if ($scope.counter <= 0) {
+        showTimeout();
       } else {
           mytimeout = $timeout(onTimeout,1000);
       }
   }
-  var mytimeout = $timeout(onTimeout,1000);
 
   stop = function(){
       $timeout.cancel(mytimeout);
@@ -71,8 +71,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
         // Cuando el jugador_2 se une al juego, comienza este.
         socket.on('start_game',function(){
-          //console.log('iniciando juego ');
-          //console.log('actualizando datos del juego');
 
           updateGameData().then(function() {
               //console.log('actualizando datos de los jugadores.');
@@ -81,6 +79,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
               updatePlayers();
               showGameView();
               sonidoComienzo.play();
+              var mytimeout = $timeout(onTimeout,1000);
           }, function(reason) {
               //console.log(reason);
           });
@@ -191,7 +190,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // Muestra un mensaje de alerta si no es el turno del jugador.
       if (!$scope.token) {
           sendAlert("NO ES TU TURNO");
-          //console.log("NO ES TU TURNO");
           return;
       }
 
@@ -663,6 +661,11 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var showPlayerLogout = function(){
     document.getElementById("multiplayer_game").style.display='none';
     document.getElementById("player_logout").style.display='block';
+  };
+
+  var showTimeout = function(){
+    document.getElementById("multiplayer_game").style.display='none';
+    document.getElementById("time_up").style.display='block';
   };
 
   // Muestra la pantalla al jugador cuando el contrincante abandona la partida
