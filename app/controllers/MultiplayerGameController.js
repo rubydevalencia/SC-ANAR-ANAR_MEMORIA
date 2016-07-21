@@ -178,7 +178,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
       // Muestra un mensaje de alerta si no es el turno del jugador.
       if (!$scope.token) {
-          sendAlert("NO ES TU TURNO");
+          sendAlert("¡Aún no es tu turno! Espera a que tu contrincario haga su jugada.");
           return;
       }
 
@@ -644,16 +644,19 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   $scope.showAlert = false;
 
   var sendAlert = function(mensaje){
+    document.getElementById("alerts").className = "modal fade in";
     document.getElementById("alerts").style.display='block';
     $scope.textAlert = mensaje;
     $scope.showAlert = true;
+    $timeout($scope.closeAlert,5000);
   }
 
   // switch flag
-  $scope.closeAlert = function(value) {
+  $scope.closeAlert = function() {
+     document.getElementById("alerts").className = "modal fade";
      document.getElementById("alerts").style.display='none';
      $scope.textAlert = "";
-     $scope[value] = !$scope[value];
+     $scope.showAlert = false;
   };
 
   // ---------------------------------------------------------------------------
