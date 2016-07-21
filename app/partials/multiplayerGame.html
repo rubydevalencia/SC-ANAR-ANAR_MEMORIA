@@ -70,7 +70,7 @@
 <!-- Para el tablero multijugador -->
 <div id="multiplayer_game_space">
   <div id="multiplayer_game" class="recuadro" style="display: none">
-      <div class="well page">
+      <div class="recuadro-blanco redondeado">
           <div>
               <div ng-repeat="i in [] | range: cards.length / 5">
                   <div class="row"  ng-class="{'last':$last}">
@@ -95,27 +95,46 @@
   </div>
 
   <!-- ....................................................................... -->
-  <div id="win_screen" class="well page redondeado" style="display: none;">
+  <!-- Pantalla de ganar el juego -->
+  <div id="win_screen" class="container recuadro-blanco redondeado pantalla-final" style="display: none;">
       <div class="row">
-          <div class="col-md-3">
+          <div class="col-xs-3 col-sm-3 col-md-3">
               <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
           </div>
-          <div class="col-md-6">
+          <div class="col-xs-6 col-sm-6 col-md-6">
               <h1>¡GANASTE!</h1>
-              <!--<h3>Has ganado {{score}} puntos</h3>-->
+              <h3>Has ganado {{mydata.score}} puntos</h3>
               <button id="button_confirm" ng-click="changePage('home')" class="btn">
                   Continuar
                   <div class="ripple-wrapper"></div>
               </button>
               <h3>Desbloqueaste esta carta</h3>
-    <div class="col-md-3"></div>
+              <div class="col-md-3"></div>
               <div class="col-md-6">
                   <img height="120%" width="120%" ng-src="{{obtainedCard.image}}" style="margin-left:-10%">
                   <!--<p>{{obtainedCard.name}}</p>-->
               </div>
-              <div class="col-md-3"></div>
           </div>
-          <div class="col-md-3">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+              <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
+          </div>
+      </div>
+  </div>
+  <!-- Pantalla de perdida de juego  -->
+  <div id="lose_screen" class="container recuadro-blanco redondeado pantalla-final" style="display: none;">
+      <div class="row">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+              <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+              <h1>Lo sentimos</h1>
+              <h3>Tu contrincante ha ganado, mejor suerte la proxima vez. </h3>
+              <button id="button_confirm" ng-click="changePage('home')" class="btn">
+                  Continuar
+                  <div class="ripple-wrapper"></div>
+              </button>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3">
               <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
           </div>
       </div>
@@ -129,7 +148,7 @@
 
 <!-- ....................................................................... -->
 
-<div id="player_logout" class="well page active container" style="display: none">
+<div id="player_logout" class="recuadro-blanco redondeado active container" style="display: none">
     <div class="row">
         <div class="col-md-3">
             <img src="images/inicio-der1.png" width="60%" height="60%">
@@ -137,7 +156,7 @@
         <div class="col-md-6">
             <h1>¡Opps!</h1>
             <h2>El jugador {{other_player_data.username}} ha abandonado la partida.</h2>
-            <button id="button_confirm" ng-click="endGame()" class="btn">
+            <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Finalizar Juego
                 <div class="ripple-wrapper"></div>
             </button>
@@ -149,15 +168,15 @@
     </div>
 </div>
 
-<div id="time_up" class="well page active container" style="display: none">
+<div id="time_up" class="recuadro-blanco redondeado active container" style="display: none">
     <div class="row">
         <div class="col-md-3">
             <img src="images/inicio-der1.png" width="60%" height="60%">
         </div>
         <div class="col-md-6">
-            <h1>¡Se acabó el timepo!</h1>
+            <h1>¡Se acabó el tiempo!</h1>
             <h2>El ganador del juego sera el jugador con mayor puntaje.</h2>
-            <button id="button_confirm" ng-click="endGame()" class="btn">
+            <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Finalizar
                 <div class="ripple-wrapper"></div>
             </button>
@@ -170,7 +189,7 @@
 </div>
 
 <!-- Esta es la primera vista que se muestra -->
-<div id="wait_other_player" class="well page active container redondeado" style="display: block">
+<div id="wait_other_player" class="recuadro-blanco redondeado active container redondeado" style="display: block">
     <div class="row">
         <div class="col-md-3">
             <img src="images/inicio-der1.png" width="60%" height="60%">
@@ -178,7 +197,7 @@
         <div class="col-md-6">
             <h1>Buscando Contrincante</h1>
             <h2>Por favor espera</h2>
-            <button id="button_confirm" ng-click="endGame()" class="btn">
+            <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Cancelar
                 <div class="ripple-wrapper"></div>
             </button>

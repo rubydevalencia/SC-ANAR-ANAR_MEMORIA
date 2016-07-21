@@ -205,6 +205,10 @@ p{
   box-shadow: 7px 7px 5px rgba(0,0,0,0.2);
 }
 
+.pantalla-final {
+  margin-top: 7%;
+}
+
 #bottom {
     position: fixed;
     left:0px;
