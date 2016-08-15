@@ -1,4 +1,4 @@
-// Atts: id, password, levels [1..*], cards [1..*], highscore
+// Atts: id, password, levels [1..*], cards [0..*], highscore, hands
 // Descomentar para usar base de datos remota
 // var db_user = new PouchDB('http://memoria-anar-alfjf.c9users.io:8081/anar_user', {ajax: {timeout: 10000}});
 // Descomentar para usar base de datos local
