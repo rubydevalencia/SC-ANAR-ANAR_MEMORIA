@@ -3,6 +3,8 @@ var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
 
+
+
 app.start = function() {
   // start the web server
   return app.listen(function() {
@@ -36,36 +38,40 @@ boot(app, __dirname, function(err) {
           console.log('Un usuario se desconecto');
       });
 
-      // El socket recibe un mensaje, y le dice a los clientes que se actualicen
-      socket.on('message', function(message){
-          console.log('Mensaje recibido:' + message);
-          app.io.sockets.emit("update");
+      // Cuando los dos jugadores estan listo, se emite el mensaje para comenzar
+      // el juego.
+      socket.on('create_game',function(gameid) {
+          console.log('un jugador creo la sala de juego ' + gameid);
+          socket.join(gameid);
+          console.log('Se unio al jugador 1 a la sala de juego ' + gameid);
       });
 
       // Cuando los dos jugadores estan listo, se emite el mensaje para comenzar
       // el juego.
-      socket.on('players_ready',function() {
-          console.log('Los jugadores estan listos.');
-          app.io.sockets.emit('start_game');
+      socket.on('players_ready',function(gameid) {
+          console.log('Los jugadores estan listos');
+          socket.join(gameid);
+          console.log('Se unio al jugador 2 a la sala de juego ' + gameid)
+          app.io.to(gameid).emit('start_game');
       });
 
       // Cada vez que un jugador sube sus puntos, se actualizan ambos clientes.
-      socket.on('new_score',function(){
+      socket.on('new_score',function(gameid){
           console.log("Actualicen los puntajes.");
-          app.io.sockets.emit("update_scores");
+          app.io.to(gameid).emit("update_scores");
       });
 
       // Cada vez que un jugador abandona la partida, se le anuncia a su
       // contrincante.
-      socket.on("player_logout",function(username){
+      socket.on("player_logout",function(username, gameid){
           console.log('El jugador ' + username + " ha abandonado la partida.");
-          app.io.sockets.emit("player_logout",username);
+          app.io.to(gameid).emit("player_logout",username);
       });
 
       // Cuado se pide que se muestre la carta
-      socket.on("show_card",function(card){
+      socket.on("show_card",function(card, gameid){
           console.log('Uno de los jugadore volteo la carta ' + card);
-          socket.broadcast.emit("show_card",card);
+          socket.broadcast.to(gameid).emit("show_card",card);
       });
     });
 });

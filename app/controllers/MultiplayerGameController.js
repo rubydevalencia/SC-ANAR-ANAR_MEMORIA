@@ -192,7 +192,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       card.imageShown = card.image;
 
       // le informamos al otro jugador que tiene que voltear la carta tambien
-      serverConnection.emit("show_card",position);
+      serverConnection.emit("show_card",position, $scope.gamedata.id);
 
       if (!selectedCards.card1){
           selectedCards.card1 = card;
@@ -413,6 +413,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     // Crea un juego nuevo.
     var createGame = function() {
       // Cuando creo un juego nuevo, creo las cartas que se van a jugar.
+
+      var deferred = $q.defer();
+
       sortCards().then(function() {
         // dificultad, juego_libre, distribucion del tablero (para despues)
         $http.post(serverURL + 'api/Games', {
@@ -427,11 +430,13 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
             joinGame($scope.gamedata.id,$scope.playerID,$scope.mynumber);
             // Como es el primer jugador, le toca el token.
             $scope.token = true;
+            return deferred.resolve();
         })
         .error(function(data){
         });
       }, function(reason) {
       });
+      return deferred.promise;
     };
 
     // Busca si hay juegos disponibles en nuestra difucultad,
@@ -444,13 +449,19 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
             $scope.gamedata = data;
             $scope.mynumber = 2;
             joinGame($scope.gamedata.id, $scope.playerID, $scope.mynumber);
-            serverConnection.emit('players_ready');
+            serverConnection.emit('players_ready', $scope.gamedata.id);
           } else {
-            createGame();
+            createGame().then(function(){
+              serverConnection.emit("create_game", $scope.gamedata.id);
+            }, function(reason) {
+            });
           }
       })
-      .error(function(data){
-          createGame();
+      .error(function(data) {
+        createGame().then(function(){
+          serverConnection.emit("create_game", $scope.gamedata.id);
+        }, function(reason) {
+        });
       });
     };
 
@@ -507,7 +518,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           })
           .error(function(data){
           });
-          serverConnection.emit("new_score");
+          serverConnection.emit("new_score", $scope.gamedata.id);
     };
 
     // Muestra la pantalla de ganar/perder y guarda los puntajes respectivos en el servidor de juego.
@@ -522,23 +533,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         showLoseScreen();
       }
     }
-
-    // Enviamos un nuevo mensaje al servidor de juegos
-    $scope.sendGameplay = function() {
-        // Guarda la jugada obtenida desde el input
-        $scope.jugada = this.jugada;
-        $http.post(serverURL + 'api/Games/' +  $scope.gamedata.id + '/gamePlays',{
-          'text'   : $scope.jugada,
-          'gameId' : $scope.gamedata.id,
-          'from'   : $scope.user._id
-      })
-          .success(function(data) {
-              serverConnection.emit('message',$scope.jugada);
-              $scope.jugada = '';
-          })
-          .error(function(data){
-          });
-  };
 
   // Intercambia el token entre los jugadores
   var changeToken = function() {
@@ -575,7 +569,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     unregiterUser($scope.mydata.id);
     // Le informamos al contrincario que el jugador actual ha abandonado la
     // partida
-    serverConnection.emit("player_logout",$scope.mydata.username);
+    serverConnection.emit("player_logout",$scope.mydata.username, $scope.gamedata.id);
     // Regresamos al jugador a su perfil
     $scope.closeGame();
 
