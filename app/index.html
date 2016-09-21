@@ -60,22 +60,21 @@
             <div style="height: 100%" ng-include=" ' partials/profile.html ' "></div>
         </div>
 
-        <!--                -->
-        <!-- Multiplayer    -->
-        <!--                -->
+        <!--                    -->
+        <!-- Multiplayer Level  -->
+        <!--                    -->
 
-        <div style="height: 100%" ng-switch-when="multiplayer" ng-controller="MultiplayerLevelController">
+        <div style="height: 100%" ng-switch-when="multiplayer-level" ng-controller="MultiplayerLevelController">
             <div style="height: 100%" ng-include=" ' partials/multiplayerLevel.html ' "></div>
         </div>
 
-        <!--                -->
-        <!-- ChatTest    -->
-        <!--                -->
+        <!--               -->
+        <!-- Multiplayer   -->
+        <!--               -->
 
-        <div style="height: 100%" ng-switch-when="chat" ng-controller="MultiplayerGameController">
+        <div style="height: 100%" ng-switch-when="multiplayer" ng-controller="MultiplayerGameController">
             <div style="height: 100%" ng-include=" ' partials/multiplayerGame.html ' "></div>
         </div>
-
 
         <!--                -->
         <!--     Home       -->
