@@ -31,7 +31,8 @@ app.factory('socket', function(){
 });
 
 app.service('sharedGlobals', function () {
-        var multiplayerDifficulty = '';
+        var multiplayerDifficulty    = '';
+        var multiplayerUnlokedDifficulties = 0;
 
         return {
             getDifficulty: function () {
@@ -39,6 +40,12 @@ app.service('sharedGlobals', function () {
             },
             setDifficulty: function(value) {
                 multiplayerDifficulty = value;
+            },
+            getUlockedDifficulties: function () {
+                return multiplayerUnlokedDifficulties;
+            },
+            setUlockedDifficulties: function(value) {
+                multiplayerUnlokedDifficulties = value;
             }
         };
 });

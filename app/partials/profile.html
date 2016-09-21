@@ -55,6 +55,27 @@
     </div>
     <div class="col-xs-8 col-md-6 container recuadro-blanco redondeado" style="margin-left:5%">
       <button id="button_play" type="button" class="btn btn-block button_play" ng-click="changePage('home')"> <img src="images/solitario.png"><br>Solitario </button>
-      <button id="button_multiplayer" type="button" class="btn btn-block button_multiplayer" ng-click="changePage('multiplayer')"><img src="images/multijugador.png"><br>Multijugador </button>
+      <button id="button_multiplayer" type="button" class="btn btn-block button_multiplayer" ng-click="verifyMultiplayerActive()"><img src="images/multijugador.png"><br>Multijugador </button>
     </div>
+
+    <!-- Alertas Dialogos Modales -->
+    <div id="alerts" class="modal fade" style="display: none; border-radius: 25px;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header" style="color: black; text-align: center;">
+            <h4 class="modal-title">¡Atención!</h4>
+          </div>
+          <div class="modal-body" style="color: black;">
+            <p>{{textAlert}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
+                    ng-click="closeAlert()">
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
