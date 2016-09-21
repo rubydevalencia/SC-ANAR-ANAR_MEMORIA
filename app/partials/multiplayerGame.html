@@ -23,136 +23,133 @@
 
     <!-- Modal que aparecerá antes de salir -->
     <div id="alerts" class="modal fade" style="display: none; border-radius: 25px;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header" style="color: black; text-align: center;">
-            <h4 class="modal-title">¡Atención!</h4>
-          </div>
-          <div class="modal-body" style="color: black;">
-            <p>{{textAlert}}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
-                    ng-click="closeAlert()">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="color: black; text-align: center;">
+                    <h4 class="modal-title">¡Atención!</h4>
+                </div>
+                <div class="modal-body" style="color: black;">
+                    <p>{{textAlert}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="closeAlert()">
               Aceptar
             </button>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- dialogo modal para las advertencias -->
     <div id="exitModal" class="modal fade" style="display: none; border-radius: 25px;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header" style="color: black; text-align: center;">
-            <h4 class="modal-title">¿Abandonarás la partida?</h4>
-          </div>
-          <div class="modal-body" style="color: black;">
-            <p>Estas apunto de abandonar la partida, si sales ahora no ganarás puntos. ¿Seguro quieres salir?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
-                    ng-click="leaveGame()">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="color: black; text-align: center;">
+                    <h4 class="modal-title">¿Abandonarás la partida?</h4>
+                </div>
+                <div class="modal-body" style="color: black;">
+                    <p>Estas apunto de abandonar la partida, si sales ahora no ganarás puntos. ¿Seguro quieres salir?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="leaveGame()">
               Si
             </button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
-                    ng-click="notLeaveGame()">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="notLeaveGame()">
               No
             </button>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 </div>
 
 <!-- ....................................................................... -->
 <!-- Barras donde se mostrarán la información del score de los jugadores. -->
-<div id ="player_info">
+<div id="player_info">
     {{mydata.username}} <br> {{mydata.score}} puntos
 </div>
 
-<div id ="timerBar">
+<div id="timerBar">
     {{counter}}
 </div>
 
-<div id ="player_info">
+<div id="player_info">
     {{other_player_data.username}} <br> {{other_player_data.score}} puntos
 </div>
 <!-- ....................................................................... -->
 
 <!-- Para el tablero multijugador -->
 <div id="multiplayer_game_space">
-  <div id="multiplayer_game" class="recuadro" style="display: none">
-      <div class="recuadro-blanco redondeado">
-          <div>
-              <div ng-repeat="i in [] | range: cards.length / 5">
-                  <div class="row"  ng-class="{'last':$last}">
-                      <div class="col-md-1"></div>
-                      <div  class="col-xs-6 col-md-2" ng-repeat="j in array">
-                          <div style="position: relative; left: 0; top: 0;">
-                              <div>
-                                  <img ng-click="showCard(i*5 + j)" class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}"/>
-                              </div>
-                              <div ng-if="conLupa">
-                                  <div ng-click="hacerZoom(cards[i*5 + j])">
-                                      <img class="lupa" id="{{cards[i*5+j].position}}" src="images/lupa.png"/>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-1"></div>
-                  </div>
-              </div>
-          </div>
-     </div>
-  </div>
+    <div id="multiplayer_game" class="recuadro" style="display: none">
+        <div class="recuadro-blanco redondeado">
+            <div>
+                <div ng-repeat="i in [] | range: cards.length / 5">
+                    <div class="row" ng-class="{'last':$last}">
+                        <div class="col-md-1"></div>
+                        <div class="col-xs-6 col-md-2" ng-repeat="j in array">
+                            <div style="position: relative; left: 0; top: 0;">
+                                <div>
+                                    <img ng-click="showCard(i*5 + j)" class="{{cards[i*5 + j]._id}} card" ng-src="{{cards[i*5 + j].imageShown}}" />
+                                </div>
+                                <div ng-if="conLupa">
+                                    <div ng-click="hacerZoom(cards[i*5 + j])">
+                                        <img class="lupa" id="{{cards[i*5+j].position}}" src="images/lupa.png" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- ....................................................................... -->
-  <!-- Pantalla de ganar el juego -->
-  <div id="win_screen" class="container recuadro-blanco redondeado pantalla-final" style="display: none;">
-      <div class="row">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-              <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6">
-              <h1>¡GANASTE!</h1>
-              <h3>Has ganado {{mydata.score}} puntos</h3>
-              <button id="button_confirm" ng-click="changePage('home')" class="btn">
+    <!-- ....................................................................... -->
+    <!-- Pantalla de ganar el juego -->
+    <div id="win_screen" class="container recuadro-blanco redondeado pantalla-final" style="display: none;">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <h1>¡GANASTE!</h1>
+                <h3>Has ganado {{mydata.score}} puntos</h3>
+                <button id="button_confirm" ng-click="closeGame()" class="btn">
                   Continuar
                   <div class="ripple-wrapper"></div>
               </button>
-              <h3>Desbloqueaste esta carta</h3>
-              <div class="col-md-3"></div>
-              <div class="col-md-6">
-                  <img height="120%" width="120%" ng-src="{{obtainedCard.image}}" style="margin-left:-10%">
-                  <!--<p>{{obtainedCard.name}}</p>-->
-              </div>
-          </div>
-          <div class="col-xs-3 col-sm-3 col-md-3">
-              <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
-          </div>
-      </div>
-  </div>
-  <!-- Pantalla de perdida de juego  -->
-  <div id="lose_screen" class="container recuadro-blanco redondeado pantalla-final" style="display: none;">
-      <div class="row">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-              <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
-          </div>
-          <div class="col-xs-6 col-sm-6 col-md-6">
-              <h1>Lo sentimos</h1>
-              <h3>Tu contrincante ha ganado, mejor suerte la proxima vez. </h3>
-              <button id="button_confirm" ng-click="changePage('home')" class="btn">
+                <h3>Desbloqueaste esta carta</h3>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <img height="120%" width="120%" ng-src="{{obtainedCard.image}}" style="margin-left:-10%">
+                    <!--<p>{{obtainedCard.name}}</p>-->
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
+            </div>
+        </div>
+    </div>
+    <!-- Pantalla de perdida de juego  -->
+    <div id="lose_screen" class="container recuadro-blanco redondeado pantalla-final" style="display: none;">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <h1>Lo sentimos</h1>
+                <h3>Tu contrincante ha ganado, mejor suerte la proxima vez. </h3>
+                <button id="button_confirm" ng-click="closeGame()" class="btn">
                   Continuar
                   <div class="ripple-wrapper"></div>
               </button>
-          </div>
-          <div class="col-xs-3 col-sm-3 col-md-3">
-              <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
-          </div>
-      </div>
-  </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <img src="images/inicio-izq1.png" style="width:60%; margin-top:60%">
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- ....................................................................... -->
