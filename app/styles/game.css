@@ -159,3 +159,29 @@
 #player_info{
   margin-bottom: 5%;
 }
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/*
+  Estilos correspondiente al modal. De esta forma se obtiene el comportamiento
+  correspondiente.
+*/
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Se mantiene en el lugar */
+    z-index: 1; /* Se ubica en lo más alto */
+    left: 0;
+    top: 0;
+    overflow: auto; /* Se habilita el scroll si es necesario */
+    background-color: rgba(0,0,0,0.4); /* Negro con opacidad */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+}
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
