@@ -45,18 +45,18 @@
 
     <div class="col-sm-6 col-md-6 col-centered recuadro-blanco redondeado">
       <span ng-repeat="level in difficulty">
-      <button type="button" class="btn btn-block button_level" ng-click="startMultiplayerGame(level)"> {{level}} </button>
+        <button type="button" class="btn btn-block button_level" ng-click="startMultiplayerGame(level)"> {{level}} </button>
       </span>
     </div>
 
     <!-- Alertas Dialogos Modales -->
-    <div id="alerts" class="modal fade" style="display: none; border-radius: 25px;">
+    <div id="alerts" class="modal" style="display: none;">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="color: black; text-align: center;">
             <h4 class="modal-title">¡Atención!</h4>
           </div>
-          <div class="modal-body" style="color: black;">
+          <div class="modal-body textAlert" style="color: black;">
             <p>{{textAlert}}</p>
           </div>
           <div class="modal-footer">
@@ -68,5 +68,4 @@
         </div>
       </div>
     </div>
-
 </div>

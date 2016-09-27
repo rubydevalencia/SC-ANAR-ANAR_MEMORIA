@@ -30,7 +30,7 @@ app.controller('MultiplayerLevelController', function ($scope, sharedGlobals) {
     $scope.showAlert = false;
 
     var sendAlert = function(mensaje){
-      document.getElementById("alerts").className = "modal fade";
+      document.getElementById("alerts").className = "modal fade in";
       document.getElementById("alerts").style.display='block';
       $scope.textAlert = mensaje;
       $scope.showAlert = true;
