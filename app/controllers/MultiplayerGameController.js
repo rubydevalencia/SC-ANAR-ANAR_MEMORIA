@@ -2,6 +2,9 @@
 
 app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGlobals, $timeout) {
 
+  var score_por_carta = 10;
+  $scope.score_por_ganar   = 50;
+  $scope.score_por_perder  = 25;
   var totalCards = 10;
 
   // Direccion del servidor de juego
@@ -228,7 +231,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     // $scope.$apply() verifica que hay cambios en la vista.
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-          updateScore(10);
+          updateScore(score_por_carta);
           removeCard(selectedCards.card1);
           console.log("Se supone que muevo las cartas al fondo");
           sonidoQuitar.play();
@@ -526,12 +529,23 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // actualizamos los scores
       updateScore(0);
       stopTimer();
+      var newUser = $scope.user;
+
       if ($scope.mydata.score > $scope.other_player_data.score) {
         showWinScreen();
-        // Guardamos los puntos y la carta aqui
+        newUser.multiplayer_highscore += ($scope.mydata.score + $scope.score_por_ganar);
       } else {
         showLoseScreen();
+        newUser.multiplayer_highscore += ($scope.score_por_perder);
       }
+
+      DBUpdateUser(newUser, function(err, response) {
+          if (err)
+              console.log(err);
+          else {
+              $scope.user._rev = response.rev
+          }
+      });
     }
 
   // Intercambia el token entre los jugadores

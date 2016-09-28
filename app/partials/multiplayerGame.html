@@ -97,7 +97,9 @@
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <h1>¡GANASTE!</h1>
-                <h3>Has ganado {{mydata.score}} puntos</h3>
+                <h3> Puntos por Ganar: {{score_por_ganar}}.</h3>
+                <h3> Puntos por Nro. Cartas: {{mydata.score}}.</h3>
+                <h3> Puntos Totales: {{score_por_ganar + mydata.score}}.</h3>
                 <button id="button_confirm" ng-click="closeGame()" class="btn">
                   Continuar
                   <div class="ripple-wrapper"></div>
@@ -123,6 +125,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <h1>Lo sentimos</h1>
                 <h3>Tu contrincante ha ganado, mejor suerte la proxima vez. </h3>
+                <h3> Has ganado {{score_por_perder}} Puntos por jugar.</h3>
                 <button id="button_confirm" ng-click="closeGame()" class="btn">
                   Continuar
                   <div class="ripple-wrapper"></div>

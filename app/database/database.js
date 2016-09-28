@@ -39,8 +39,9 @@ function DBregisterUser(id, password, callback) {
         _id: id,
         password: password,
         highscore: 0,
+        multiplayer_highscore: 0,
         levels: ["0"],
-        cards: [], 
+        cards: [],
         hands: 0
     };
 
