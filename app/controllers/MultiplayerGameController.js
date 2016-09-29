@@ -231,18 +231,22 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     // $scope.$apply() verifica que hay cambios en la vista.
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-          updateScore(score_por_carta);
-          removeCard(selectedCards.card1);
-          console.log("Se supone que muevo las cartas al fondo");
-          sonidoQuitar.play();
+          updateScore(score_por_carta).then(function(){
+            removeCard(selectedCards.card1);
+            console.log(selectedCards.card1._id);
+            console.log("Se supone que muevo las cartas al fondo");
+            sonidoQuitar.play();
+            delete selectedCards.card1;
+            delete selectedCards.card2;
+          });
       } else {
           selectedCards.card1.imageShown = 'images/done.png';
           selectedCards.card2.imageShown = 'images/done.png';
+          delete selectedCards.card1;
+          delete selectedCards.card2;
         }
     });
 
-    delete selectedCards.card1;
-    delete selectedCards.card2;
     // Si era mi turno al momento de voltear, las cartas, ya no lo es.
     // y viceversa.
     changeToken();
@@ -255,18 +259,20 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     // $scope.$apply() verifica que hay cambios en la vista.
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-          updateScore(0);
           removeCardOp(selectedCards.card1);
+          console.log(selectedCards.card1._id);
+          console.log("Se supone que muevo las cartas al fondo");
           sonidoQuitar.play();
+          delete selectedCards.card1;
+          delete selectedCards.card2;
           console.log("Se supone que muevo las cartas al fondo");
       } else {
           selectedCards.card1.imageShown = 'images/done.png';
           selectedCards.card2.imageShown = 'images/done.png';
+          delete selectedCards.card1;
+          delete selectedCards.card2;
         }
     });
-
-    delete selectedCards.card1;
-    delete selectedCards.card2;
     // Si era mi turno al momento de voltear, las cartas, ya no lo es.
     // y viceversa.
     changeToken();
@@ -280,32 +286,35 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
     if (totalCards > 2 && $scope.counter > 1)
       // Mueve las cartas al fondo.
-      moveToBottom(card);
+      moveToBottom(card).then(function(){
+          totalCards -= 2;
+          console.log("El numero total de cartas actual es: " + totalCards);
 
-      totalCards -= 2;
-      console.log("El numero total de cartas actual es: " + totalCards);
-      if (totalCards == 0)
-      {
-        finishGame();
-      }
+          if (totalCards == 0){
+              $timeout(finishGame,5000);
+            };
+      });
   }
 
   var removeCardOp = function(card) {
       if (totalCards > 2)
         // Mueve las cartas al fondo.
-        moveToBottomRight(card);
+      moveToBottomRight(card).then(function(){
+          totalCards -= 2;
+          console.log("El numero total de cartas actual es: " + totalCards);
 
-      totalCards -= 2;
-      console.log("El numero total de cartas actual es: " + totalCards);
+          if (totalCards == 0){
+              $timeout(finishGame,5000);
+            };
+      });
 
-      if (totalCards == 0)
-      {
-        finishGame();
-      }
   }
 
   // Animación del movimiento de las cartas hacia abajo
   var moveToBottom = function (card) {
+
+      var deferred = $q.defer();
+
       var old = $("." + card._id);
       var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
       newcard.css('width', '110px').css('height','110px').css('padding', '0')
@@ -332,9 +341,15 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           newcard.show();
           temp.remove();
       });
+
+      if (true) {return deferred.resolve();} else {return deferred.reject();}
+      return deferred.promise;
   }
 
   var moveToBottomRight = function (card) {
+
+      var deferred = $q.defer();
+
       var old = $("." + card._id);
       var newcard = $("." + card._id).first().clone().appendTo('#obtenidasOp');
       newcard.css('width', '110px').css('height','110px').css('padding', '0')
@@ -361,6 +376,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           newcard.show();
           temp.remove();
       });
+
+      if (true) {return deferred.resolve();} else {return deferred.reject();}
+      return deferred.promise;
   }
 
   // -----------------------------------------------------------------------------
@@ -516,18 +534,21 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
     // Actualizamos el puntaje de juego del jugador actual.
     var updateScore = function(points) {
+      var deferred = $q.defer();
       $http.put(serverURL + 'api/Players/'+ $scope.playerID, {'score':$scope.mydata.score+points})
           .success(function(data){
+            serverConnection.emit("new_score", $scope.gamedata.id);
+            return deferred.resolve();
           })
           .error(function(data){
+            return deferred.reject();
           });
-          serverConnection.emit("new_score", $scope.gamedata.id);
+
+      return deferred.promise
     };
 
     // Muestra la pantalla de ganar/perder y guarda los puntajes respectivos en el servidor de juego.
-    var finishGame = function(){
-      // actualizamos los scores
-      updateScore(0);
+    var finishGame = function() {
       stopTimer();
       var newUser = $scope.user;
 
