@@ -13,7 +13,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Obtenemos la dificultad del juego que escogimos anteriormente.
   var dificultad = sharedGlobals.getDifficulty();
   $scope.gameDifficulty = dificultad;
-  $scope.counter   = 100;  // Se establece el timer para el jugador.
+  $scope.counter   = 1000;  // Se establece el timer para el jugador.
   var temporizador = 0;
 
   // Sonidos del Juego
@@ -233,8 +233,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
           updateScore(score_por_carta).then(function(){
             removeCard(selectedCards.card1);
-            console.log(selectedCards.card1._id);
-            console.log("Se supone que muevo las cartas al fondo");
             sonidoQuitar.play();
             delete selectedCards.card1;
             delete selectedCards.card2;
@@ -260,12 +258,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     $scope.$apply(function(){
       if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
           removeCardOp(selectedCards.card1);
-          console.log(selectedCards.card1._id);
-          console.log("Se supone que muevo las cartas al fondo");
           sonidoQuitar.play();
           delete selectedCards.card1;
           delete selectedCards.card2;
-          console.log("Se supone que muevo las cartas al fondo");
       } else {
           selectedCards.card1.imageShown = 'images/done.png';
           selectedCards.card2.imageShown = 'images/done.png';
@@ -284,27 +279,31 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Inicia el proceso para remover las cartas del juego
   var removeCard = function(card) {
 
-    if (totalCards > 2 && $scope.counter > 1)
+    if (totalCards >= 2 && $scope.counter > 1)
       // Mueve las cartas al fondo.
       moveToBottom(card).then(function(){
           totalCards -= 2;
           console.log("El numero total de cartas actual es: " + totalCards);
+          console.log("AQUI PERRRASSSS "+ totalCards);
 
           if (totalCards == 0){
-              $timeout(finishGame,5000);
+              console.log("GAME'S OVER BITCHES");
+              $timeout(finishGame,1000);
             };
       });
   }
 
   var removeCardOp = function(card) {
-      if (totalCards > 2)
+
+      if (totalCards >= 2)
         // Mueve las cartas al fondo.
       moveToBottomRight(card).then(function(){
           totalCards -= 2;
           console.log("El numero total de cartas actual es: " + totalCards);
 
           if (totalCards == 0){
-              $timeout(finishGame,5000);
+              console.log("GAME'S OVER BITCHES");
+              $timeout(finishGame,1000);
             };
       });
 
@@ -313,6 +312,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Animación del movimiento de las cartas hacia abajo
   var moveToBottom = function (card) {
 
+      console.log("MOVIENDO AL FONDO!!");
       var deferred = $q.defer();
 
       var old = $("." + card._id);
@@ -340,9 +340,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       }, 700, function () {
           newcard.show();
           temp.remove();
+          return deferred.resolve();
       });
 
-      if (true) {return deferred.resolve();} else {return deferred.reject();}
       return deferred.promise;
   }
 
@@ -375,9 +375,9 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       }, 700, function () {
           newcard.show();
           temp.remove();
+          return deferred.resolve();
       });
 
-      if (true) {return deferred.resolve();} else {return deferred.reject();}
       return deferred.promise;
   }
 
@@ -552,10 +552,14 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       stopTimer();
       var newUser = $scope.user;
 
+      console.log("Mi Puntaje: " + $scope.mydata.score  + "Su Puntaje: " + $scope.other_player_data.score);
+
       if ($scope.mydata.score > $scope.other_player_data.score) {
+        console.log("GANEEEE");
         showWinScreen();
         newUser.multiplayer_highscore += ($scope.mydata.score + $scope.score_por_ganar);
       } else {
+        console.log("PERDI");
         showLoseScreen();
         newUser.multiplayer_highscore += ($scope.score_por_perder);
       }
