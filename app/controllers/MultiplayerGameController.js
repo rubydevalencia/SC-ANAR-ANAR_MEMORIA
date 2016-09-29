@@ -283,11 +283,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // Mueve las cartas al fondo.
       moveToBottom(card).then(function(){
           totalCards -= 2;
-          console.log("El numero total de cartas actual es: " + totalCards);
-          console.log("AQUI PERRRASSSS "+ totalCards);
 
           if (totalCards == 0){
-              console.log("GAME'S OVER BITCHES");
               $timeout(finishGame,1000);
             };
       });
@@ -299,10 +296,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         // Mueve las cartas al fondo.
       moveToBottomRight(card).then(function(){
           totalCards -= 2;
-          console.log("El numero total de cartas actual es: " + totalCards);
 
           if (totalCards == 0){
-              console.log("GAME'S OVER BITCHES");
               $timeout(finishGame,1000);
             };
       });
@@ -312,7 +307,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Animación del movimiento de las cartas hacia abajo
   var moveToBottom = function (card) {
 
-      console.log("MOVIENDO AL FONDO!!");
       var deferred = $q.defer();
 
       var old = $("." + card._id);
@@ -552,14 +546,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       stopTimer();
       var newUser = $scope.user;
 
-      console.log("Mi Puntaje: " + $scope.mydata.score  + "Su Puntaje: " + $scope.other_player_data.score);
-
       if ($scope.mydata.score > $scope.other_player_data.score) {
-        console.log("GANEEEE");
         showWinScreen();
         newUser.multiplayer_highscore += ($scope.mydata.score + $scope.score_por_ganar);
       } else {
-        console.log("PERDI");
         showLoseScreen();
         newUser.multiplayer_highscore += ($scope.score_por_perder);
       }

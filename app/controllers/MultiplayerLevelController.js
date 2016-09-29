@@ -8,23 +8,20 @@ app.controller('MultiplayerLevelController', function ($scope, sharedGlobals) {
     // Necesarios para poder jugar multijugador.
     $scope.startMultiplayerGame = function(value){
 
-      // var multiplayerUnlokedDifficulties = sharedGlobals.getUlockedDifficulties();
-      //
-      // if (multiplayerUnlokedDifficulties < 3 && value == 'Dificil') {
-      //   var mensaje = "Necesitas completar todos los niveles medios del Modo Solitario para \n"
-      //       mensaje =  mensaje + "poder jugar en modo Dificil."
-      //   sendAlert(mensaje);
-      // } else if (multiplayerUnlokedDifficulties < 2 && value == 'Medio') {
-      //   var mensaje = "Necesitas completar todos los niveles intermedios del Modo Solitario para \n"
-      //       mensaje =  mensaje + "poder jugar en modo Medio."
-      //   sendAlert(mensaje);
-      // } else {
-      //   sharedGlobals.setDifficulty(value);
-      //   console.log("CAMBIAMOS");
-      //   $scope.changePage('multiplayer');
-      // }
+      var multiplayerUnlokedDifficulties = sharedGlobals.getUlockedDifficulties();
+
+      if (multiplayerUnlokedDifficulties < 3 && value == 'Dificil') {
+        var mensaje = "Necesitas completar todos los niveles medios del Modo Solitario para \n"
+            mensaje =  mensaje + "poder jugar en modo Dificil."
+        sendAlert(mensaje);
+      } else if (multiplayerUnlokedDifficulties < 2 && value == 'Medio') {
+        var mensaje = "Necesitas completar todos los niveles intermedios del Modo Solitario para \n"
+            mensaje =  mensaje + "poder jugar en modo Medio."
+        sendAlert(mensaje);
+      } else {
         sharedGlobals.setDifficulty(value);
         $scope.changePage('multiplayer');
+      }
     };
 
     // Alertas al jugador
