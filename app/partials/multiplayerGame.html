@@ -20,30 +20,49 @@
             </li>
         </ul>
     </div>
+</div>
 
-    <!-- Dialogo modal para las advertencias -->
-    <div id="exitModal" class="modal" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="color: black; text-align: center;">
-                    <h4 class="modal-title">¿Abandonarás la partida?</h4>
-                </div>
-                <div class="modal-body textAlert" style="color: black;">
-                    <p>Estas apunto de abandonar la partida, si sales ahora no ganarás puntos. ¿Seguro quieres salir?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="leaveGame()">
-              Si
-            </button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="notLeaveGame()">
-              No
-            </button>
-                </div>
+<!-- Dialogo modal para salir del juego-->
+<div id="exitModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="color: black; text-align: center;">
+                <h4 class="modal-title">¿Abandonarás la partida?</h4>
+            </div>
+            <div class="modal-body textAlert" style="color: black;">
+                <p>Estas apunto de abandonar la partida, si sales ahora no ganarás puntos. ¿Seguro quieres salir?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="leaveGame()">
+          Si
+        </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;" ng-click="notLeaveGame()">
+          No
+        </button>
             </div>
         </div>
-
-        <div class="modal fade"></div>
     </div>
+    <div class="modal fade"></div>
+</div>
+
+<!-- Alertas Dialogos Modales -->
+<div id="alerts" class="modal fade" style="display: none; border-radius: 25px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div miv class="modal-header" style="color: black; text-align: center;">
+        <h4 class="modal-title">¡Atención!</h4>
+      </div>
+      <div class="modal-body" style="color: black;">
+        <p>{{textAlert}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
+                ng-click="closeAlert()">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ....................................................................... -->

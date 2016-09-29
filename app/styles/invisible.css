@@ -21,16 +21,10 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	font-size: 155%;
-	color: #FF0000;
+	color: #FFFFFF;
 	white-space: pre-wrap;
-  /*Opcion1*/
-  /*display: block;*/
 }
 
 .dato .p {
   background-color: white;
-  /*Opcion1*/
-  /*background: rgba(255,255,255,0.5);
-  max-width: 650px;
-  margin: auto;*/
 }
