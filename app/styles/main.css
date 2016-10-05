@@ -49,14 +49,14 @@ body {
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
-    height: 6%;
-    background-color: #993300;
-    color: white;
-    font-family:"myFirstFont", sans-serif;
+  height: 9%;
+  background-color: #993300;
+  color: white;
+  font-family:"myFirstFont", sans-serif;
+  display: flex;
 }
 
 #credit h4 {
-    margin-top: 0;
     font-family:"myFirstFont", sans-serif;
 }
 
@@ -273,6 +273,10 @@ p{
     font-family:"Florencesans", sans-serif;
 }
 
+.greetings-logos {
+    margin-bottom: 10%;
+}
+
 .enfasis {
     font-weight: bold;
     font-style: italic;
@@ -282,6 +286,12 @@ p{
 .textAlert
 {
   text-align: center;
+}
+
+.derechos-footer {
+  text-align: center;
+  height: 100%;
+  margin: 0 auto;
 }
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
