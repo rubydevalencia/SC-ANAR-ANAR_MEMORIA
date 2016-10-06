@@ -153,13 +153,32 @@
 }
 
 #wait_other_player, #multiplayer_game_space{
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 #player_info{
   margin-bottom: 5%;
 }
 
+.mensaje-multiplayer{
+  margin: 0 10%;
+  display: block;
+}
+
+.mensaje-multiplayer img {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.mensaje-multiplayer h1 {
+  font-size: 8vmin;
+}
+
+.mensaje-multiplayer h2 {
+  font-size: 5vmin;
+}
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 /*
   Estilos correspondiente al modal. De esta forma se obtiene el comportamiento
