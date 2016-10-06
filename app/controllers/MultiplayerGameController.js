@@ -311,8 +311,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
       var old = $("." + card._id);
       var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
-      newcard.css('width', '110px').css('height','110px').css('padding', '0')
-             .css('float','left');
+      newcard.css('width', '110px').css('height','110px').css('padding', '0');
       var newOffset = newcard.offset();
       var oldOffset1 = old.first().offset();
       var oldOffset2 = old.last().offset();
@@ -326,15 +325,26 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       old.hide();
       newcard.hide();
       //quitarPar.play();
+
+      console.log($(document).width()/2 - newcard.width() * 2);
+      // El primer animate es para centrar la carta y el segundo es para
+      // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: newOffset.top,
-          left: newOffset.left,
-          width: newcard.width(),
-          height: newcard.height(),
-      }, 700, function () {
-          newcard.show();
-          temp.remove();
-          return deferred.resolve();
+          top: $(document).height()/2 - newOffset.top/5,
+          left:$(document).width()/2 - newcard.width() * 2,
+          width: newcard.width() * 4,
+          height: newcard.height() * 4,
+      }, 1000, function () {
+          temp.animate({
+            top: newOffset.top,
+            left:newOffset.left,
+            width: "110px",
+            height: "110px",
+          }, 1200, function(){
+            newcard.show();
+            temp.remove();
+            return deferred.resolve();
+          });
       });
 
       return deferred.promise;
