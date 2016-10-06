@@ -164,62 +164,59 @@
 
 <!-- ....................................................................... -->
 
-<div id="player_logout" class="recuadro-blanco redondeado active container" style="display: none">
+<div id="player_logout" class="recuadro-blanco redondeado mensaje-multiplayer" style="display: none;">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="images/inicio-der1.png" width="60%" height="60%">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h1>¡Opps!</h1>
             <h2>El jugador {{other_player_data.username}} ha abandonado la partida.</h2>
             <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Finalizar Juego
                 <div class="ripple-wrapper"></div>
             </button>
-            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="images/inicio-izq1.png" width="60%" height="60%">
         </div>
     </div>
 </div>
 
-<div id="time_up" class="recuadro-blanco redondeado active container" style="display: none">
+<div id="time_up" class="recuadro-blanco redondeado mensaje-multiplayer" style="display: none;">>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="images/inicio-der1.png" width="60%" height="60%">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h1>¡Se acabó el tiempo!</h1>
             <h2>El ganador del juego sera el jugador con mayor puntaje.</h2>
             <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Finalizar
                 <div class="ripple-wrapper"></div>
             </button>
-            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="images/inicio-izq1.png" width="60%" height="60%">
         </div>
     </div>
 </div>
 
 <!-- Esta es la primera vista que se muestra -->
-<div id="wait_other_player" class="recuadro-blanco redondeado active container redondeado" style="display: block">
+<div id="wait_other_player" class="recuadro-blanco redondeado mensaje-multiplayer">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="images/inicio-der1.png" width="60%" height="60%">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h1>Buscando Contrincante</h1>
             <h2>Por favor espera</h2>
             <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Cancelar
                 <div class="ripple-wrapper"></div>
             </button>
-            <div class="col-md-3"></div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="images/inicio-izq1.png" width="60%" height="60%">
         </div>
     </div>
