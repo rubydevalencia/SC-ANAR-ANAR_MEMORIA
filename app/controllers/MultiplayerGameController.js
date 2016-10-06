@@ -330,7 +330,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // El primer animate es para centrar la carta y el segundo es para
       // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: $(document).height()/2 - newOffset.top/5,
+          top: $(document).height()/2 - newcard.height() * 2,
           left:$(document).width()/2 - newcard.width() * 2,
           width: newcard.width() * 4,
           height: newcard.height() * 4,
