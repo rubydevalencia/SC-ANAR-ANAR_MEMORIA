@@ -1,10 +1,31 @@
 'use strict';
 
-app.controller('ProfileController', function ($scope, sharedGlobals) {
+app.controller('ProfileController', function ($scope, $q, sharedGlobals) {
     $scope.category = "";
     $scope.unlockedLevels = [];
     $scope.levelsByCategory = {};
     $scope.array = [0, 1, 2, 3, 4];
+
+    $scope.unlockedCards = [];
+
+    // Mostramos una carta de perfil aleatoria, dentro de las cartas que se
+    // han ganado en el juego.
+    DBGetUserCards($scope.user, function (err, result) {
+      if (err)
+          return;
+
+      $scope.profileCardImage = null;
+
+      if ((result.rows.length) == 0) {
+        $scope.profileCardImage = 'images/done.png';
+        $scope.$apply();
+      } else {
+        var random = Math.floor(Math.random() * result.rows.length);
+        $scope.profileCardImage = result.rows[random].doc.image;
+        $scope.$apply();
+      };
+
+    })
 
 
     $scope.getCategory = function() {
@@ -28,7 +49,7 @@ app.controller('ProfileController', function ($scope, sharedGlobals) {
         sharedGlobals.setUlockedDifficulties(2);
       }
       else {
-        $scope.category = "Investigador";
+        $scope.category = "Arqueólogo";
         sharedGlobals.setUlockedDifficulties(3);
       }
     }
