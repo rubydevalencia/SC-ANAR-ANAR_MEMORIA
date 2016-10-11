@@ -338,8 +338,8 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
           temp.animate({
             top: newOffset.top,
             left:newOffset.left,
-            width: "110px",
-            height: "110px",
+            width: newcard.width(),
+            height: newcard.height(),
           }, 1200, function(){
             newcard.show();
             temp.remove();
@@ -371,15 +371,25 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       old.hide();
       newcard.hide();
       //quitarPar.play();
+
+      // El primer animate es para centrar la carta y el segundo es para
+      // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: newOffset.top,
-          left: newOffset.left,
-          width: newcard.width(),
-          height: newcard.height(),
-      }, 700, function () {
-          newcard.show();
-          temp.remove();
-          return deferred.resolve();
+          top: $(document).height()/2 - newcard.height() * 2,
+          left:$(document).width()/2 - newcard.width() * 2,
+          width: newcard.width() * 4,
+          height: newcard.height() * 4,
+      }, 1000, function () {
+          temp.animate({
+            top: newOffset.top,
+            left:newOffset.left,
+            width: newcard.width(),
+            height: newcard.height(),
+          }, 1200, function(){
+            newcard.show();
+            temp.remove();
+            return deferred.resolve();
+          });
       });
 
       return deferred.promise;
