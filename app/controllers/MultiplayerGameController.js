@@ -325,8 +325,6 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       old.hide();
       newcard.hide();
       //quitarPar.play();
-
-      console.log($(document).width()/2 - newcard.width() * 2);
       // El primer animate es para centrar la carta y el segundo es para
       // posicionarla en la zona de cartas obtenidas.
       temp.animate({

@@ -34,12 +34,9 @@ app.controller('GameController', function($scope, $timeout) {
     }
 
     // Then we get the cards
-    console.log("EL SCOPE LEVEL ES:");
-    console.log($scope.level);
     DBGetLevelCards($scope.level, function (err, result) {
         var cards = [];
         totalCards = result.rows.length;
-        console.log("La cantidad de cartas es:");
         for (var i = 0; i < result.rows.length; i++) {
             var card = result.rows[i].doc;
             card.imageShown = 'images/done.png';
