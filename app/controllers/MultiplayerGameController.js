@@ -555,14 +555,23 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     var finishGame = function() {
       stopTimer();
       var newUser = $scope.user;
+      var addCard = false;
 
       if ($scope.mydata.score > $scope.other_player_data.score) {
-        showWinScreen();
+
+        //Escogemos una carta aleatoria entre la cartas del nivel.
+        var random = Math.floor(Math.random() * $scope.cards.length);
+        $scope.obtainedCard = $scope.cards[random];
+        addCard = true;
         newUser.multiplayer_highscore += ($scope.mydata.score + $scope.score_por_ganar);
+        showWinScreen();
       } else {
         showLoseScreen();
         newUser.multiplayer_highscore += ($scope.score_por_perder);
       }
+
+      if (addCard)
+          newUser.cards.push($scope.obtainedCard._id);
 
       DBUpdateUser(newUser, function(err, response) {
           if (err)
