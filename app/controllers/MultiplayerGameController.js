@@ -311,8 +311,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
       var old = $("." + card._id);
       var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
-      newcard.css('width', '110px').css('height','110px').css('padding', '0')
-             .css('float','left');
+      newcard.css('width', '110px').css('height','110px').css('padding', '0');
       var newOffset = newcard.offset();
       var oldOffset1 = old.first().offset();
       var oldOffset2 = old.last().offset();
@@ -326,15 +325,24 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       old.hide();
       newcard.hide();
       //quitarPar.play();
+      // El primer animate es para centrar la carta y el segundo es para
+      // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: newOffset.top,
-          left: newOffset.left,
-          width: newcard.width(),
-          height: newcard.height(),
-      }, 700, function () {
-          newcard.show();
-          temp.remove();
-          return deferred.resolve();
+          top: $(document).height()/2 - newcard.height() * 2,
+          left:$(document).width()/2 - newcard.width() * 2,
+          width: newcard.width() * 4,
+          height: newcard.height() * 4,
+      }, 1000, function () {
+          temp.animate({
+            top: newOffset.top,
+            left:newOffset.left,
+            width: newcard.width(),
+            height: newcard.height(),
+          }, 1200, function(){
+            newcard.show();
+            temp.remove();
+            return deferred.resolve();
+          });
       });
 
       return deferred.promise;
@@ -361,15 +369,25 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       old.hide();
       newcard.hide();
       //quitarPar.play();
+
+      // El primer animate es para centrar la carta y el segundo es para
+      // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: newOffset.top,
-          left: newOffset.left,
-          width: newcard.width(),
-          height: newcard.height(),
-      }, 700, function () {
-          newcard.show();
-          temp.remove();
-          return deferred.resolve();
+          top: $(document).height()/2 - newcard.height() * 2,
+          left:$(document).width()/2 - newcard.width() * 2,
+          width: newcard.width() * 4,
+          height: newcard.height() * 4,
+      }, 1000, function () {
+          temp.animate({
+            top: newOffset.top,
+            left:newOffset.left,
+            width: newcard.width(),
+            height: newcard.height(),
+          }, 1200, function(){
+            newcard.show();
+            temp.remove();
+            return deferred.resolve();
+          });
       });
 
       return deferred.promise;
@@ -545,14 +563,23 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
     var finishGame = function() {
       stopTimer();
       var newUser = $scope.user;
+      var addCard = false;
 
       if ($scope.mydata.score > $scope.other_player_data.score) {
-        showWinScreen();
+
+        //Escogemos una carta aleatoria entre la cartas del nivel.
+        var random = Math.floor(Math.random() * $scope.cards.length);
+        $scope.obtainedCard = $scope.cards[random];
+        addCard = true;
         newUser.multiplayer_highscore += ($scope.mydata.score + $scope.score_por_ganar);
+        showWinScreen();
       } else {
         showLoseScreen();
         newUser.multiplayer_highscore += ($scope.score_por_perder);
       }
+
+      if (addCard)
+          newUser.cards.push($scope.obtainedCard._id);
 
       DBUpdateUser(newUser, function(err, response) {
           if (err)
