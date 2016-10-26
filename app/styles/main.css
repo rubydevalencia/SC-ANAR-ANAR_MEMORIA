@@ -4,6 +4,122 @@
  * Primary Dark
  */
 
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/* MEDIA QUERIES */
+
+@media (min-width: 320px) {
+  .container_level{
+    margin-bottom: 4%;
+  }
+
+  .instrucciones h2, h4{
+    font-size: 12px;
+  }
+
+  .instrucciones p{
+    font-size: 10px;
+  }
+
+  #main{
+    padding-top: 0%;
+  }
+}
+
+@media (min-width: 420px) {
+
+  .instrucciones h2, h4{
+    font-size: 14px;
+  }
+
+  .instrucciones p{
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 600px) {
+
+  .instrucciones h2, h4{
+    font-size: 16px;
+  }
+
+  .instrucciones p{
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container_level{
+    margin-bottom: 0%;
+  }
+
+  #main{
+    padding-top: 20%;
+  }
+
+  .container_level{
+    margin-top: 10%;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .instrucciones h2, h4{
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 846px) {
+  .container_level{
+    margin-top: 5%;
+  }
+}
+
+@media (min-width: 992px){
+
+  .instrucciones{
+    width: 225px;
+    height: 530px;
+  }
+
+  .container_level {
+  }
+
+  #main{
+    padding-top: 15%;
+  }
+}
+
+@media (min-width: 1050px){
+
+  #main{
+    padding-top: 13%;
+  }
+}
+
+
+@media (min-width: 1200px) {
+   .instrucciones{
+     width: 250px;
+   }
+
+   #main{
+     padding-top: 8%
+   }
+ }
+
+ @media (min-width: 1500px) {
+    .instrucciones{
+      height: 550px;
+    }
+
+    #main{
+      padding-top: 8%
+    }
+  }
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
 @font-face {
     font-family: myFirstFont;
     src: url(GOTHIC.TTF);
@@ -35,7 +151,7 @@ body {
 
 .container {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
@@ -201,7 +317,7 @@ p{
 .recuadro-blanco {
   background-color: white;
   padding: 1%;
-  margin-bottom: 1%;
+  /*margin-bottom: 1%;*/
   box-shadow: 7px 7px 5px rgba(0,0,0,0.2);
 }
 
@@ -299,6 +415,32 @@ p{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+/*
+  Se encargará de centrar los cuadros redondeados solamente en altura.
+*/
+
+.instrucciones{
+
+}
+
+.instrucciones h2{
+  /* Color del interliniado. */
+  border-bottom: 4px solid #993300;
+  border-radius: 4px;
+}
+
+.instrucciones h4{
+  /* Color del interliniado. */
+  border-bottom: 2px solid #993300;
+  border-radius: 2px;
+}
+
+.instrucciones p{
+  text-align: justify;
+  margin: 12px 10px 10px;
 }
 
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */

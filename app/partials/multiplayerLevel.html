@@ -1,15 +1,20 @@
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- NAV BAR -->
 <div class="primary_background navbar navbar-default ">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
         </button>
+
+        <!-- ................................................................... -->
+        <!--BOTÓN UNDO -->
         <a href="#" class="navbar-brand" ng-click="changePage('profile')">
             <i class="mdi-navigation-arrow-back navbar-icon"></i>
         </a>
         <a class="navbar-brand">Bienvenido, {{user._id}}</a>
     </div>
+
+    <!-- ................................................................... -->
+    <!-- BOTONES QUE APARECEN EN EL NAV BAR -->
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -38,44 +43,48 @@
             </li>
         </ul>
     </div>
+    <!-- ................................................................... -->
 </div>
 
-<div id="main" class="row" style='font-family: "myFirstFont", sans-serif;' style="padding-top:2%;">
-    <div class="col-xs-1 col-md-1"></div>
-    <div class="col-xs-2 col-md-2 recuadro-blanco redondeado">
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<div id="main" class="row">
+      <!-- ................................................................... -->
+      <!-- SELECCIÓN DE NIVELES -->
+      <div class="col-xs-6 col-xs-offset-3
+                  col-sm-6 col-sm-offset-2 col-sm-push-3
+                  col-md-6 col-md-offset-1
+                  col-lg-5 col-md-offset-1
+                  container_level recuadro-blanco redondeado">
+        <span ng-repeat="level in difficulty">
+        <button type="button" class="btn btn-block button_level" ng-click="startMultiplayerGame(level)"> {{level}} </button>
+        </span>
+      </div>
+
+    <!-- ................................................................... -->
+    <!-- CUADRO DE INSTRUCCIONES -->
+    <div class="col-xs-6 col-xs-offset-3
+                col-sm-3 col-sm-offset-1 col-sm-pull-8
+                col-md-3 col-md-offset-1 col-md-pull-7
+                col-lg-2 col-lg-offset-1 col-lg-pull-6
+                recuadro-blanco redondeado instrucciones">
         <h2 class="title text-center gothic primary">Instrucciones</h2>
-        <br>
         <h4 class="title text-left gothic primary">Niveles:</h4>
         <h5 class="subtitle text-center gothic">
-          <p>
-            Para comenzar a jugar debes elegir alguno de los niveles mostrados: Facil, Medio y Dificil.
-          </p>
-          <p>
-            Si deseas enfrentarte a oponentes más fuertes debes superar los niveles Facil, Intermedio y Medio en Solitario.
-
-            <p class="primary">¡Juega, diviertete y aprende!<p>
-          </p>
+          <p> Para comenzar a jugar debes elegir alguno de los niveles mostrados: Facil, Medio y Dificil.</p>
+          <p> Si deseas enfrentarte a oponentes más fuertes debes superar los niveles Facil, Intermedio y Medio en Solitario.</p>
+          <p class="primary">¡Juega, diviertete y aprende!<p>
         </h5><br>
         <h4 class="title text-left gothic primary">Puntuación:</h4>
         <h5 class="subtitle text-center gothic">
-          <p>
-            Si ganas la partida se te otorgará 50 puntos mas 10 puntos por cada carta
-            obtenida.
-          </p>
-          <p>
-            Si pierdes se te otorgarán 25 puntos por intentarlo.
-          </p>
-        </h5>
-        <br>
+          <p> Si ganas la partida se te otorgará 50 puntos mas 10 puntos por cada carta obtenida.</p>
+          <p> Si pierdes se te otorgarán 25 puntos por intentarlo.</p>
+        </h5><br>
     </div>
 
-    <div class="col-xs-8 col-md-6 container recuadro-blanco redondeado" style="margin-left:5%">
-      <span ng-repeat="level in difficulty">
-      <button type="button" class="btn btn-block button_level" ng-click="startMultiplayerGame(level)"> {{level}} </button>
-      </span>
-    </div>
 
-    <!-- Alertas Dialogos Modales -->
+    <!-- ................................................................... -->
+    <!-- ALERTA DIALOGO MODAL -->
     <div id="alerts" class="modal fade" style="display: none; border-radius: 25px;">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -94,4 +103,7 @@
         </div>
       </div>
     </div>
+
+    <!-- ................................................................... -->
 </div>
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
