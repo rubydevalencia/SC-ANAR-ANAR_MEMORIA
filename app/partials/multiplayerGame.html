@@ -2,19 +2,20 @@
 
 <div class="primary_background navbar navbar-default ">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand">Modo Multijugador | Nivel {{gamedata.difficulty}}</a>
     </div>
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
         <ul class="nav navbar-nav navbar-right">
             <li>
 
                 <a href="#" ng-click="isLeaving()">
                     <i class="mdi-action-exit-to-app navbar-icon"></i>
+                    Salir
                 </a>
 
             </li>

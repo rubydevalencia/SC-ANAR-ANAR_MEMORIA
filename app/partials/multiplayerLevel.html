@@ -1,49 +1,47 @@
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<!-- NAV BAR -->
 <div class="primary_background navbar navbar-default ">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
         </button>
-
-        <!-- ................................................................... -->
-        <!--BOTÓN UNDO -->
         <a href="#" class="navbar-brand" ng-click="changePage('profile')">
             <i class="mdi-navigation-arrow-back navbar-icon"></i>
         </a>
-        <a class="navbar-brand">Bienvenido, {{user._id}}</a>
+        <a class="navbar-brand">Seleccionar Dificultad</a>
     </div>
-
-    <!-- ................................................................... -->
-    <!-- BOTONES QUE APARECEN EN EL NAV BAR -->
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <a title="Tu colección de cartas"
                    href="#" ng-click="changePage('collection')">
                     <i class="mdi-content-content-copy navbar-icon"></i>
+                    Tus Cartas
                 </a>
             </li>
             <li>
                 <a title="Puntuaciones más altas"
                    href="#" ng-click="changePage('highscores')">
                     <i class="mdi-editor-insert-chart navbar-icon"></i>
+                    Puntuajes
                 </a>
             </li>
             <li>
                 <a title="Créditos"
                    href="#" ng-click="changePage('credits')">
                     <i class="mdi-action-receipt navbar-icon"></i>
+                    Créditos
                 </a>
             </li>
             <li>
                 <a title="Salir"
                    href="#" ng-click="logOut()">
                     <i class="mdi-action-exit-to-app navbar-icon"></i>
+                    Salir
                 </a>
             </li>
         </ul>
     </div>
-    <!-- ................................................................... -->
 </div>
 
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->

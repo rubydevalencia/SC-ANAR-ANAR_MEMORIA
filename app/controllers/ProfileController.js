@@ -87,5 +87,12 @@ app.controller('ProfileController', function ($scope, $q, sharedGlobals) {
        $scope.showAlert = false;
     };
 
+    $scope.showCard = function() {
+        document.getElementById("modal").style.display="block";
+    }
+
+    $scope.hideCard = function() {
+        document.getElementById("modal").style.display="none";
+    }
 
 });
