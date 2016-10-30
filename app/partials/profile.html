@@ -38,25 +38,28 @@
 </div>
 
 <div id="main" class="row" style='font-family: "myFirstFont", sans-serif;'>
-    <div class="col-xs-1 col-md-1"></div>
-    <div class="col-xs-2 col-md-2 recuadro-blanco redondeado">
+    <div class="col-xs-6 col-sm-3 col-md-2 col-xs-offset-3 col-md-offset-1 recuadro-blanco redondeado">
         <h2 class="title text-center gothic">{{user._id}}</h2>
         <!-- Imagen de perfil que deberia buscarse en la base de datos -->
         <img src="{{profileCardImage}}" width="100%" height="100%">
-        <h4 class="title text-left gothic"> Niveles Desbloqueados: </h4>
+        <h4 class="title text-center gothic"> Niveles Desbloqueados: </h4>
         <h4 class="subtitle text-center gothic"> {{user.levels.length}} </h4>
-        <h4 class="title text-left gothic"> Mayor Puntaje: </h4>
+        <h4 class="title text-center gothic"> Mayor Puntaje: </h4>
         <h4 class="subtitle text-center gothic"> {{user.highscore}} </h4>
-        <h4 class="title text-left gothic"> Categoria: </h4>
+        <h4 class="title text-center gothic"> Categoria: </h4>
         <h4 class="subtitle text-center gothic"> {{category}} </h4>
-        <h4 class="title text-left gothic"> Cartas Ganadas: </h4>
+        <h4 class="title text-center gothic"> Cartas Ganadas: </h4>
         <h4 class="subtitle text-center gothic"> {{user.cards.length}} </h4>
 
     </div>
-    <div class="col-xs-8 col-md-6 container recuadro-blanco redondeado" style="margin-left:5%">
-      <button id="button_play" type="button" class="btn btn-block button_play" ng-click="changePage('home')"> <img src="images/solitario.png"><br>Solitario </button>
-      <button id="button_multiplayer" type="button" class="btn btn-block button_multiplayer" ng-click="verifyMultiplayerActive()"><img src="images/multijugador.png"><br>Multijugador </button>
-    </div>
+    <div class="col-xs-10 col-sm-6 col-md-6 col-sm-offset-1 col-xs-offset-1 recuadro-blanco redondeado seleccionar-modo">
+      <div class="row">
+        <button id="button_play" type="button" class="btn btn-block button_play" ng-click="changePage('home')"> <img src="images/solitario.png"><br>Solitario </button>
+      </div>
+      <div class="row">
+        <button id="button_multiplayer" type="button" class="btn btn-block button_multiplayer" ng-click="verifyMultiplayerActive()"><img src="images/multijugador.png"><br>Multijugador </button>
+      </div>
+   </div>
 
     <!-- Alertas Dialogos Modales -->
     <div id="alerts" class="modal" style="display: none;">

@@ -81,9 +81,13 @@
     padding: 5%;
 }
 
-#loser_screen, #win_screen, #player_logout {
+#lose_screen, #win_screen, #player_logout {
     text-align: center;
     font-family:"myFirstFont", sans-serif;
+}
+
+#lose_screen, #win_screen {
+  margin-top: 10%;
 }
 
 #win_screen h1 {
@@ -100,12 +104,11 @@
 }
 
 #player_logout {
-  background-color: white;
   padding: 2%;
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 #button_confirm {
@@ -152,8 +155,13 @@
   width: 30%;
 }
 
-#wait_other_player, #multiplayer_game_space{
+#wait_other_player {
+  text-align: center;
   margin-top: 10%;
+}
+
+#multiplayer_game_space{
+  margin-top: 5%;
 }
 
 #player_info{
@@ -167,9 +175,8 @@
 
 .mensaje-multiplayer img {
   text-align: center;
-  margin: 0 auto;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .mensaje-multiplayer h1 {
