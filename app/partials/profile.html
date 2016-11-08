@@ -42,17 +42,17 @@
 </div>
 
 <div id="main" class="row" style='font-family: "myFirstFont", sans-serif;'>
-    <div class="col-xs-6 col-sm-3 col-md-2 col-xs-offset-3 col-md-offset-1 recuadro-blanco redondeado">
-        <h2 class="title text-center gothic">{{user._id}}</h2>
+    <div class="profile_box col-xs-6 col-sm-3 col-md-2 col-xs-offset-1 col-md-offset-1 recuadro-blanco redondeado">
+        <h2 class="main_title text-center gothic" style="color: #993300;">{{user._id}}</h2>
         <!-- Imagen de perfil que deberia buscarse en la base de datos -->
         <img src="{{profileCardImage}}" ng-click="showCard()" width="100%" height="100%">
-        <h4 class="title text-center gothic"> Niveles Desbloqueados: </h4>
+        <h5 class="title gothic"> Niveles Desbloqueados: </h5>
         <h4 class="subtitle text-center gothic"> {{user.levels.length}} </h4>
-        <h4 class="title text-center gothic"> Mayor Puntaje: </h4>
+        <h5 class="title gothic"> Mayor Puntaje: </h5>
         <h4 class="subtitle text-center gothic"> {{user.highscore}} </h4>
-        <h4 class="title text-center gothic"> Categoria: </h4>
+        <h5 class="title gothic"> Categoria: </h5>
         <h4 class="subtitle text-center gothic"> {{category}} </h4>
-        <h4 class="title text-center gothic"> Cartas Ganadas: </h4>
+        <h5 class="title gothic"> Cartas Ganadas: </h5>
         <h4 class="subtitle text-center gothic"> {{user.cards.length}} </h4>
 
     </div>
@@ -66,17 +66,17 @@
    </div>
 
     <!-- Alertas Dialogos Modales -->
-    <div id="alerts" class="modal" style="display: none;">
+    <div id="alerts" class="modal gothic" style="display: none;">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header" style="color: black; text-align: center;">
-            <h4 class="modal-title">¡Atención!</h4>
+            <h4 class="modal-title gothic">¡Atención!</h4>
           </div>
-          <div class="modal-body textAlert" style="color: black;">
+          <div class="modal-body textAlert gothic" style="color: black;">
             <p>{{textAlert}}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #993300;"
+            <button type="button" class="btn btn-primary gothic" data-dismiss="modal" style="background-color: #993300;"
                     ng-click="closeAlert()">
               Aceptar
             </button>
@@ -85,18 +85,18 @@
       </div>
     </div>
 
-    <div id="modal" class="modal" style="display: none;">
+    <div id="modal" class="modal gothic" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Carta de Perfil</h4>
+                    <h4 class="modal-title gothic" style="color: #993300;">Carta de Perfil</h4>
                 </div>
                 <div class="modal-body" style="text-align:center">
-                    <img class="modal-image" src="{{profileCardImage}}" height="70%" width="70%">
-                    <p style="text-align:center">¡Mientras más cartas ganes, más Cartas de Pefil puedes conseguir!</p>
+                    <img class="modal-image" src="{{profileCardImage}}" height="55%" width="55%">
+                    <p style="text-align:center; padding-top:5%;">¡Mientras más cartas ganes, más cartas de Perfil puedes conseguir!</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="button_close_modal" ng-click="hideCard()">CERRAR<div class="ripple-wrapper"></div></button>
+                    <button type="button" class="btn btn-primary gothic" id="button_close_modal" ng-click="hideCard()">CERRAR<div class="ripple-wrapper"></div></button>
                 </div>
             </div>
         </div>

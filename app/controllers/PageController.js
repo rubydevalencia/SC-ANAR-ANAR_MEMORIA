@@ -15,6 +15,9 @@ app.controller('PageController', function($scope) {
         console.log(user);
         $scope.user = user;
         //$scope.$apply();
+
+        var width_window = $(window).width();
+        console.log(width_window);
     }
 
     $scope.startGame = function (level) {

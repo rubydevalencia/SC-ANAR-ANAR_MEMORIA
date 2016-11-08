@@ -237,7 +237,15 @@ body {
 
 .title {
     border-bottom: 1px solid lightgrey;
+    border-radius: 1px;
+    padding: 2%;
+    color: #993300;
 
+}
+
+.main_title {
+  border-bottom: 2px solid #993300;
+  border-radius: 2px;
 }
 
 .primary {
@@ -439,6 +447,11 @@ p{
   border-radius: 2px;
 }
 
+  /* Color del interliniado. */
+  border-bottom: 2px solid #993300;
+  border-radius: 2px;
+}
+
 .instrucciones p{
   text-align: justify;
   margin: 12px 10px 10px;
@@ -466,6 +479,8 @@ p{
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius: 10px !important;
 }
-
 /* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */

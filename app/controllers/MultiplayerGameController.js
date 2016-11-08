@@ -13,7 +13,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   // Obtenemos la dificultad del juego que escogimos anteriormente.
   var dificultad = sharedGlobals.getDifficulty();
   $scope.gameDifficulty = dificultad;
-  $scope.counter   = 1000;  // Se establece el timer para el jugador.
+  $scope.counter   = 100;  // Se establece el timer para el jugador.
   var temporizador = 0;
 
   // Sonidos del Juego
