@@ -328,10 +328,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // El primer animate es para centrar la carta y el segundo es para
       // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: $(document).height()/2 - newcard.height() * 2,
+          top: $(document).height()/2.5 - newcard.height() * 2.5,
           left:$(document).width()/2 - newcard.width() * 2,
-          width: newcard.width() * 4,
-          height: newcard.height() * 4,
+          width: newcard.width() * 5,
+          height: newcard.height() * 5,
       }, 1000, function () {
           temp.animate({
             top: newOffset.top,
@@ -373,10 +373,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // El primer animate es para centrar la carta y el segundo es para
       // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: $(document).height()/2 - newcard.height() * 2,
+          top: $(document).height()/2.5 - newcard.height() * 2.5,
           left:$(document).width()/2 - newcard.width() * 2,
-          width: newcard.width() * 4,
-          height: newcard.height() * 4,
+          width: newcard.width() * 5,
+          height: newcard.height() * 5,
       }, 1000, function () {
           temp.animate({
             top: newOffset.top,
