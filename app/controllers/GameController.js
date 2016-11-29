@@ -27,10 +27,15 @@ app.controller('GameController', function($scope, $timeout) {
             mytimeout = $timeout(onTimeout,1000);
         }
     }
+
     var mytimeout = $timeout(onTimeout,1000);
 
     stop = function(){
         $timeout.cancel(mytimeout);
+    }
+
+    resume = function() {
+        mytimeout = $timeout(onTimeout, 1000);
     }
 
     // Then we get the cards
@@ -58,7 +63,7 @@ app.controller('GameController', function($scope, $timeout) {
             selectedCards.card2 = card;
         else {
             if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-                removeCard(selectedCards.card1);
+                $timeout(removeCard(selectedCards.card1),1000);
             } else {
                 selectedCards.card1.imageShown = 'images/done.png';
                 selectedCards.card2.imageShown = 'images/done.png';
@@ -161,6 +166,7 @@ app.controller('GameController', function($scope, $timeout) {
 
     // Animación del movimiento de las cartas hacia abajo
     var moveToBottom = function (card) {
+        stop();
         var old = $("." + card._id);
         var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
         newcard.css('width', '110px').css('height','110px').css('padding', '0')
@@ -195,6 +201,7 @@ app.controller('GameController', function($scope, $timeout) {
             }, 1200, function(){
               newcard.show();
               temp.remove();
+              resume();
             });
         });
     }
