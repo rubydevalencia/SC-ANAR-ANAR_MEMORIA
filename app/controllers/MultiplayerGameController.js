@@ -50,8 +50,12 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       }
   }
 
-  function stopTimer(){
+  function stopTimer(time){
       $timeout.cancel(temporizador);
+      if (time > 0) {
+        // Espero time segundos para continuar
+        temporizador = $timeout(onTimeout,time);
+      };
   }
 
 
@@ -306,7 +310,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Animación del movimiento de las cartas hacia abajo
   var moveToBottom = function (card) {
-
+      stopTimer(2500);
       var deferred = $q.defer();
 
       var old = $("." + card._id);
@@ -349,7 +353,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   }
 
   var moveToBottomRight = function (card) {
-
+      stopTimer(2500);
       var deferred = $q.defer();
 
       var old = $("." + card._id);
@@ -561,7 +565,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
     // Muestra la pantalla de ganar/perder y guarda los puntajes respectivos en el servidor de juego.
     var finishGame = function() {
-      stopTimer();
+      stopTimer(0);
       var newUser = $scope.user;
       var addCard = false;
 

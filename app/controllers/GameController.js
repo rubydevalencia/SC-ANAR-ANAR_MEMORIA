@@ -23,19 +23,19 @@ app.controller('GameController', function($scope, $timeout) {
             document.getElementById("game_screen").style.display='none';
             document.getElementById("loser_screen").style.display='block';
             document.getElementById("obtenidas").style.display='none';
-        } else {
-            mytimeout = $timeout(onTimeout,1000);
+            return;
         }
+        mytimeout = $timeout(onTimeout,1000);
     }
 
     var mytimeout = $timeout(onTimeout,1000);
 
-    stop = function(){
+    stop = function(time) {
         $timeout.cancel(mytimeout);
-    }
-
-    resume = function() {
-        mytimeout = $timeout(onTimeout, 1000);
+        if (time > 0) {
+          // Espero time segundos para continuar
+          mytimeout = $timeout(onTimeout,time);
+        };
     }
 
     // Then we get the cards
@@ -108,7 +108,7 @@ app.controller('GameController', function($scope, $timeout) {
 
         if (totalCards == 0) {
             // El timer se detiene y esconde
-            stop();
+            stop(0);
             document.getElementById("timer").style.display='none';
 
             // Se actualiza el puntaje del nivel
@@ -166,7 +166,7 @@ app.controller('GameController', function($scope, $timeout) {
 
     // Animación del movimiento de las cartas hacia abajo
     var moveToBottom = function (card) {
-        stop();
+        stop(2500);
         var old = $("." + card._id);
         var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
         newcard.css('width', '110px').css('height','110px').css('padding', '0')
@@ -201,7 +201,6 @@ app.controller('GameController', function($scope, $timeout) {
             }, 1200, function(){
               newcard.show();
               temp.remove();
-              resume();
             });
         });
     }
@@ -227,7 +226,7 @@ app.controller('GameController', function($scope, $timeout) {
         selectedCards = {};
 
         // Reinicio el contador
-        stop();
+        stop(0);
         $scope.counter = $scope.level.time;
         mytimeout = $timeout(onTimeout,1000);
 
@@ -243,7 +242,7 @@ app.controller('GameController', function($scope, $timeout) {
 
     // Se cancela el timeout cuando el usuario abandona el nivel
     $scope.$on("$destroy", function (event) {
-        stop();
+        stop(0);
     });
 
 });
