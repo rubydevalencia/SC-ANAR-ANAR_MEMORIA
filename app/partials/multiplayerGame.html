@@ -69,7 +69,12 @@
 <!-- ....................................................................... -->
 <!-- Barras donde se mostrarán la información del score de los jugadores. -->
 <div id="player_info">
-    {{mydata.username}} <br> {{mydata.score}} puntos
+    <div ng-if="token == true">
+      <b>Tu turno: {{mydata.username}} <br> {{mydata.score}} puntos</b>
+    </div>
+    <div ng-if="token != true"->
+      {{mydata.username}} <br> {{mydata.score}} puntos
+    </div>
 </div>
 
 <div id="timerBar">
@@ -78,7 +83,12 @@
 </div>
 
 <div id="player_info">
+  <div ng-if="token != true">
+    <b> Turno de: {{other_player_data.username}} <br> {{other_player_data.score}} puntos</b>
+  </div>
+  <div ng-if="token == true"->
     {{other_player_data.username}} <br> {{other_player_data.score}} puntos
+  </div>
 </div>
 <!-- ....................................................................... -->
 

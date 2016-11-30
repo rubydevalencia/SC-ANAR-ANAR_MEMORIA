@@ -92,6 +92,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         // Cuando el contrincante abanona la partida
         socket.on("player_logout",function(username){
             showPlayerLogout();
+            stopTimer(0);
         });
 
         // Cuando me toque voltear una carta
