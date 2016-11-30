@@ -1,6 +1,6 @@
 // Atts: id, password, levels [1..*], cards [0..*], highscore, hands
 // Descomentar para usar base de datos remota
-// var db_user = new PouchDB('http://memoria-anar-alfjf.c9users.io:8081/anar_user', {ajax: {timeout: 10000}});
+// var db_user = new PouchDB('https://anar-user-leotms.c9users.io:8080/anar_user', {ajax: {timeout: 10000}});
 // Descomentar para usar base de datos local
 var db_user  = new PouchDB('anar_user');
 // Atts: id, name, cards, numPieces, time, difficulty, imageName

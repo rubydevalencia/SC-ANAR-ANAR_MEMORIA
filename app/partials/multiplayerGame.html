@@ -69,15 +69,26 @@
 <!-- ....................................................................... -->
 <!-- Barras donde se mostrarán la información del score de los jugadores. -->
 <div id="player_info">
-    {{mydata.username}} <br> {{mydata.score}} puntos
+    <div ng-if="token == true">
+      <b>Tu turno: {{mydata.username}} <br> {{mydata.score}} puntos</b>
+    </div>
+    <div ng-if="token != true"->
+      {{mydata.username}} <br> {{mydata.score}} puntos
+    </div>
 </div>
 
 <div id="timerBar">
+  <img src="images/reloj.gif" style="margin: 0">
     {{counter}}
 </div>
 
 <div id="player_info">
+  <div ng-if="token != true">
+    <b> Turno de: {{other_player_data.username}} <br> {{other_player_data.score}} puntos</b>
+  </div>
+  <div ng-if="token == true"->
     {{other_player_data.username}} <br> {{other_player_data.score}} puntos
+  </div>
 </div>
 <!-- ....................................................................... -->
 
@@ -211,6 +222,9 @@
         <div class="col-md-8">
             <h1>Buscando Contrincante</h1>
             <h2>Por favor espera</h2>
+            <div>
+                <img src="images/reloj.gif" style="margin: 0">
+            </div>
             <button id="button_confirm" ng-click="closeGame()" class="btn">
                 Cancelar
                 <div class="ripple-wrapper"></div>

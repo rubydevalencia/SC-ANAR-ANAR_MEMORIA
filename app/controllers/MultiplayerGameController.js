@@ -50,8 +50,12 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       }
   }
 
-  function stopTimer(){
+  function stopTimer(time){
       $timeout.cancel(temporizador);
+      if (time > 0) {
+        // Espero time segundos para continuar
+        temporizador = $timeout(onTimeout,time);
+      };
   }
 
 
@@ -88,6 +92,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
         // Cuando el contrincante abanona la partida
         socket.on("player_logout",function(username){
             showPlayerLogout();
+            stopTimer(0);
         });
 
         // Cuando me toque voltear una carta
@@ -306,7 +311,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
   // Animación del movimiento de las cartas hacia abajo
   var moveToBottom = function (card) {
-
+      stopTimer(2500);
       var deferred = $q.defer();
 
       var old = $("." + card._id);
@@ -328,10 +333,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // El primer animate es para centrar la carta y el segundo es para
       // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: $(document).height()/2 - newcard.height() * 2,
+          top: $(document).height()/2.5 - newcard.height() * 2.5,
           left:$(document).width()/2 - newcard.width() * 2,
-          width: newcard.width() * 4,
-          height: newcard.height() * 4,
+          width: newcard.width() * 5,
+          height: newcard.height() * 5,
       }, 1000, function () {
           temp.animate({
             top: newOffset.top,
@@ -349,7 +354,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   }
 
   var moveToBottomRight = function (card) {
-
+      stopTimer(2500);
       var deferred = $q.defer();
 
       var old = $("." + card._id);
@@ -373,10 +378,10 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
       // El primer animate es para centrar la carta y el segundo es para
       // posicionarla en la zona de cartas obtenidas.
       temp.animate({
-          top: $(document).height()/2 - newcard.height() * 2,
+          top: $(document).height()/2.5 - newcard.height() * 2.5,
           left:$(document).width()/2 - newcard.width() * 2,
-          width: newcard.width() * 4,
-          height: newcard.height() * 4,
+          width: newcard.width() * 5,
+          height: newcard.height() * 5,
       }, 1000, function () {
           temp.animate({
             top: newOffset.top,
@@ -561,7 +566,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
 
     // Muestra la pantalla de ganar/perder y guarda los puntajes respectivos en el servidor de juego.
     var finishGame = function() {
-      stopTimer();
+      stopTimer(0);
       var newUser = $scope.user;
       var addCard = false;
 

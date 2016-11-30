@@ -23,14 +23,19 @@ app.controller('GameController', function($scope, $timeout) {
             document.getElementById("game_screen").style.display='none';
             document.getElementById("loser_screen").style.display='block';
             document.getElementById("obtenidas").style.display='none';
-        } else {
-            mytimeout = $timeout(onTimeout,1000);
+            return;
         }
+        mytimeout = $timeout(onTimeout,1000);
     }
+
     var mytimeout = $timeout(onTimeout,1000);
 
-    stop = function(){
+    stop = function(time) {
         $timeout.cancel(mytimeout);
+        if (time > 0) {
+          // Espero time segundos para continuar
+          mytimeout = $timeout(onTimeout,time);
+        };
     }
 
     // Then we get the cards
@@ -58,7 +63,7 @@ app.controller('GameController', function($scope, $timeout) {
             selectedCards.card2 = card;
         else {
             if (selectedCards.card1._id == selectedCards.card2._id && selectedCards.card1.position != selectedCards.card2.position) {
-                removeCard(selectedCards.card1);
+                $timeout(removeCard(selectedCards.card1),1000);
             } else {
                 selectedCards.card1.imageShown = 'images/done.png';
                 selectedCards.card2.imageShown = 'images/done.png';
@@ -103,7 +108,7 @@ app.controller('GameController', function($scope, $timeout) {
 
         if (totalCards == 0) {
             // El timer se detiene y esconde
-            stop();
+            stop(0);
             document.getElementById("timer").style.display='none';
 
             // Se actualiza el puntaje del nivel
@@ -161,6 +166,7 @@ app.controller('GameController', function($scope, $timeout) {
 
     // Animación del movimiento de las cartas hacia abajo
     var moveToBottom = function (card) {
+        stop(2500);
         var old = $("." + card._id);
         var newcard = $("." + card._id).first().clone().appendTo('#obtenidas');
         newcard.css('width', '110px').css('height','110px').css('padding', '0')
@@ -182,10 +188,10 @@ app.controller('GameController', function($scope, $timeout) {
         // El primer animate es para centrar la carta y el segundo es para
         // posicionarla en la zona de cartas obtenidas.
         temp.animate({
-            top: $(document).height()/2 - newcard.height() * 2,
+            top: $(document).height()/2.5 - newcard.height() * 2.5,
             left:$(document).width()/2 - newcard.width() * 2,
-            width: newcard.width() * 4,
-            height: newcard.height() * 4,
+            width: newcard.width() * 5,
+            height: newcard.height() * 5,
         }, 1000, function () {
             temp.animate({
               top: newOffset.top,
@@ -220,7 +226,7 @@ app.controller('GameController', function($scope, $timeout) {
         selectedCards = {};
 
         // Reinicio el contador
-        stop();
+        stop(0);
         $scope.counter = $scope.level.time;
         mytimeout = $timeout(onTimeout,1000);
 
@@ -236,7 +242,7 @@ app.controller('GameController', function($scope, $timeout) {
 
     // Se cancela el timeout cuando el usuario abandona el nivel
     $scope.$on("$destroy", function (event) {
-        stop();
+        stop(0);
     });
 
 });
