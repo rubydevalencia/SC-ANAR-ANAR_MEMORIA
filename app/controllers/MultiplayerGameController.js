@@ -8,7 +8,7 @@ app.controller('MultiplayerGameController', function($scope, $http, $q, sharedGl
   var totalCards = 10;
 
   // Direccion del servidor de juego
-  var serverURL = 'http://0.0.0.0:3000/';
+  var serverURL = 'http://159.90.9.166:444/';
 
   // Obtenemos la dificultad del juego que escogimos anteriormente.
   var dificultad = sharedGlobals.getDifficulty();
