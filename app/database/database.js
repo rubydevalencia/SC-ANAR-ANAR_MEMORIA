@@ -1,13 +1,13 @@
 // Atts: id, password, levels [1..*], cards [0..*], highscore, hands
 // Descomentar para usar base de datos remota
-// var db_user = new PouchDB('https://anar-user-leotms.c9users.io:8080/anar_user', {ajax: {timeout: 10000}});
+var db_user = new PouchDB('http://anar-user-leotms.c9users.io:8080/anar_user', {ajax: {timeout: 10000}});
 // Descomentar para usar base de datos local
-var db_user  = new PouchDB('anar_user');
+// var db_user  = new PouchDB('anar_user');
 // Atts: id, name, cards, numPieces, time, difficulty, imageName
 // Functions: getPieces(), getCardsOnWin(), getPoints()
-var db_level = new PouchDB('anar_level');
+var db_level = new PouchDB('http://anar-user-leotms.c9users.io:8080/anar_level');
 // Atts: id, name, image, description, number
-var db_card  = new PouchDB('anar_card');
+var db_card  = new PouchDB('http://anar-user-leotms.c9users.io:8080/anar_card');
 
 function DBCreateDB() {
     // Buscamos todos los docs en la base de niveles. Si no hay los creamos.
