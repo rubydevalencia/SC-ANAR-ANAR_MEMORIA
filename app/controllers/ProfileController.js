@@ -56,17 +56,17 @@ app.controller('ProfileController', function ($scope, $q, sharedGlobals) {
 
     $scope.getCategory();
 
-    $scope.verifyMultiplayerActive = function() {
-      var nivelMultiplayerDesbloq = sharedGlobals.getUlockedDifficulties();
-
-      if (nivelMultiplayerDesbloq > 0){
-        $scope.changePage('multiplayer-level');
-      } else {
-        var mensaje = "Necesitas completar todos los niveles fáciles del Modo Solitario para \n"
-            mensaje =  mensaje + "desbloquear el modo Multijugador."
-        sendAlert(mensaje);
-      }
-    };
+    // $scope.verifyMultiplayerActive = function() {
+    //   var nivelMultiplayerDesbloq = sharedGlobals.getUlockedDifficulties();
+    //
+    //   if (nivelMultiplayerDesbloq > 0){
+    //     $scope.changePage('multiplayer-level');
+    //   } else {
+    //     var mensaje = "Necesitas completar todos los niveles fáciles del Modo Solitario para \n"
+    //         mensaje =  mensaje + "desbloquear el modo Multijugador."
+    //     sendAlert(mensaje);
+    //   }
+    // };
 
     // Alertas al jugador
     $scope.textAlert = "";
