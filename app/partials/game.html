@@ -58,17 +58,17 @@
                     <img src="images/inicio-der1.png" style="width:55%; margin-top:55%">
                 </div>
                 <div class="col-md-6">
-                    <h1>¡GANASTE!</h1>
-                    <h3>Has ganado {{score}} puntos</h3>
-                    <button id="button_confirm" ng-click="changePage('home')" class="btn">
+                    <h1 class="gothic">¡GANASTE!</h1>
+                    <h3 class="gothic">Has ganado {{score}} puntos</h3>
+                    <button id="button_confirm" ng-click="changePage('home')" class="btn gothic">
                         Continuar
                         <div class="ripple-wrapper"></div>
                     </button>
-                    <h3>Desbloqueaste esta carta</h3>
+                    <h3 class="gothic">Desbloqueaste esta carta</h3>
 					<div class="col-md-3"></div>
                     <div class="col-md-6">
                         <img height="120%" width="120%" ng-src="{{obtainedCard.image}}" style="margin-left:-10%">
-                        <p>{{obtainedCard.name}}</p>
+                        <p class="gothic">{{obtainedCard.name}}</p>
                     </div>
                     <div class="col-md-3"></div>
                 </div>
@@ -79,19 +79,20 @@
         </div>
 
         <div id="loser_screen" class="well page redondeado" style="display: none">
-			<div class="row">
-				<div class="col-md-3">
-					<img src="images/inicio-der1.png" style="width: 55%; margin-top:30%">
-				</div>
-				<div class="col-md-6">
-					<h3>Se acabó el tiempo</h3>
-					<h1>¡Intentalo de nuevo!</h1>
-					<i href="#" class="mdi-action-autorenew navbar-icon" ng-click="restartGame()"></i>
-				</div>
-				<div class="col-md-3">
-					<img src="images/inicio-izq1.png" style="width: 60%; margin-top:30%">
-				</div>
-			</div>
+    			<div class="row">
+    				<div class="col-md-3">
+    					<img src="images/inicio-der1.png" style="width: 55%; margin-top:30%">
+    				</div>
+    				<div class="col-md-6 text-center">
+              <br>
+    					<h3 class="gothic">Se acabó el tiempo</h3>
+    					<h1 class="gothic">¡Intentalo de nuevo!</h1>
+    					<i href="#" class="mdi-action-autorenew navbar-icon" ng-click="restartGame()"></i>
+    				</div>
+    				<div class="col-md-3">
+    					<img src="images/inicio-izq1.png" style="width: 60%; margin-top:30%">
+    				</div>
+    			</div>
         </div>
 </div>
 <div id="obtenidas"></div>
