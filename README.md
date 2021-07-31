@@ -3,6 +3,8 @@ Juego de memoria para el Archivo Nacional de Arte Rupestre desarrollado por
 estudiantes de la Universidad Simón Bolívar como parte de su proyecto de
 servicio comunitario.
 
+## Concepto, Contenido y Diseño: Ruby De Valencia
+
 ## Instalación
 
 Con la excepción de la base de datos, la aplicación se ejecuta completamente en
